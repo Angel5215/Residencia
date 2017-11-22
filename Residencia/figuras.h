@@ -1,10 +1,9 @@
-//#include <windows.h>  //Solo para Windows
-//#include <GL/gl.h>     // The GL Header File
-//#include <stdio.h>
 
-//#include <math.h>
-#include "Main.h"
-
+#if _WIN32
+	#include "Main.h"
+#else
+	#include "NVSMain.h"
+#endif
 
 class CFiguras
 {

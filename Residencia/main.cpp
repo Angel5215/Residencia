@@ -8,8 +8,9 @@
 //************************************************************//
 
 #include "texture.h"
-#include "figuras.h"
+//#include "figuras.h"
 #include "Camera.h"
+#include "Figures.h"
 
 //	Prototipos de funciones
 void fachada();
@@ -19,7 +20,8 @@ int frame=0,time,timebase=0;
 int deltaTime = 0;*/
 
 //	Objeto para dibujar figuras
-CFiguras figures;
+//CFiguras figures;
+Figures figures;
 
 CCamera objCamera;	//Create objet Camera
 
@@ -187,7 +189,7 @@ void fachada()
 	//	Figura A
 	glPushMatrix();
 	glScalef(19, 21, -36);
-	figures.prisma2(0, 0);	
+	figures.u_prisma(0);	
 	glPopMatrix();
 
 	//	Figura B
@@ -195,7 +197,7 @@ void fachada()
 	glColor3f(0, 1, 1);
 	glTranslatef(-15.501, -7.5, 3.5);
 	glScalef(12, 6, 16);
-	figures.prisma2(0, 0);
+	figures.u_prisma(0);
 	glPopMatrix();
 
 	//	Figura C
@@ -203,21 +205,21 @@ void fachada()
 	glPushMatrix();
 	glTranslatef(20.501, -6.5, 5.5);
 	glScalef(22, 8, 25);
-	figures.prisma2(0, 0);
+	figures.u_prisma(0);
 	glPopMatrix();
 
 	glColor3f(0, 1, 0);
 	glPushMatrix();
 	glTranslatef(15.01, 1.01, 5.5);
 	glScalef(11, 7, 25);
-	figures.prisma2(0, 0);
+	figures.u_prisma(0);
 	glPopMatrix();
 
 	glColor3f(1, 0, 0);
 	glPushMatrix();
 	glTranslatef(-10.501, 1.5, -11.5);
 	glScalef(2, 24, 2);
-	figures.prisma2(0, 0);
+	figures.u_prisma(0);
 
 	glPopMatrix();
 

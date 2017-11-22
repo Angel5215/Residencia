@@ -1,4 +1,9 @@
-#include "Main.h"
+
+#if _WIN32
+	#include "Main.h"
+#else
+	#include "NVSMain.h"
+#endif
 
 #define CAMERASPEED	0.07f				// The Camera Speed
 //NEW//////////////////NEW//////////////////NEW//////////////////NEW////////////////

@@ -1,9 +1,9 @@
-//#include <windows.h>  //Solo para Windows
-//#include <gl/gl.h>     // The GL Header File
-//#include <stdio.h>
-//#include <string.h>
-#include "Main.h"
-//#include "gl.h"
+
+#if _WIN32
+	#include "Main.h"
+#else
+	#include "NVSMain.h"
+#endif
 
 class CTexture
 {
