@@ -15,6 +15,7 @@
 //	Prototipos de funciones
 void fachada();
 void refrigerador();
+void silla();
 void arbol();
 
 /*int w = 500, h = 500;
@@ -129,6 +130,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPushMatrix();
 				glTranslatef(5, 5, 30);
 				refrigerador();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(10,5,30);
+			silla();
 			glPopMatrix();
 
 			fachada();
@@ -346,6 +352,51 @@ void refrigerador()
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 	
+}
+
+void silla()
+{
+	glTranslatef(0.5,0.5,0.5);
+
+	//RESPALDO
+	glPushMatrix();
+	glTranslatef(0,1.0,-0.5);
+	glPushMatrix();
+	
+	glPopMatrix();
+	glScalef(0.75,1.5,0.125);
+	glColor3f(0,1,0);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,0);
+	//PATA 1
+	glPushMatrix();
+	glTranslatef(0.375,-1,0.375);
+	glScalef(0.25,1.5,0.25);
+	figures.u_prisma(0);
+	glPopMatrix();
+	//PATA  2
+	glPushMatrix();
+	glTranslatef(-0.375,-1,0.375);
+	glScalef(0.25,1.5,0.25);
+	figures.u_prisma(0);
+	glPopMatrix();
+	//PATA 3
+	glPushMatrix();
+	glTranslatef(-0.375,-1,-0.375);
+	glScalef(0.25,1.5,0.25);
+	figures.u_prisma(0);
+	glPopMatrix();
+	//PATA 4
+	glPushMatrix();
+	glTranslatef(0.375,-1,-0.375);
+	glScalef(0.25,1.5,0.25);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glScalef(1,0.5,1);
+	glColor3f(1,0,0);
+	figures.u_prisma(0);
+	glColor3f(1,1,1);
 }
 
 void arbol()
