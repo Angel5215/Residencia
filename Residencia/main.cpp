@@ -17,6 +17,7 @@ void fachada();
 void refrigerador();
 void silla();
 void arbol();
+void cocina();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -85,6 +86,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 
 }
 
+void cocina(void){
+
+	glPushMatrix();
+		glTranslatef(5, 5, 30);
+		refrigerador();
+	glPopMatrix();
+
+}
 
 
 void display ( void )   // Creamos la funcion donde se dibuja
@@ -127,10 +136,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glEnd();
 			glPopMatrix();
 
-			glPushMatrix();
-				glTranslatef(5, 5, 30);
-				refrigerador();
-			glPopMatrix();
+			cocina();
 
 			glPushMatrix();
 			glTranslatef(10,5,30);
@@ -193,6 +199,16 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 		case 'd':
 		case 'D':
 			objCamera.Strafe_Camera( CAMERASPEED+0.4 );
+			break;
+
+		case 'q':
+		case 'Q':
+			objCamera.UpDown_Camera(CAMERASPEED+0.2);
+			break;
+
+		case 'z':
+		case 'Z':
+			objCamera.UpDown_Camera(-(CAMERASPEED+0.2));
 			break;
 
 		case 27:        // Cuando Esc es presionado...
