@@ -376,11 +376,17 @@ void silla()
 
 	//RESPALDO
 	glPushMatrix();
-	glTranslatef(0,1.0,-0.5);
+	glTranslatef(0,1.0,-0.45);
+	glPushMatrix();
+	glTranslatef(0,0.75,0.06);
+	glRotatef(-90,1,0,0);
+	glColor3f(0,1,0);
+	figures.u_medio_cilindro(0.5,0.125,30,0);
+	glPopMatrix();
 	glPushMatrix();
 	
 	glPopMatrix();
-	glScalef(0.75,1.5,0.125);
+	glScalef(1.0,1.5,0.125);
 	glColor3f(0,1,0);
 	figures.u_prisma(0);
 	glPopMatrix();
