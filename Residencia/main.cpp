@@ -53,6 +53,9 @@ CTexture puertaFrente;
 CTexture garage;
 CTexture pisoRojo;
 CTexture mosaicoVintage;
+CTexture textAlberca;
+CTexture pisoPatioT;
+CTexture agua;
 
 //CTexture tree;
 
@@ -111,6 +114,19 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	mosaicoVintage.BuildGLTexture();
 	mosaicoVintage.ReleaseImage();
 
+	textAlberca.LoadTGA("textures/alberca.tga");
+	textAlberca.BuildGLTexture();
+	textAlberca.ReleaseImage();
+
+	pisoPatioT.LoadTGA("textures/piso_patioT.tga");
+	pisoPatioT.BuildGLTexture();
+	pisoPatioT.ReleaseImage();
+
+	agua.LoadTGA("textures/agua.tga");
+	agua.BuildGLTexture();
+	agua.ReleaseImage();
+
+
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
 	//	inclinación  (0, 1, 0)
@@ -156,6 +172,52 @@ void cocina(void){
 		refrigerador();
 	glPopMatrix();
 
+}
+
+void alberca(void){
+
+
+	glPushMatrix(); //jacuzzi
+		glTranslatef(17, -3.4, -46);
+		glPushMatrix(); //alberca parte 1
+			glTranslatef(-8.45, -6.2, -4.8);
+			figures.u_medio_cilindro_sin_tapa(8,10,10,textAlberca.GLindex);
+			glPushMatrix(); //alberca parte 2
+				//glTranslatef(-8.45,-6.4,-4.8);
+				glRotatef(180,0,1,0);
+				glScalef(1,1,2);
+				figures.u_medio_cilindro_sin_tapa(8,10,10,textAlberca.GLindex);
+			glPopMatrix(); //alberca parte 2
+		glPopMatrix(); //alberca parte 1
+			
+		figures.l_cilindro_sin_tapa(2,5,10,textAlberca.GLindex);
+	glPopMatrix(); //jacuzzi
+
+	///Agua en la alberca
+	glPushMatrix(); //agua
+		glTranslatef(17,0.8,-46);
+		glPushMatrix(); //alberca parte 1
+			glTranslatef(-8.45, -2.2, -4.8);
+			figures.u_medio_cilindro_sin_tapa(7.99,0.1,10,agua.GLindex);
+			glPushMatrix(); //alberca parte 2
+				//glTranslatef(-8.45,-6.4,-4.8);
+				glRotatef(180,0,1,0);
+				glScalef(1,1,2);
+				figures.u_medio_cilindro_sin_tapa(7.99,0.1,10,agua.GLindex);
+			glPopMatrix(); //alberca parte 2
+		glPopMatrix(); //alberca parte 1
+		figures.l_cilindro_sin_tapa(1.99,0.1,10,agua.GLindex);
+	glPopMatrix(); //agua
+
+}
+
+void patioTrasero(void){
+
+	glPushMatrix();
+	glTranslatef(8,-1.51,-51.8+12.7);
+	glScalef(10,3,8);
+	figures.u_prisma(pisoPatioT.GLindex);
+	glPopMatrix();
 }
 
 
@@ -220,6 +282,8 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			fachada();
 			divisiones();
 			puertas();
+			alberca();
+			patioTrasero();
 			glEnable(GL_LIGHTING);
 
 		glPopMatrix(); 
@@ -297,19 +361,20 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 		//Tecla para colocar la camara al interior de un cuarto de la casa
 		case 'c':
 		case 'C':
-			objCamera.Position_Camera(16.27, 9.5f, -9.68, 9.5, 2.5f, 38, 0, 1, 0);
+			objCamera.Position_Camera(16.27, 9.5f, -9.68, 14, 9.5f, -7, 0, 1, 0);
 			break;
 
 		//Tecla para colocar la camara a un lado de la alberca
 		case 'p':
 		case 'P':
-			objCamera.Position_Camera(22.13, 6.69f, -38.55, -48.94, 2.5f, -69.66, 0, 1, 0);
+			//objCamera.Position_Camera(22.13, 6.69f, -38.55, -48.94, 2.5f, -69.66, 0, 1, 0);
+			objCamera.Position_Camera(22.13, 6.69f, -38.55, 20, 4.0f, -40, 0, 1, 0);
 			break;
 
 		//Tecla para colocar la camara en una vista isometrica de la casa
 		case 'i':
 		case 'I':
-			objCamera.Position_Camera(-23.94, 58.5f, 16.99, 2.44, 2.5f, -12.39, 0, 1, 0);
+			objCamera.Position_Camera(-23.94, 58.5f, 16.99, -5, 2.5f, -12.39, 0, 1, 0);
 			break;
 
 		case 'u':
@@ -347,7 +412,7 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 			printf("(xx,yy,zz) (%f,%f,%f)\n", xx,yy,zz);
 			printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
 			printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
-			printf("(mUp) (%f, %f, %f)\n", objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
+			//printf("(mUp) (%f, %f, %f)\n", objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
 			break;
 
 		case 27:        // Cuando Esc es presionado...
