@@ -19,6 +19,7 @@ void silla();
 void arbol();
 void cocina();
 void sillon_uno();
+void mesa_centro();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -48,7 +49,7 @@ CTexture metal_cromo;
 //CTexture tree;
 
 //CFiguras sky;
-
+const double PI = 3.1415926535897;
 void InitGL ( GLvoid )     // Inicializamos parametros
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);				// Negro de fondo	
@@ -147,6 +148,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPushMatrix();
 			glTranslatef(15,5,30);
 			sillon_uno();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(20,5,30);
+			mesa_centro();
 			glPopMatrix();
 
 			fachada();
@@ -539,6 +545,28 @@ void sillon_uno()
 	glScalef(3,1,1);
 	glColor3f(1,1,0);
 	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+
+void mesa_centro()
+{
+
+	glPushMatrix();
+
+
+
+	glColor3f(0.75,1,0.25);
+	figures.u_cilindro(0.5,0.1,30,0);
+	for (int i = 0; i < 4; i++)
+	{
+		glPushMatrix();
+		glColor3f(1,0.25,0.5);
+		glTranslatef(0.4*cos(PI/2 * i),-0.5,0.4*sin(PI/2 * i));
+		figures.u_cilindro(0.05,0.5,5,0);
+		glPopMatrix();
+	}
+	
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
