@@ -20,6 +20,7 @@ void arbol();
 void cocina();
 void sillon_uno();
 void mesa_centro();
+void divisiones();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -45,6 +46,7 @@ GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 //	Texturas para el refrigerador
 CTexture cuarzo;
 CTexture metal_cromo;
+CTexture pared_interior;
 
 //CTexture tree;
 
@@ -80,11 +82,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	metal_cromo.BuildGLTexture();
 	metal_cromo.ReleaseImage();
 
+	pared_interior.LoadTGA("textures/pared_interior_5.tga");
+	pared_interior.BuildGLTexture();
+	pared_interior.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
 	//	inclinación  (0, 1, 0)
-	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 37, 0, 1, 0);
+	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 38, 0, 1, 0);
 
 }
 
@@ -155,9 +160,10 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			mesa_centro();
 			glPopMatrix();
 
-			glDisable(GL_LIGHTING);
+			//glDisable(GL_LIGHTING);
 			fachada();
-			glEnable(GL_LIGHTING);
+			divisiones();
+			//glEnable(GL_LIGHTING);
 
 		glPopMatrix(); 
 
@@ -571,6 +577,203 @@ void mesa_centro()
 	
 	glPopMatrix();
 	glColor3f(1,1,1);
+}
+
+void divisiones() {
+
+	glPushMatrix();
+		//	División entrada (derecha)
+		glTranslatef(17, 3, -4.502);
+		glScalef(18, 6, 9);
+		figures.u_prisma(cuarzo.GLindex);
+		/*glBindTexture(GL_TEXTURE_2D, cuarzo.GLindex);
+		glBegin(GL_POLYGON);
+			glNormal3f(-1, 0, 0);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(8, 0, 0);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(8, 0, -9);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(8, 6, -9);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(8, 6, 0);
+		glEnd();*/
+	glPopMatrix();
+
+	glPushMatrix();
+	//	División entrada (derecha sala)
+	glTranslatef(9.5, 3, -17);
+	glScalef(3, 6, 8);
+	figures.u_prisma(cuarzo.GLindex);
+
+	/*glBindTexture(GL_TEXTURE_2D, cuarzo.GLindex);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(8, 0, -12);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(8, 0, -21);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(8, 6, -21);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(8, 6, -12);
+	glEnd();*/
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(10, 3, -12.5);
+		glScalef(4, 6, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	División central entrada sala
+	glPushMatrix();
+	glTranslatef(8.5, 5.5, -10.5);
+	glScalef(1, 0.5, 3);
+	figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	División Pasillo Cochera
+	glPushMatrix();
+	glTranslatef(3, 2, -16.5);
+	glScalef(6, 4, 1);
+	figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	División Pasillo Cochera
+	glPushMatrix();
+	glTranslatef(3.5, 2, -20.5);
+	glScalef(5, 4, 1);
+	figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	División Pasillo Cochera
+	glPushMatrix();
+	glTranslatef(0.5, 2, -20);
+	glScalef(1, 4, 2);
+	figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	División Pasillo Cochera
+	glPushMatrix();
+	glTranslatef(0.5, 3.75, -18);
+	glScalef(1, 0.5, 2);
+	figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	ESCALERAS	
+	glPushMatrix();	// 01
+		glColor3f(1,1,0);
+		glTranslatef(2, 0.25, -10);
+		glScalef(4, 0.5, 2);
+		figures.u_prisma(pared_interior.GLindex);
+		glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 02
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 0.5, -10.5);
+	glScalef(3, 1, 1);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 03
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 0.75, -11.5);
+	glScalef(3, 1.5, 1);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 04
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 1, -12.5);
+	glScalef(3, 2, 1);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 05
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 1.25, -13.5);
+	glScalef(3, 2.5, 1);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 06
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 1.5, -14.5);
+	glScalef(3, 3, 1);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 07
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 1.75, -15.5);
+	glScalef(3, 3.5, 1);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	//	Escalera (vuelta)
+	glPushMatrix();	// 08-1
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 3.5, -16.5);
+	glScalef(3, 1.01, 1.01);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 08-2
+	glColor3f(1,1,0);
+	glTranslatef(1.5, 3.75, -18);
+	glScalef(3, 0.501, 4.01);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 09
+	glColor3f(1,1,0);
+	glTranslatef(3.5, 4.25, -18);
+	glScalef(1, 0.5, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 10
+	glColor3f(1,1,0);
+	glTranslatef(4.5, 4.5, -18);
+	glScalef(1, 1, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 11
+	glColor3f(1,1,0);
+	glTranslatef(5.5, 4.75, -18);
+	glScalef(1, 1.5, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 12
+	glColor3f(1,1,0);
+	glTranslatef(6.5, 5, -18);
+	glScalef(1, 2, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 13
+	glColor3f(1,1,0);
+	glTranslatef(7.5, 5.25, -18);
+	glScalef(1, 2.5, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
+	glPushMatrix();	// 14
+	glColor3f(1,1,0);
+	glTranslatef(8.5, 5.5, -18);
+	glScalef(1, 3, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();
+
 }
 
 void fachada()
