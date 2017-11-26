@@ -155,7 +155,9 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			mesa_centro();
 			glPopMatrix();
 
+			glDisable(GL_LIGHTING);
 			fachada();
+			glEnable(GL_LIGHTING);
 
 		glPopMatrix(); 
 
@@ -577,40 +579,42 @@ void fachada()
 
 	glTranslatef(9.5, 10.5, -18);
 	
-	//	Figura A
+	//	Figura A (central)
 	glPushMatrix();
 	glScalef(19, 21, -36);
-	figures.u_prisma(0);	
+	figures.u_prisma_no_derecha(metal_cromo.GLindex);	
 	glPopMatrix();
 
-	//	Figura B
+	//	Figura B (garage)
 	glPushMatrix();
 	glColor3f(0, 1, 1);
 	glTranslatef(-15.501, -7.5, 3.5);
 	glScalef(12, 6, 16);
-	figures.u_prisma(0);
+	figures.u_prisma(metal_cromo.GLindex);
 	glPopMatrix();
 
-	//	Figura C
+	//	Figura C (sala)
 	glColor3f(1, 1, 0);
 	glPushMatrix();
 	glTranslatef(20.501, -6.5, 5.5);
 	glScalef(22, 8, 25);
-	figures.u_prisma(0);
+	figures.u_prisma_no_izquierda(metal_cromo.GLindex);
 	glPopMatrix();
 
+	//	Cuartos (arriba)
 	glColor3f(0, 1, 0);
 	glPushMatrix();
 	glTranslatef(15.01, 1.01, 5.5);
 	glScalef(11, 7, 25);
-	figures.u_prisma(0);
+	figures.u_prisma(metal_cromo.GLindex);
 	glPopMatrix();
 
+	//	Chimenea
 	glColor3f(1, 0, 0);
 	glPushMatrix();
 	glTranslatef(-10.501, 1.5, -11.5);
 	glScalef(2, 24, 2);
-	figures.u_prisma(0);
+	figures.u_prisma(metal_cromo.GLindex);
 
 	glPopMatrix();
 

@@ -26,6 +26,10 @@ class Figures
 		void u_esfera(const GLfloat &r, const GLuint &meridianos, const GLuint &paralelos, const GLuint &t1);
 		void l_esfera(const GLfloat &r, const GLuint &meridianos, const GLuint &paralelos, const GLuint &t1);
 
+		//	Otros
+		void u_prisma_no_derecha(const GLuint &t1);
+		void u_prisma_no_izquierda(const GLuint &t1);
+
 };
 
 #endif
