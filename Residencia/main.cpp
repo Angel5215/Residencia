@@ -18,6 +18,7 @@ void refrigerador();
 void silla();
 void arbol();
 void cocina();
+void sillon_uno();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -141,6 +142,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPushMatrix();
 			glTranslatef(10,5,30);
 			silla();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(15,5,30);
+			sillon_uno();
 			glPopMatrix();
 
 			fachada();
@@ -481,6 +487,60 @@ void arbol()
 					glEnable(GL_LIGHTING);
 				
 			glPopMatrix();
+}
+
+void sillon_uno()
+{
+	glPushMatrix(); //PUSH DE PRISMA PRINCIPAL
+	/*glPushMatrix();
+	glTranslatef(0,0.75,0.0);
+	glScalef(2.5,0.5,1.5);
+	glColor3f(0,0,1);
+	figures.u_prisma(0);
+	glPopMatrix();*/
+	glPushMatrix();
+	glTranslatef(1.20,0.5,0.5);
+	glColor3f(0,0,1);
+	glRotatef(-90,1,0,0);
+	figures.u_medio_cilindro(0.30,0.75,30,0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-1.20,0.5,0.5);
+	glColor3f(0,0,1);
+	glRotatef(-90,1,0,0);
+	figures.u_medio_cilindro(0.30,0.75,30,0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,1,-0.375);
+	glScalef(3,1,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 1 derecha
+	glTranslatef(1.3,-0.75,0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 2 
+	glTranslatef(1.3,-0.75,-0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 3 izquierda
+	glTranslatef(-1.3,-0.75,0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 4
+	glTranslatef(-1.3,-0.75,-0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glScalef(3,1,1);
+	glColor3f(1,1,0);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,1);
 }
 
 void fachada()
