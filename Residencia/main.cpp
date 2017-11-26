@@ -130,7 +130,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
 	//	inclinación  (0, 1, 0)
-	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 38, 0, 1, 0);
+	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 37, 0, 1, 0);
 
 }
 
@@ -279,12 +279,14 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glDisable(GL_LIGHTING);
-			fachada();
-			divisiones();
-			puertas();
-			alberca();
-			patioTrasero();
+				fachada();
+				puertas();
+				alberca();
+				patioTrasero();
 			glEnable(GL_LIGHTING);
+			divisiones();
+			
+			
 
 		glPopMatrix(); 
 
@@ -770,29 +772,13 @@ void divisiones() {
 		glTranslatef(17, 3, -4.502);
 		glScalef(18, 6, 9);
 		figures.u_prisma(cuarzo.GLindex);
-		/*glBindTexture(GL_TEXTURE_2D, cuarzo.GLindex);
-		glBegin(GL_POLYGON);
-			glNormal3f(-1, 0, 0);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(8, 0, 0);
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(8, 0, -9);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(8, 6, -9);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(8, 6, 0);
-		glEnd();*/
 	glPopMatrix();
 
 	glPushMatrix();
-	//	División entrada (derecha sala)
-	glTranslatef(9.5, 3, -17);
-	glScalef(3, 6, 8);
-	figures.u_prisma(cuarzo.GLindex);
-
-	/*glBindTexture(GL_TEXTURE_2D, cuarzo.GLindex);
-	glBegin(GL_POLYGON);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(8, 0, -12);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(8, 0, -21);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(8, 6, -21);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(8, 6, -12);
-	glEnd();*/
+		//	División entrada (derecha sala)
+		glTranslatef(9.5, 3, -17);
+		glScalef(3, 6, 8);
+		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -803,9 +789,9 @@ void divisiones() {
 
 	//	División central entrada sala
 	glPushMatrix();
-	glTranslatef(8.5, 5.5, -10.5);
-	glScalef(1, 0.5, 3);
-	figures.u_prisma(cuarzo.GLindex);
+		glTranslatef(8.5, 5.5, -10.5);
+		glScalef(1, 1, 3);
+		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 
 	//	División Pasillo Cochera
@@ -956,7 +942,75 @@ void divisiones() {
 	glScalef(1, 3, 4);
 	figures.u_prisma(pared_interior.GLindex);
 	glColor3f(1,1,1);
+	glPopMatrix();	//	Fin escaleras
+
+
+	//	Modificaciones sala
+	glPushMatrix();
+		glTranslatef(26.5, 3.5, -11);
+		glScalef(1, 5, 4);
+		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(26.5, 3.5, -11);
+		glScalef(1, 5, 4);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(27.5, 3.5, -16.5);
+		glScalef(1, 7, 9);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(27.5, 1, -22.5);
+		glScalef(1, 2, 3);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(27.5, 6, -22.5);
+		glScalef(1, 2, 3);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(27.5, 3.5, -24.5);
+		glScalef(1, 7, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(25.5, 1, -24.5);
+		glScalef(3, 2, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(25.5, 6, -24.5);
+		glScalef(3, 2, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(20.5, 3.5, -24.5);
+		glScalef(7, 7, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+
+
+
+	//	PISO SALA
+	glPushMatrix();
+		glTranslatef(19, 0.5, -16.5);
+		glScalef(16, 1, 15);
+		figures.u_prisma(0);
+	glPopMatrix();
+
+	//	Fin modificaciones sala
 
 }
 
@@ -1002,7 +1056,6 @@ void fachada()
 	glTranslatef(-10.501, 1.5, -11.5);
 	glScalef(2, 24, 2);
 	figures.u_prisma(metal_cromo.GLindex);
-
 	glPopMatrix();
 
 	glColor3f(1, 1, 1);
