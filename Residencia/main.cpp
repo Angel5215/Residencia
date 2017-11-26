@@ -51,6 +51,8 @@ CTexture metal_cromo;
 CTexture pared_interior;
 CTexture puertaFrente;
 CTexture garage;
+CTexture pisoRojo;
+CTexture mosaicoVintage;
 
 //CTexture tree;
 
@@ -100,6 +102,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	garage.LoadTGA("textures/garage.tga");
 	garage.BuildGLTexture();
 	garage.ReleaseImage();
+
+	pisoRojo.LoadTGA("textures/piso_entrada.tga");
+	pisoRojo.BuildGLTexture();
+	pisoRojo.ReleaseImage();
+
+	mosaicoVintage.LoadTGA("textures/mosaico_vintage.tga");
+	mosaicoVintage.BuildGLTexture();
+	mosaicoVintage.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -278,6 +288,30 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 			objCamera.UpDown_Camera(-(CAMERASPEED+0.2));
 			break;
 
+		//Tecla para colocar la camara al frente de la casa
+		case 'f':
+		case 'F':
+			objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 38, 0, 1, 0);
+			break;
+
+		//Tecla para colocar la camara al interior de un cuarto de la casa
+		case 'c':
+		case 'C':
+			objCamera.Position_Camera(16.27, 9.5f, -9.68, 9.5, 2.5f, 38, 0, 1, 0);
+			break;
+
+		//Tecla para colocar la camara a un lado de la alberca
+		case 'p':
+		case 'P':
+			objCamera.Position_Camera(22.13, 6.69f, -38.55, -48.94, 2.5f, -69.66, 0, 1, 0);
+			break;
+
+		//Tecla para colocar la camara en una vista isometrica de la casa
+		case 'i':
+		case 'I':
+			objCamera.Position_Camera(-23.94, 58.5f, 16.99, 2.44, 2.5f, -12.39, 0, 1, 0);
+			break;
+
 		case 'u':
 		case 'U':
 			zz -= 0.2;
@@ -310,7 +344,10 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 
 		case 'l':
 		case 'L':
-			printf("(%f,%f,%f)", xx,yy,zz);
+			printf("(xx,yy,zz) (%f,%f,%f)\n", xx,yy,zz);
+			printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
+			printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
+			printf("(mUp) (%f, %f, %f)\n", objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
 			break;
 
 		case 27:        // Cuando Esc es presionado...
