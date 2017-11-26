@@ -39,6 +39,8 @@ GLfloat Specular[] = { 1.0, 1.0, 1.0, 1.0 };				// Specular Light Values
 GLfloat Position[]= { 0.0f, 7.0f, -5.0f, 0.0f };			// Light Position
 GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
+float xx=0.0, yy = 0.0, zz = 0.0;
+
 //CTexture text1;
 //CTexture text2;
 //CTexture text3;	//Flecha
@@ -47,6 +49,8 @@ GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 CTexture cuarzo;
 CTexture metal_cromo;
 CTexture pared_interior;
+CTexture puertaFrente;
+CTexture garage;
 
 //CTexture tree;
 
@@ -72,8 +76,11 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	glEnable(GL_AUTO_NORMAL);
 	glEnable(GL_NORMALIZE);
 
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.3f);
 
-	//	Texturas refrigerador
+
+	//	Texturas
 	cuarzo.LoadTGA("textures/cuarzo.tga");
 	cuarzo.BuildGLTexture();
 	cuarzo.ReleaseImage();
@@ -86,10 +93,49 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pared_interior.BuildGLTexture();
 	pared_interior.ReleaseImage();
 
+	puertaFrente.LoadTGA("textures/puerta.tga");
+	puertaFrente.BuildGLTexture();
+	puertaFrente.ReleaseImage();
+
+	garage.LoadTGA("textures/garage.tga");
+	garage.BuildGLTexture();
+	garage.ReleaseImage();
+
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
 	//	inclinación  (0, 1, 0)
 	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 38, 0, 1, 0);
+
+}
+
+void puertas(void){
+
+	//Puerta Frontal
+	glPushMatrix();
+		glTranslatef(4.8, 5.0, -0.4);
+		glScalef(4, 8, 1);
+		glBindTexture(GL_TEXTURE_2D, puertaFrente.GLindex);
+		glBegin(GL_QUADS);
+			glTexCoord2f(1, 0); glVertex3f(0.5, -0.5, 0.5);
+			glTexCoord2f(0, 0); glVertex3f(-0.5, -0.5, 0.5);
+			glTexCoord2f(0, 1); glVertex3f(-0.5, 0.5, 0.5);
+			glTexCoord2f(1, 1); glVertex3f(0.5, 0.5, 0.5);
+		glEnd();
+
+	glPopMatrix();
+
+	//Puerta garage
+	glPushMatrix();
+		glTranslatef(-6, 2.4, -6.99);
+		glScalef(8, 4.8, 1);
+		glBindTexture(GL_TEXTURE_2D, garage.GLindex);
+		glBegin(GL_QUADS);
+			glTexCoord2f(1, 0); glVertex3f(0.5, -0.5, 0.5);
+			glTexCoord2f(0, 0); glVertex3f(-0.5, -0.5, 0.5);
+			glTexCoord2f(0, 1); glVertex3f(-0.5, 0.5, 0.5);
+			glTexCoord2f(1, 1); glVertex3f(0.5, 0.5, 0.5);
+		glEnd();
+	glPopMatrix();
 
 }
 
@@ -160,10 +206,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			mesa_centro();
 			glPopMatrix();
 
-			//glDisable(GL_LIGHTING);
+			glDisable(GL_LIGHTING);
 			fachada();
 			divisiones();
-			//glEnable(GL_LIGHTING);
+			puertas();
+			glEnable(GL_LIGHTING);
 
 		glPopMatrix(); 
 
@@ -229,6 +276,41 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 		case 'z':
 		case 'Z':
 			objCamera.UpDown_Camera(-(CAMERASPEED+0.2));
+			break;
+
+		case 'u':
+		case 'U':
+			zz -= 0.2;
+			break;
+
+		case 'j':
+		case 'J':
+			zz += 0.2;
+			break;
+
+		case 'h':
+		case 'H':
+			xx -= 0.2;
+			break;
+
+		case 'k':
+		case 'K':
+			xx += 0.2;
+			break;
+
+		case 'y':
+		case 'Y':
+			yy += 0.2;
+			break;
+
+		case 'n':
+		case 'N':
+			yy -= 0.2;
+			break;
+
+		case 'l':
+		case 'L':
+			printf("(%f,%f,%f)", xx,yy,zz);
 			break;
 
 		case 27:        // Cuando Esc es presionado...
