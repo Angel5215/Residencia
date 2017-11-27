@@ -70,6 +70,8 @@ CTexture cielo_superior;
 CTexture pasto;
 CTexture sillon;
 CTexture madera;
+CTexture muebleBanio;
+CTexture negroMate;
 
 //CTexture tree;
 
@@ -171,6 +173,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	madera.LoadTGA("textures/madera.tga");
 	madera.BuildGLTexture();
 	madera.ReleaseImage();
+
+	muebleBanio.LoadTGA("textures/muebleBanio.tga");
+	muebleBanio.BuildGLTexture();
+	muebleBanio.ReleaseImage();
+
+	negroMate.LoadTGA("textures/negroMate.tga");
+	negroMate.BuildGLTexture();
+	negroMate.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -374,7 +384,7 @@ void banio(void){
 
 		glScalef(2.5,1.5+1.2,1);
 		//glColor3f(1,0,1);
-		figures.u_prisma_mueble(porcelana.GLindex,garage.GLindex);
+		figures.u_prisma_mueble(negroMate.GLindex,muebleBanio.GLindex);
 		glPopMatrix();
 		//glColor3f(1,1,1);
 	glPopMatrix(); //mueble
@@ -433,11 +443,20 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			sillon_uno();
 			glPopMatrix();
 
-			glPushMatrix();
+			glPushMatrix(); //CHIMENEA Y TELE
 			glTranslatef(20.5,2,-23.5);
+
+			glPushMatrix();
+			glTranslatef(0,3,-0.35);
+			glColor3f(0,0,0);
+			glRotatef(-90,1,0,0);
+			figures.u_prisma_tele(0.25,2.5,3,0,0);
+			glPopMatrix();
+
 			glScalef(1.5,2,1);
 			glColor3f(0.3254,0.5294,0.5098);
-			figures.u_prisma(0);
+			figures.u_prisma_mueble(0,0);
+			glColor3f(1,1,1);
 			glPopMatrix();
 
 			glPushMatrix();
@@ -1139,7 +1158,7 @@ void mueble_buro()
 
 	glScalef(2,1.5,0.5);
 	glColor3f(1,0,1);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(0,0);
 	glPopMatrix();
 	glColor3f(1,1,1);
 
@@ -1161,7 +1180,7 @@ void mueble_armario()
 	glPopMatrix();
 	glScalef(2,4.0,0.5);
 	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(0,0);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
