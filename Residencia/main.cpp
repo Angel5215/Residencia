@@ -652,50 +652,47 @@ void refrigerador()
 
 void silla()
 {
-	glTranslatef(0.5,0.5,0.5);
+	
 
 	//RESPALDO
 	glPushMatrix();
-	glTranslatef(0,1.0,-0.45);
+	glTranslatef(0,0.50,-0.22);
 	glPushMatrix();
-	glTranslatef(0,0.75,0.06);
+	glTranslatef(0,0.375,0.031);
 	glRotatef(-90,1,0,0);
 	glColor3f(0,1,0);
-	figures.u_medio_cilindro(0.5,0.125,30,0);
+	figures.u_medio_cilindro(0.25,0.0625,30,0);
 	glPopMatrix();
-	glPushMatrix();
-	
-	glPopMatrix();
-	glScalef(1.0,1.5,0.125);
+	glScalef(0.5,0.75,0.0625);
 	glColor3f(0,1,0);
 	figures.u_prisma(0);
 	glPopMatrix();
 	glColor3f(1,1,0);
 	//PATA 1
 	glPushMatrix();
-	glTranslatef(0.375,-1,0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(0.1875,-0.5,0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
 	//PATA  2
 	glPushMatrix();
-	glTranslatef(-0.375,-1,0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(0.1875,-0.5,-0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
 	//PATA 3
 	glPushMatrix();
-	glTranslatef(-0.375,-1,-0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(-0.1875,-0.5,-0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
 	//PATA 4
 	glPushMatrix();
-	glTranslatef(0.375,-1,-0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(-0.1875,-0.5,0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
-	glScalef(1,0.5,1);
+	glScalef(0.5,0.25,0.5);
 	glColor3f(1,0,0);
 	figures.u_prisma(0);
 	glColor3f(1,1,1);
