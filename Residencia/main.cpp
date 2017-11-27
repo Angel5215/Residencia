@@ -58,6 +58,8 @@ CTexture mosaicoVintage;
 CTexture textAlberca;
 CTexture pisoPatioT;
 CTexture agua;
+CTexture porcelana;
+CTexture plata;
 
 //CTexture tree;
 
@@ -127,6 +129,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	agua.LoadTGA("textures/agua.tga");
 	agua.BuildGLTexture();
 	agua.ReleaseImage();
+
+	porcelana.LoadTGA("textures/porcelana.tga");
+	porcelana.BuildGLTexture();
+	porcelana.ReleaseImage();
+
+	plata.LoadTGA("textures/plata.tga");
+	plata.BuildGLTexture();
+	plata.ReleaseImage();
 
 
 	//	posicion     (0, 2.5, 3)
@@ -270,6 +280,39 @@ void patioTrasero(void){
 
 }
 
+void banio(void){
+
+	glPushMatrix(); //toilet
+		glTranslatef(00,0.6, 12.8);
+
+		glPushMatrix(); //base
+			glTranslatef(0, -1.4, -0.4);
+			figures.u_cono(1,2,10,porcelana.GLindex);
+		glPopMatrix(); //base
+
+		glPushMatrix(); //caja
+			glTranslatef(0, 2.2, -1);
+			glScalef(2, 3.4, 0.8);
+			figures.l_prisma(porcelana.GLindex);
+
+			glPushMatrix(); //palanca
+				glTranslatef(0.4,0.35,0.6);
+				glRotatef(90,1,0,0);
+				figures.u_cilindro(0.05,0.1,5,plata.GLindex);
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0.45, 0.35, 0.6);
+				glScalef(0.15, 0.02, 0.2);
+				figures.u_prisma(plata.GLindex);
+			glPopMatrix(); //palanca
+
+		glPopMatrix(); //caja
+
+		glScalef(1,1,1.5);
+		figures.u_cilindro(1,1,10,porcelana.GLindex);
+
+	glPopMatrix(); //toilet
+}
 
 void display ( void )   // Creamos la funcion donde se dibuja
 {
@@ -333,6 +376,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				puertas();
 				alberca();
 				patioTrasero();
+				banio();
 			glEnable(GL_LIGHTING);
 			divisiones();
 			
