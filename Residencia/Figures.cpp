@@ -1444,3 +1444,90 @@ void Figures::l_prisma_no_izquierda(const GLuint &t1)
 	glEnd();
 
 }
+
+void Figures::skybox(const GLuint &t1, const GLuint &t2, const GLuint &t3, const GLuint &t4)
+{
+	GLfloat vertices[8][3] = 
+	{
+		{ -0.5, -0.5, +0.5 },		//	V0
+		{ +0.5, -0.5, +0.5 },		//	V1
+		{ +0.5, +0.5, +0.5 },		//	V2
+		{ -0.5, +0.5, +0.5 },		//	V3
+		{ -0.5, -0.5, -0.5 },		//	V4
+		{ +0.5, -0.5, -0.5 },		//	V5
+		{ +0.5, +0.5, -0.5 },		//	V6
+		{ -0.5, +0.5, -0.5 }		//	V7
+	}; 
+
+
+	glBindTexture(GL_TEXTURE_2D, t3);
+
+	//	Arriba (3267)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, -1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	//	Color azul
+	glColor3f(0.1764, 0.4235, 0.7960);
+
+	glBindTexture(GL_TEXTURE_2D, t1);
+
+	//	Frontal (0123)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, -1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[3]);
+	glEnd();
+
+	//	Atrás (5476)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, 1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[7]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[6]);
+	glEnd();
+
+
+	glBindTexture(GL_TEXTURE_2D, t2);
+
+	//	Derecha (1562)
+	glBegin(GL_POLYGON);
+		glNormal3f(-1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[2]);
+	glEnd();
+
+	//	Izquierda (4037)
+	glBegin(GL_POLYGON);
+		glNormal3f(1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+
+	glBindTexture(GL_TEXTURE_2D, t4);
+
+	//	Volver a blanco
+	glColor3f(1, 1, 1);
+
+	//	Abajo (1045)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(40.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(40.0, 40.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(0.0, 40.0); glVertex3fv(vertices[5]);
+	glEnd();
+
+}
