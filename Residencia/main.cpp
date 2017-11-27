@@ -21,6 +21,7 @@ void cocina();
 void sillon_uno();
 void mesa_centro();
 void divisiones();
+void sillon_dos();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -326,6 +327,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPushMatrix();
 			glTranslatef(20,5,30);
 			mesa_centro();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(25,5,30);
+			sillon_dos();
 			glPopMatrix();
 
 			glDisable(GL_LIGHTING);
@@ -843,6 +849,110 @@ void sillon_uno()
 	figures.u_cilindro(0.1,0.25,5,0);
 	glPopMatrix();
 	glScalef(3,1,1);
+	glColor3f(1,1,0);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+
+void sillon_dos()
+{
+	glPushMatrix(); //PUSH DE PRISMA PRINCIPAL
+	/*glPushMatrix();
+	glTranslatef(0,0.75,0.0);
+	glScalef(2.5,0.5,1.5);
+	glColor3f(0,0,1);
+	figures.u_prisma(0);
+	glPopMatrix();*/
+	
+
+	glPushMatrix();
+	glTranslatef(0.6,0.65,0.12);
+	glPushMatrix(); //DESCANSO BRAZP DER
+	glTranslatef(0,0.15,0.375);
+	glColor3f(0,0,1);
+	glRotatef(-90,1,0,0);
+	figures.u_medio_cilindro(0.15,0.75,30,0);
+	glPopMatrix();
+	glColor3f(0,0,1);
+	glScalef(0.3,0.3,0.75);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-0.6,0.65,0.12);
+	glPushMatrix(); //DESCANSO BRAZP DER
+	glTranslatef(0,0.15,0.375);
+	glColor3f(0,0,1);
+	glRotatef(-90,1,0,0);
+	figures.u_medio_cilindro(0.15,0.75,30,0);
+	glPopMatrix();
+	glColor3f(0,0,1);
+	glScalef(0.3,0.3,0.75);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+
+	glPushMatrix(); //RESPALDO
+	glTranslatef(0,0.90,-0.375);
+
+	glPushMatrix();
+	glTranslatef(0.6,-0.1,0);
+
+	glPushMatrix(); 
+	glTranslatef(-0.15,0.3,0.125);
+	glColor3f(0,1.5,1);
+	glRotatef(-90,1,0,0);
+	figures.u_cuarto_cilindro(0.3,0.25,30,0);
+	glPopMatrix();
+
+	glScalef(0.3,0.6,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-0.6,-0.1,0);
+
+	glPushMatrix(); 
+	glTranslatef(0.15,0.3,-0.125);
+	glColor3f(0,1.5,1);
+	glRotatef(-90,1,0,0);
+	glRotatef(180,0,0,1);
+	figures.u_cuarto_cilindro(0.3,0.25,30,0);
+	glPopMatrix();
+
+	glScalef(0.3,0.6,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glScalef(0.9,1.0,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glPushMatrix(); //pata del sillon 1 derecha
+	glTranslatef(0.65,-0.75,0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 2 
+	glTranslatef(0.65,-0.75,-0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 3 izquierda
+	glTranslatef(-0.65,-0.75,0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glPushMatrix(); //pata del sillon 4
+	glTranslatef(-0.65,-0.75,-0.40);
+	glColor3f(0,1,0);
+	figures.u_cilindro(0.1,0.25,5,0);
+	glPopMatrix();
+	glScalef(1.5,1,1);
 	glColor3f(1,1,0);
 	figures.u_prisma(0);
 	glPopMatrix();
