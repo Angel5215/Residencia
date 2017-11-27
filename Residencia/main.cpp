@@ -26,7 +26,7 @@ void sillon_dos();
 void mueble_buro();
 void mueble_armario();
 void mueble_librero();
-
+void lampara();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -442,6 +442,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(20.5,1.8,-14);
 			glRotatef(180,0,1,0);
 			sillon_uno();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(23,0,-15);
+			lampara();
 			glPopMatrix();
 
 			glPushMatrix();
@@ -1117,6 +1122,27 @@ void sillon_dos()
 	glScalef(1.5,1,1);
 	glColor3f(1,1,1);
 	figures.u_prisma(sillon.GLindex);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+void lampara()
+{
+	glPushMatrix();
+	glTranslatef(0,1,0.0);
+
+	glPushMatrix();
+	glTranslatef(0,0.0625,0);
+	glPushMatrix();
+	glTranslatef(0,2,0);
+	glColor3f(1,0,1);
+	figures.u_cono(0.3,1,20,0);
+	glPopMatrix();
+	glColor3f(0.1258,1,0.84);
+	figures.u_cilindro(0.01,2,5,0);
+	glPopMatrix();
+
+	glColor3f(1,1,0);
+	figures.u_cilindro(0.25,0.0625,30,0);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
