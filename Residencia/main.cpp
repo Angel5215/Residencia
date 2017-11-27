@@ -68,6 +68,8 @@ CTexture cielo_lateral;
 CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
+CTexture sillon;
+CTexture madera;
 
 //CTexture tree;
 
@@ -146,6 +148,9 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	plata.BuildGLTexture();
 	plata.ReleaseImage();
 
+	sillon.LoadTGA("textures/sillon.tga");
+	sillon.BuildGLTexture();
+	sillon.ReleaseImage();
 
 	cielo_frontal.LoadTGA("textures/cielo_2.tga");
 	cielo_frontal.BuildGLTexture();
@@ -162,6 +167,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pasto.LoadTGA("textures/pasto.tga");
 	pasto.BuildGLTexture();
 	pasto.ReleaseImage();
+
+	madera.LoadTGA("textures/madera.tga");
+	madera.BuildGLTexture();
+	madera.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -905,16 +914,16 @@ void sillon_uno()
 	glPopMatrix();*/
 	glPushMatrix(); //DESCANSO BRAZP DER
 	glTranslatef(1.20,0.5,0.5);
-	glColor3f(0,0,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
-	figures.u_medio_cilindro(0.30,0.75,30,0);
+	figures.u_medio_cilindro(0.30,0.75,30,sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix(); //DESCANSO BRAZO IZQ
 	glTranslatef(-1.20,0.5,0.5);
-	glColor3f(0,0,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
-	figures.u_medio_cilindro(0.30,0.75,30,0);
+	figures.u_medio_cilindro(0.30,0.75,30,sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix(); //RESPALDO
@@ -925,14 +934,14 @@ void sillon_uno()
 
 	glPushMatrix(); 
 	glTranslatef(-0.3,0.3,0.125);
-	glColor3f(0,1.5,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
-	figures.u_cuarto_cilindro(0.6,0.25,30,0);
+	figures.u_cuarto_cilindro(0.6,0.25,30,sillon.GLindex);
 	glPopMatrix();
 
 	glScalef(0.6,0.6,0.25);
-	glColor3f(0,1,1);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -940,45 +949,45 @@ void sillon_uno()
 
 	glPushMatrix(); 
 	glTranslatef(0.3,0.3,-0.125);
-	glColor3f(0,1.5,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
 	glRotatef(180,0,0,1);
-	figures.u_cuarto_cilindro(0.6,0.25,30,0);
+	figures.u_cuarto_cilindro(0.6,0.25,30,sillon.GLindex);
 	glPopMatrix();
 
 	glScalef(0.6,0.6,0.25);
-	glColor3f(0,1,1);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glScalef(1.8,1.20,0.25);
-	glColor3f(0,1,1);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix(); //pata del sillon 1 derecha
 	glTranslatef(1.3,-0.75,0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix(); //pata del sillon 2 
 	glTranslatef(1.3,-0.75,-0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix(); //pata del sillon 3 izquierda
 	glTranslatef(-1.3,-0.75,0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix(); //pata del sillon 4
 	glTranslatef(-1.3,-0.75,-0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glScalef(3,1,1);
-	glColor3f(1,1,0);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
@@ -998,26 +1007,26 @@ void sillon_dos()
 	glTranslatef(0.6,0.65,0.12);
 	glPushMatrix(); //DESCANSO BRAZP DER
 	glTranslatef(0,0.15,0.375);
-	glColor3f(0,0,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
-	figures.u_medio_cilindro(0.15,0.75,30,0);
+	figures.u_medio_cilindro(0.15,0.75,30,sillon.GLindex);
 	glPopMatrix();
-	glColor3f(0,0,1);
+	glColor3f(1,1,1);
 	glScalef(0.3,0.3,0.75);
-	figures.u_prisma(0);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-0.6,0.65,0.12);
 	glPushMatrix(); //DESCANSO BRAZP DER
 	glTranslatef(0,0.15,0.375);
-	glColor3f(0,0,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
-	figures.u_medio_cilindro(0.15,0.75,30,0);
+	figures.u_medio_cilindro(0.15,0.75,30,sillon.GLindex);
 	glPopMatrix();
-	glColor3f(0,0,1);
+	glColor3f(1,1,1);
 	glScalef(0.3,0.3,0.75);
-	figures.u_prisma(0);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 
@@ -1029,14 +1038,14 @@ void sillon_dos()
 
 	glPushMatrix(); 
 	glTranslatef(-0.15,0.3,0.125);
-	glColor3f(0,1.5,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
-	figures.u_cuarto_cilindro(0.3,0.25,30,0);
+	figures.u_cuarto_cilindro(0.3,0.25,30,sillon.GLindex);
 	glPopMatrix();
 
 	glScalef(0.3,0.6,0.25);
-	glColor3f(0,1,1);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -1044,45 +1053,45 @@ void sillon_dos()
 
 	glPushMatrix(); 
 	glTranslatef(0.15,0.3,-0.125);
-	glColor3f(0,1.5,1);
+	glColor3f(1,1,1);
 	glRotatef(-90,1,0,0);
 	glRotatef(180,0,0,1);
-	figures.u_cuarto_cilindro(0.3,0.25,30,0);
+	figures.u_cuarto_cilindro(0.3,0.25,30,sillon.GLindex);
 	glPopMatrix();
 
 	glScalef(0.3,0.6,0.25);
-	glColor3f(0,1,1);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glScalef(0.9,1.0,0.25);
-	glColor3f(0,1,1);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 
 	glPushMatrix(); //pata del sillon 1 derecha
 	glTranslatef(0.65,-0.75,0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix(); //pata del sillon 2 
 	glTranslatef(0.65,-0.75,-0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix(); //pata del sillon 3 izquierda
 	glTranslatef(-0.65,-0.75,0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix(); //pata del sillon 4
 	glTranslatef(-0.65,-0.75,-0.40);
-	glColor3f(0,1,0);
-	figures.u_cilindro(0.1,0.25,5,0);
+	glColor3f(0,0,0);
+	figures.u_cilindro(0.1,0.25,5,madera.GLindex);
 	glPopMatrix();
 	glScalef(1.5,1,1);
-	glColor3f(1,1,0);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
