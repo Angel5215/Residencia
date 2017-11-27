@@ -22,6 +22,7 @@ void sillon_uno();
 void mesa_centro();
 void divisiones();
 void sillon_dos();
+void mueble_buro();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -369,13 +370,19 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(20.5,1.5,-14);
+			glTranslatef(11.3,1.8,-17);
+			glRotatef(90,0,1,0);
+			mueble_buro();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(15.5,1.5,-14);
 			mesa_centro();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(22,1.8,-15);
-			glRotatef(225,0,1,0);
+			glTranslatef(14,1.8,-15);
+			glRotatef(135,0,1,0);
 			sillon_dos();
 			glPopMatrix();
 
@@ -1003,6 +1010,55 @@ void sillon_dos()
 	figures.u_prisma(0);
 	glPopMatrix();
 	glColor3f(1,1,1);
+}
+
+void mueble_buro()
+{
+	glPushMatrix();
+	glTranslatef(0,0.3,0);
+	glPushMatrix();//PATA1
+	glTranslatef(0.9,-1.1,0.15);
+	glColor3f(0.5,1,0.855);
+	figures.u_cilindro(0.05,0.4,5,0);
+	glPopMatrix();
+
+	glPushMatrix();//PATA2
+	glTranslatef(-0.9,-1.1,0.15);
+	glColor3f(0.5,1,0.855);
+	figures.u_cilindro(0.05,0.4,5,0);
+	glPopMatrix();
+
+	glPushMatrix();//PATA3
+	glTranslatef(-0.9,-1.1,-0.15);
+	glColor3f(0.5,1,0.855);
+	figures.u_cilindro(0.05,0.4,5,0);
+	glPopMatrix();
+
+	glPushMatrix();//PATA4
+	glTranslatef(0.9,-1.1,-0.15);
+	glColor3f(0.5,1,0.855);
+	figures.u_cilindro(0.05,0.4,5,0);
+	glPopMatrix();
+
+	glPushMatrix();//PATA5
+	glTranslatef(0.0,-1.1,0.15);
+	glColor3f(0.5,1,0.855);
+	figures.u_cilindro(0.05,0.4,5,0);
+	glPopMatrix();
+
+	glPushMatrix();//PATA6
+	glTranslatef(0.0,-1.1,-0.15);
+	glColor3f(0.5,1,0.855);
+	figures.u_cilindro(0.05,0.4,5,0);
+	glPopMatrix();
+
+
+	glScalef(2,1.5,0.5);
+	glColor3f(1,0,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+
 }
 
 void mesa_centro()
