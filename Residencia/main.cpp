@@ -388,9 +388,16 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(18,1.8,-14);
+			glTranslatef(20.5,1.8,-14);
 			glRotatef(180,0,1,0);
 			sillon_uno();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(20.5,2,-23.5);
+			glScalef(1.5,2,1);
+			glColor3f(0.3254,0.5294,0.5098);
+			figures.u_prisma(0);
 			glPopMatrix();
 
 			glPushMatrix();
@@ -406,15 +413,22 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(15.5,1.5,-14);
+			glTranslatef(18,1.5,-14);
 			mesa_centro();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(14,1.8,-15);
+			glTranslatef(16.5,1.8,-15);
 			glRotatef(135,0,1,0);
 			sillon_dos();
 			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(23,1.8,-18);
+			glRotatef(255,0,1,0);
+			sillon_dos();
+			glPopMatrix();
+
 
 			glDisable(GL_LIGHTING);
 				fachada();
