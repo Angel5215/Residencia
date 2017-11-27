@@ -424,11 +424,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			sillon_uno();
 			glPopMatrix();
 
-			glPushMatrix();
+			glPushMatrix(); //CHIMENEA
 			glTranslatef(20.5,2,-23.5);
 			glScalef(1.5,2,1);
 			glColor3f(0.3254,0.5294,0.5098);
-			figures.u_prisma(0);
+			figures.u_prisma_mueble(0,0);
 			glPopMatrix();
 
 			glPushMatrix();
@@ -1130,7 +1130,7 @@ void mueble_buro()
 
 	glScalef(2,1.5,0.5);
 	glColor3f(1,0,1);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(0,0);
 	glPopMatrix();
 	glColor3f(1,1,1);
 
@@ -1152,7 +1152,7 @@ void mueble_armario()
 	glPopMatrix();
 	glScalef(2,4.0,0.5);
 	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(0,0);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
