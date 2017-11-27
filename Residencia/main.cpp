@@ -39,7 +39,9 @@ GLfloat Specular[] = { 1.0, 1.0, 1.0, 1.0 };				// Specular Light Values
 GLfloat Position[]= { 0.0f, 7.0f, -5.0f, 0.0f };			// Light Position
 GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
+//Variables de apoyo para colocar figuras
 float xx=0.0, yy = 0.0, zz = 0.0;
+float tamx = 1.0, tamy = 1.0, tamz = 1.0;
 
 //CTexture text1;
 //CTexture text2;
@@ -118,7 +120,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	textAlberca.BuildGLTexture();
 	textAlberca.ReleaseImage();
 
-	pisoPatioT.LoadTGA("textures/piso_patioT.tga");
+	pisoPatioT.LoadTGA("textures/ladrillo.tga");
 	pisoPatioT.BuildGLTexture();
 	pisoPatioT.ReleaseImage();
 
@@ -176,7 +178,18 @@ void cocina(void){
 
 void alberca(void){
 
+	glPushMatrix(); //alberca
+		glTranslatef(7.8+5.9, -4-0.2, -62.4-3.8);
+		glPushMatrix(); //agua
+			glTranslatef(0,4,0);
+			glScalef(9.99,0.1,19.99);
+			figures.l_prisma(agua.GLindex);
+		glPopMatrix(); //agua
+		glScalef(10,10,20);
+		figures.l_prisma_alberca(textAlberca.GLindex);
+	glPopMatrix(); //alberca
 
+	/*
 	glPushMatrix(); //jacuzzi
 		glTranslatef(17, -3.4, -46);
 		glPushMatrix(); //alberca parte 1
@@ -208,16 +221,53 @@ void alberca(void){
 		glPopMatrix(); //alberca parte 1
 		figures.l_cilindro_sin_tapa(1.99,0.1,10,agua.GLindex);
 	glPopMatrix(); //agua
+	*/
 
 }
 
 void patioTrasero(void){
 
 	glPushMatrix();
-	glTranslatef(8,-1.51,-51.8+12.7);
-	glScalef(10,3,8);
-	figures.u_prisma(pisoPatioT.GLindex);
+	glTranslatef(9.2,-1.51,-43.4);
+
+	glPushMatrix();
+		glTranslatef(22.2, 1, 6);
+		glScalef(25.4, 1, 25.2);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
 	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(16.52+5.6, 0.99-0.4, -16.8-2.4-0.22);
+		glScalef(25.8-0.6, 2, 24.4+1+1.25);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0.2, 1, -0.17);
+		glScalef(18.8, 1, 25.2);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-11.81, 1, -19.2);
+		glScalef(22.6, 0.8, 27.2);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-16, 1.2, 5.2);
+		glScalef(14.2, 0.4, 21.6);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-15.4, 0.9, 18.2);
+		glScalef(15.4, 0.8, 18.8);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPopMatrix();
+
 }
 
 
@@ -409,11 +459,35 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 			yy -= 0.2;
 			break;
 
+		case '1':
+			tamx += 0.2;
+			break;
+		case '2':
+			tamx -= 0.2;
+			break;
+
+		case '3':
+			tamy += 0.2;
+			break;
+
+		case '4':
+			tamy -= 0.2;
+			break;
+
+		case '5':
+			tamz += 0.2;
+			break;
+
+		case '6':
+			tamz -= 0.2;
+			break;
+
 		case 'l':
 		case 'L':
 			printf("(xx,yy,zz) (%f,%f,%f)\n", xx,yy,zz);
-			printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
-			printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
+			printf("(tamx,tamy,tamz) (%f,%f,%f)\n", tamx,tamy,tamz);
+			//printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
+			//printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
 			//printf("(mUp) (%f, %f, %f)\n", objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
 			break;
 

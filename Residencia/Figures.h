@@ -31,6 +31,8 @@ class Figures
 		void u_prisma_no_izquierda(const GLuint &t1);
 		void l_prisma_no_derecha(const GLuint &t1);
 		void l_prisma_no_izquierda(const GLuint &t1);
+		void u_prisma_patio(const GLuint &t1);
+		void l_prisma_alberca(const GLuint &t1);
 		void u_medio_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void l_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 
