@@ -34,6 +34,8 @@ class Figures
 		void l_prisma_no_izquierda(const GLuint &t1);
 		void u_prisma_patio(const GLuint &t1);
 		void l_prisma_alberca(const GLuint &t1);
+		void u_media_esfera(const GLfloat &r, const GLuint &meridianos, const GLuint &paralelos, const GLuint &t1);
+		void u_prisma_mueble(const GLuint &t1, const GLuint &t2);
 		void u_medio_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void l_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void skybox(const GLuint &t1, const GLuint &t2, const GLuint &t3, const GLuint &t4);

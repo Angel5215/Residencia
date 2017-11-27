@@ -217,6 +217,80 @@ void Figures::u_prisma(const GLuint &t1)
 
 }
 
+void Figures::u_prisma_mueble(const GLuint &t1, const GLuint &t2)
+{
+	GLfloat vertices[8][3] = 
+	{
+		{ -0.5, -0.5, +0.5 },		//	V0
+		{ +0.5, -0.5, +0.5 },		//	V1
+		{ +0.5, +0.5, +0.5 },		//	V2
+		{ -0.5, +0.5, +0.5 },		//	V3
+		{ -0.5, -0.5, -0.5 },		//	V4
+		{ +0.5, -0.5, -0.5 },		//	V5
+		{ +0.5, +0.5, -0.5 },		//	V6
+		{ -0.5, +0.5, -0.5 }		//	V7
+	}; 
+
+	glBindTexture(GL_TEXTURE_2D, t2);
+
+	//	Frontal (0123)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, 1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[3]);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, t1);
+
+	//	Derecha (1562)
+	glBegin(GL_POLYGON);
+		glNormal3f(1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[2]);
+	glEnd();
+
+	//	Atrás (5476)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, -1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[7]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[6]);
+	glEnd();
+
+	//	Izquierda (4037)
+	glBegin(GL_POLYGON);
+		glNormal3f(-1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	//	Arriba (3267)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	//	Abajo (1045)
+	glBegin(GL_POLYGON);
+		glNormal3f(0,-1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[5]);
+	glEnd();
+
+}
+
 void Figures::u_prisma_patio(const GLuint &t1)
 {
 	GLfloat vertices[8][3] = 
@@ -1093,6 +1167,74 @@ void Figures::u_esfera(const GLfloat &r, const GLuint &meridianos,
 	//	Calcular la resolución
 	const double PI = 3.1415926535897;
 	const GLfloat theta = (2 * PI) / meridianos;
+	const GLfloat alfa = PI / paralelos; 
+
+	//	Texturizado
+	float ctext_s = 1.0 / meridianos;
+	float ctext_t = 1.0 / paralelos;
+
+	//	Dibujar triángulo a triángulo
+	GLfloat vertices[4][3] = 
+	{ 							//  { x, y, z }
+		{ 0.f, 0.f, 0.f },		// V0 (variable)
+		{ 0.f, 0.f, 0.f },		// V1 (variable)
+		{ 0.f, 0.f, 0.f },		// V2 (variable)
+		{ 0.f, 0.f, 0.f },		// V3 (variable)
+	};
+
+	//	Aplicar textura
+	glBindTexture(GL_TEXTURE_2D, t1);
+
+	for(int i = 0; i < meridianos; i++)
+	{
+		for(int j = 0; j < paralelos; j++)
+		{
+			//	Actual (inferior)
+			vertices[0][0] = r * sin(alfa * j) * cos(theta * i);
+			vertices[0][1] = r * cos(alfa * j);
+			vertices[0][2] = r * sin(alfa * j) * sin(theta * i);
+
+			//	Actual (superior)
+			vertices[1][0] = r * sin(alfa * (j + 1)) * cos(theta * i);
+			vertices[1][1] = r * cos(alfa * (j + 1));
+			vertices[1][2] = r * sin(alfa * (j + 1)) * sin(theta * i);
+
+			//	Siguiente (superior)
+			vertices[2][0] = r * sin(alfa * (j + 1)) * cos(theta * (i + 1));
+			vertices[2][1] = r * cos(alfa * (j + 1));
+			vertices[2][2] = r * sin(alfa * (j + 1)) * sin(theta * (i + 1));
+
+			//	Siguiente (inferior)
+			vertices[3][0] = r * sin(alfa * j) * cos(theta * (i + 1));
+			vertices[3][1] = r * cos(alfa * j);
+			vertices[3][2] = r * sin(alfa * j) * sin(theta * (i + 1));
+
+			glBegin(GL_POLYGON);
+				//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
+				glNormal3fv(vertices[0]);
+				glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
+				glNormal3fv(vertices[1]);
+				glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
+				glNormal3fv(vertices[2]);
+				glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
+				glNormal3fv(vertices[3]);
+				glTexCoord2f(1, 0); glVertex3fv(vertices[3]);
+				/*glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
+				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[1]);
+				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[2]);
+				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[3]);*/
+			glEnd();
+			
+		}
+	}
+}
+
+void Figures::u_media_esfera(const GLfloat &r, const GLuint &meridianos, 
+	const GLuint &paralelos, const GLuint &t1)
+{
+	//	Calcular la resolución
+	const double PI = 3.1415926535897;
+	const GLfloat theta = (PI) / meridianos;
 	const GLfloat alfa = PI / paralelos; 
 
 	//	Texturizado

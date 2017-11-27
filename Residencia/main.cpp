@@ -337,6 +337,36 @@ void banio(void){
 		figures.u_cilindro(1,1,10,porcelana.GLindex);
 
 	glPopMatrix(); //toilet
+
+	glPushMatrix(); //mueble
+		glTranslatef(19.6, 1.6+0.6, -16.6);
+
+		glPushMatrix(); //lavabo
+			glTranslatef(-0.6, 1.85, 0);
+
+			glPushMatrix(); //base llave
+				glTranslatef(-0.4, -0.6, -0.4);
+
+				glPushMatrix();
+					glTranslatef(0.2, 1.0, 0.2);
+					glRotatef(90,0,0,1);
+					glRotatef(-45, 1, 0, 0);
+					figures.u_cilindro(0.05, 0.4, 5, plata.GLindex);
+				glPopMatrix();
+
+				figures.u_cilindro(0.05, 1.2, 10, plata.GLindex);
+			glPopMatrix(); //base llave
+
+			glRotatef(90,1,0,0);
+			figures.u_media_esfera(0.5, 10,10, plata.GLindex);
+		glPopMatrix(); //lavabo
+
+		glScalef(2.5,1.5+1.2,1);
+		//glColor3f(1,0,1);
+		figures.u_prisma_mueble(porcelana.GLindex,garage.GLindex);
+		glPopMatrix();
+		//glColor3f(1,1,1);
+	glPopMatrix(); //mueble
 }
 
 void display ( void )   // Creamos la funcion donde se dibuja
