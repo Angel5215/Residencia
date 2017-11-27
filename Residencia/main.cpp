@@ -995,22 +995,92 @@ void divisiones() {
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(20.5, 3.5, -24.5);
-		glScalef(7, 7, 1);
+		glTranslatef(21.5, 3.5, -24.5);
+		glScalef(5, 7, 1);
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
-
-
-
 
 	//	PISO SALA
 	glPushMatrix();
 		glTranslatef(19, 0.5, -16.5);
 		glScalef(16, 1, 15);
-		figures.u_prisma(0);
+		figures.u_prisma(metal_cromo.GLindex);
 	glPopMatrix();
 
 	//	Fin modificaciones sala
+
+	//	División sala-comedor
+	glPushMatrix();
+		glTranslatef(18.5, 3.5, -30);
+		glScalef(1, 7, 11.995);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(17.495, 3.5, -27.5);
+		glScalef(3, 7, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+
+	//	División cocina-comedor
+	glPushMatrix();
+		glTranslatef(9.5, 3.5, -27.5);
+		glScalef(3, 7, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(8.5, 3.5, -29);
+		glScalef(1, 7, 2);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(8.5, 3.5, -35);
+		glScalef(1, 7, 1.995);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	Pared Escaleras
+	glPushMatrix();
+		glTranslatef(4.5, 12.5, -20.5);
+		glScalef(8.995, 17, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	PISO COCINA/COMEDOR
+	glPushMatrix();
+		glTranslatef(9.5, 0.5, -28.5);
+		glScalef(18.995, 0.995, 14.995);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
+	//	Escalones hacia la sala
+	glPushMatrix();
+		glTranslatef(9.5, 0.25, -10.5);
+		glScalef(1, 0.5, 3);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(10.5, 0.5, -10.5);
+		glScalef(1, 1, 3);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	//	Escalones hacia el comedor
+	glPushMatrix();
+		glTranslatef(7, 0.25, -20.25);
+		glScalef(2, 0.5, 0.5);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(7, 0.5, -20.75);
+		glScalef(2, 1, 0.5);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
 
 }
 
@@ -1022,7 +1092,7 @@ void fachada()
 	
 	//	Figura A (central)
 	glPushMatrix();
-	glScalef(19, 21, -36);
+	glScalef(19, 21.05, -36);
 	figures.u_prisma_no_derecha(metal_cromo.GLindex);	
 	glPopMatrix();
 
