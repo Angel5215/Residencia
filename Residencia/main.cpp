@@ -62,6 +62,10 @@ CTexture pisoPatioT;
 CTexture agua;
 CTexture porcelana;
 CTexture plata;
+CTexture cielo_lateral;
+CTexture cielo_frontal;
+CTexture cielo_superior;
+CTexture pasto;
 
 //CTexture tree;
 
@@ -128,7 +132,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pisoPatioT.BuildGLTexture();
 	pisoPatioT.ReleaseImage();
 
-	agua.LoadTGA("textures/agua.tga");
+	agua.LoadTGA("textures/water.tga");
 	agua.BuildGLTexture();
 	agua.ReleaseImage();
 
@@ -140,6 +144,22 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	plata.BuildGLTexture();
 	plata.ReleaseImage();
 
+
+	cielo_frontal.LoadTGA("textures/cielo_2.tga");
+	cielo_frontal.BuildGLTexture();
+	cielo_frontal.ReleaseImage();	
+
+	cielo_lateral.LoadTGA("textures/cielo_3.tga");
+	cielo_lateral.BuildGLTexture();
+	cielo_lateral.ReleaseImage();
+
+	cielo_superior.LoadTGA("textures/cielo.tga");
+	cielo_superior.BuildGLTexture();
+	cielo_superior.ReleaseImage();
+
+	pasto.LoadTGA("textures/pasto.tga");
+	pasto.BuildGLTexture();
+	pasto.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -193,7 +213,7 @@ void alberca(void){
 	glPushMatrix(); //alberca
 		glTranslatef(7.8+5.9, -4-0.2, -62.4-3.8);
 		glPushMatrix(); //agua
-			glTranslatef(0,4,0);
+			glTranslatef(0,4.2,0);
 			glScalef(9.99,0.1,19.99);
 			figures.l_prisma(agua.GLindex);
 		glPopMatrix(); //agua
@@ -333,13 +353,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 
 		glPushMatrix();		
 			
-			/*glPushMatrix(); //Creamos cielo
-				glDisable(GL_LIGHTING);
-				glTranslatef(0,60,0);
-				sky.skybox(130.0, 130.0, 130.0,text1.GLindex);
-				glEnable(GL_LIGHTING);
-				glColor3f(1.0,1.0,1.0);
-			glPopMatrix();*/
+			
 
 
 			//	Ejes de referencia
@@ -395,7 +409,13 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glEnable(GL_LIGHTING);
 			divisiones();
 			
-			
+			glPushMatrix(); //Creamos cielo
+				glDisable(GL_LIGHTING);
+				glTranslatef(0,29.98,0);
+				glScalef(150, 60, 200);
+				figures.skybox(0, 0, cielo_superior.GLindex, pasto.GLindex);
+				glEnable(GL_LIGHTING);
+			glPopMatrix();
 
 		glPopMatrix(); 
 
@@ -1362,7 +1382,7 @@ void divisiones() {
 
 	//	Pared Escaleras
 	glPushMatrix();
-		glTranslatef(4.5, 12.5, -20.5);
+		glTranslatef(4.5, 12.49, -20.5);
 		glScalef(8.995, 17, 1);
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
@@ -1400,6 +1420,11 @@ void divisiones() {
 		figures.u_prisma(pared_interior.GLindex);
 	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(5, 5, 5);
+		figures.u_cuarto_cilindro(3, 3, 20, pared_interior.GLindex);
+	glPopMatrix();
+
 }
 
 void fachada()
@@ -1410,7 +1435,7 @@ void fachada()
 	
 	//	Figura A (central)
 	glPushMatrix();
-	glScalef(19, 21.05, -36);
+	glScalef(19, 21, -36);
 	figures.u_prisma_no_derecha(metal_cromo.GLindex);	
 	glPopMatrix();
 
