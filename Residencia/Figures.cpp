@@ -438,7 +438,7 @@ void Figures::u_prisma_trapecio(float altura, float largo, float profundidad, GL
 	glEnd();
 }
 
-void Figures::u_prisma_tele(float altura, float largo, float profundidad, GLuint text, GLuint tex2)  //Funcion creacion prisma
+void Figures::u_prisma_tele(float altura, float largo, float profundidad, GLuint text, GLuint text2)  //Funcion creacion prisma
 {
 
 	GLfloat vertice[8][3] = {
