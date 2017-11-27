@@ -68,6 +68,8 @@ CTexture cielo_lateral;
 CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
+CTexture muebleBanio;
+CTexture negroMate;
 
 //CTexture tree;
 
@@ -162,6 +164,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pasto.LoadTGA("textures/pasto.tga");
 	pasto.BuildGLTexture();
 	pasto.ReleaseImage();
+
+	muebleBanio.LoadTGA("textures/muebleBanio.tga");
+	muebleBanio.BuildGLTexture();
+	muebleBanio.ReleaseImage();
+
+	negroMate.LoadTGA("textures/negroMate.tga");
+	negroMate.BuildGLTexture();
+	negroMate.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -365,7 +375,7 @@ void banio(void){
 
 		glScalef(2.5,1.5+1.2,1);
 		//glColor3f(1,0,1);
-		figures.u_prisma_mueble(porcelana.GLindex,garage.GLindex);
+		figures.u_prisma_mueble(negroMate.GLindex,muebleBanio.GLindex);
 		glPopMatrix();
 		//glColor3f(1,1,1);
 	glPopMatrix(); //mueble
