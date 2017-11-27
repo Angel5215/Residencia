@@ -352,7 +352,13 @@ void display ( void )   // Creamos la funcion donde se dibuja
 
 		glPushMatrix();		
 			
-			
+			glPushMatrix(); //Creamos cielo
+				glDisable(GL_LIGHTING);
+				glTranslatef(0,29.98,0);
+				glScalef(150, 60, 200);
+				figures.skybox(0, 0, cielo_superior.GLindex, pasto.GLindex);
+				glEnable(GL_LIGHTING);
+			glPopMatrix();
 
 
 			//	Ejes de referencia
@@ -402,13 +408,6 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glEnable(GL_LIGHTING);
 			divisiones();
 			
-			glPushMatrix(); //Creamos cielo
-				glDisable(GL_LIGHTING);
-				glTranslatef(0,29.98,0);
-				glScalef(150, 60, 200);
-				figures.skybox(0, 0, cielo_superior.GLindex, pasto.GLindex);
-				glEnable(GL_LIGHTING);
-			glPopMatrix();
 
 		glPopMatrix(); 
 
@@ -1235,8 +1234,8 @@ void divisiones() {
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(26.5, 3.5, -11);
-		glScalef(1, 5, 4);
+		glTranslatef(26.5, 3, -11);
+		glScalef(1.05, 6, 4.05);
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 
@@ -1368,6 +1367,21 @@ void divisiones() {
 		glTranslatef(5, 5, 5);
 		figures.u_cuarto_cilindro(3, 3, 20, pared_interior.GLindex);
 	glPopMatrix();
+
+	//	Escalones en la entrada
+	glPushMatrix();
+		glTranslatef(4.8, 0.3, 1.05);
+		glScalef(8, 0.5, 2);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(4.8, 0.6, 0.505);
+		glScalef(5, 1, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+
 
 }
 
