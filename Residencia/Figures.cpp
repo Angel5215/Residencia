@@ -833,7 +833,79 @@ void Figures::u_medio_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, cons
 		glEnd();
 	}
 }
+void Figures::u_cuarto_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1)
+{
 
+	//	Dibujar triángulo a triángulo
+	GLfloat vertices[5][3] = 
+	{ 							//  { x, y, z }
+		{ 0.f, 0.f, 0.f },		// V0 (variable)
+		{ 0.f, 0.f, 0.f },		// V1 (variable)
+		{ 0.f, h, 0.f },		// V2 (variable)
+		{ 0.f, h, 0.f },		// V3 (variable)
+		{ 0.f, 0.f, 0.f }		// V4 (fijo (origen))
+	};
+
+	//	Calcular la resolución
+	const double PI = 3.1415926535897;
+	const GLfloat alfa = (2 * PI) / res;
+
+	glBindTexture(GL_TEXTURE_2D, t1);
+
+	for(int i = 0; i < res/4; i++)
+	{
+		//	Punto actual y siguiente (inferiores)
+		vertices[0][0] = r * cos(i * alfa);
+		vertices[0][2] = r * sin(i * alfa);
+
+		vertices[1][0] = r * cos((i + 1) * alfa);
+		vertices[1][2] = r * sin((i + 1) * alfa);
+
+		//	Punto actual y siguiente (superior)
+		vertices[2][0] = r * cos((i + 1) * alfa);
+		vertices[2][2] = r * sin((i + 1) * alfa);
+
+		vertices[3][0] = r * cos(i * alfa);
+		vertices[3][2] = r * sin(i * alfa);
+
+
+		//	Reiniciar altura
+		vertices[4][1] = 0.f;
+
+		GLfloat c_text = 1.0 / res;
+
+		//	Construir base (inferior) con textura.
+		glBegin(GL_POLYGON);
+			glNormal3f(0, -1, 0);
+			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+		glEnd();
+
+		//	Actualizar vértice central para la altura
+		vertices[4][1] = h;
+
+		//	Construir base (superior) con textura.
+		glBegin(GL_POLYGON);
+			glNormal3f(0, 1, 0);
+			glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
+		glEnd();
+
+		//	Construir superficie con textura
+		glBegin(GL_POLYGON);
+			glNormal3f(vertices[0][0], h, vertices[0][2]);
+			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(1, 1); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0, 1); 	glVertex3fv(vertices[3]);
+			//glTexCoord2f(c_text * i, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(c_text * i, 1); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(c_text * (i + 1), 0); 	glVertex3fv(vertices[2]);
+		glEnd();
+	}
+}
 void Figures::l_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1)
 {
 
