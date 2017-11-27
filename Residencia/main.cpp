@@ -23,6 +23,7 @@ void mesa_centro();
 void divisiones();
 void sillon_dos();
 void mueble_buro();
+void mueble_armario();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -396,6 +397,12 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(11.3,1.8,-17);
 			glRotatef(90,0,1,0);
 			mueble_buro();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(17.75,2.3,-25.5);
+			glRotatef(-90,0,1,0);
+			mueble_armario();
 			glPopMatrix();
 
 			glPushMatrix();
@@ -1081,6 +1088,27 @@ void mueble_buro()
 	glPopMatrix();
 	glColor3f(1,1,1);
 
+}
+
+void mueble_armario()
+{
+	glPushMatrix();
+	glTranslatef(0,1.0,0);
+	glPushMatrix();
+	glTranslatef(0,2.25,0);
+	glColor3f(0.4823,0.2588,0.0745);
+	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,-2.125,0);
+	glColor3f(0.4823,0.2588,0.0745);
+	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glPopMatrix();
+	glScalef(2,4.0,0.5);
+	glColor3f(0.4823,0.2588,0.0745);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,1);
 }
 
 void mesa_centro()
