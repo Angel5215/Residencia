@@ -305,7 +305,10 @@ void patioTrasero(void){
 void banio(void){
 
 	glPushMatrix(); //toilet
-		glTranslatef(00,0.6, 12.8);
+		//glTranslatef(0,2, 12.8);
+		glTranslatef(15.6, 1.6, -16.6);
+
+		glScalef(0.4,0.4,0.4);
 
 		glPushMatrix(); //base
 			glTranslatef(0, -1.4, -0.4);
@@ -314,7 +317,7 @@ void banio(void){
 
 		glPushMatrix(); //caja
 			glTranslatef(0, 2.2, -1);
-			glScalef(2, 3.4, 0.8);
+			glScalef(2, 2.0, 0.6);
 			figures.l_prisma(porcelana.GLindex);
 
 			glPushMatrix(); //palanca
@@ -330,7 +333,7 @@ void banio(void){
 
 		glPopMatrix(); //caja
 
-		glScalef(1,1,1.5);
+		glScalef(1,1,1.7);
 		figures.u_cilindro(1,1,10,porcelana.GLindex);
 
 	glPopMatrix(); //toilet
