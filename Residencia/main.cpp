@@ -39,7 +39,9 @@ GLfloat Specular[] = { 1.0, 1.0, 1.0, 1.0 };				// Specular Light Values
 GLfloat Position[]= { 0.0f, 7.0f, -5.0f, 0.0f };			// Light Position
 GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
+//Variables de apoyo para colocar figuras
 float xx=0.0, yy = 0.0, zz = 0.0;
+float tamx = 1.0, tamy = 1.0, tamz = 1.0;
 
 //CTexture text1;
 //CTexture text2;
@@ -118,7 +120,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	textAlberca.BuildGLTexture();
 	textAlberca.ReleaseImage();
 
-	pisoPatioT.LoadTGA("textures/piso_patioT.tga");
+	pisoPatioT.LoadTGA("textures/ladrillo.tga");
 	pisoPatioT.BuildGLTexture();
 	pisoPatioT.ReleaseImage();
 
@@ -176,7 +178,18 @@ void cocina(void){
 
 void alberca(void){
 
+	glPushMatrix(); //alberca
+		glTranslatef(7.8+5.9, -4-0.2, -62.4-3.8);
+		glPushMatrix(); //agua
+			glTranslatef(0,4,0);
+			glScalef(9.99,0.1,19.99);
+			figures.l_prisma(agua.GLindex);
+		glPopMatrix(); //agua
+		glScalef(10,10,20);
+		figures.l_prisma_alberca(textAlberca.GLindex);
+	glPopMatrix(); //alberca
 
+	/*
 	glPushMatrix(); //jacuzzi
 		glTranslatef(17, -3.4, -46);
 		glPushMatrix(); //alberca parte 1
@@ -208,16 +221,53 @@ void alberca(void){
 		glPopMatrix(); //alberca parte 1
 		figures.l_cilindro_sin_tapa(1.99,0.1,10,agua.GLindex);
 	glPopMatrix(); //agua
+	*/
 
 }
 
 void patioTrasero(void){
 
 	glPushMatrix();
-	glTranslatef(8,-1.51,-51.8+12.7);
-	glScalef(10,3,8);
-	figures.u_prisma(pisoPatioT.GLindex);
+	glTranslatef(9.2,-1.51,-43.4);
+
+	glPushMatrix();
+		glTranslatef(22.2, 1, 6);
+		glScalef(25.4, 1, 25.2);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
 	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(16.52+5.6, 0.99-0.4, -16.8-2.4-0.22);
+		glScalef(25.8-0.6, 2, 24.4+1+1.25);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0.2, 1, -0.17);
+		glScalef(18.8, 1, 25.2);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-11.81, 1, -19.2);
+		glScalef(22.6, 0.8, 27.2);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-16, 1.2, 5.2);
+		glScalef(14.2, 0.4, 21.6);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-15.4, 0.9, 18.2);
+		glScalef(15.4, 0.8, 18.8);
+		figures.u_prisma_patio(pisoPatioT.GLindex);
+	glPopMatrix();
+
+	glPopMatrix();
+
 }
 
 
@@ -409,11 +459,35 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 			yy -= 0.2;
 			break;
 
+		case '1':
+			tamx += 0.2;
+			break;
+		case '2':
+			tamx -= 0.2;
+			break;
+
+		case '3':
+			tamy += 0.2;
+			break;
+
+		case '4':
+			tamy -= 0.2;
+			break;
+
+		case '5':
+			tamz += 0.2;
+			break;
+
+		case '6':
+			tamz -= 0.2;
+			break;
+
 		case 'l':
 		case 'L':
 			printf("(xx,yy,zz) (%f,%f,%f)\n", xx,yy,zz);
-			printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
-			printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
+			printf("(tamx,tamy,tamz) (%f,%f,%f)\n", tamx,tamy,tamz);
+			//printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
+			//printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
 			//printf("(mUp) (%f, %f, %f)\n", objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
 			break;
 
@@ -578,50 +652,47 @@ void refrigerador()
 
 void silla()
 {
-	glTranslatef(0.5,0.5,0.5);
+	
 
 	//RESPALDO
 	glPushMatrix();
-	glTranslatef(0,1.0,-0.45);
+	glTranslatef(0,0.50,-0.22);
 	glPushMatrix();
-	glTranslatef(0,0.75,0.06);
+	glTranslatef(0,0.375,0.031);
 	glRotatef(-90,1,0,0);
 	glColor3f(0,1,0);
-	figures.u_medio_cilindro(0.5,0.125,30,0);
+	figures.u_medio_cilindro(0.25,0.0625,30,0);
 	glPopMatrix();
-	glPushMatrix();
-	
-	glPopMatrix();
-	glScalef(1.0,1.5,0.125);
+	glScalef(0.5,0.75,0.0625);
 	glColor3f(0,1,0);
 	figures.u_prisma(0);
 	glPopMatrix();
 	glColor3f(1,1,0);
 	//PATA 1
 	glPushMatrix();
-	glTranslatef(0.375,-1,0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(0.1875,-0.5,0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
 	//PATA  2
 	glPushMatrix();
-	glTranslatef(-0.375,-1,0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(0.1875,-0.5,-0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
 	//PATA 3
 	glPushMatrix();
-	glTranslatef(-0.375,-1,-0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(-0.1875,-0.5,-0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
 	//PATA 4
 	glPushMatrix();
-	glTranslatef(0.375,-1,-0.375);
-	glScalef(0.25,1.5,0.25);
+	glTranslatef(-0.1875,-0.5,0.1875);
+	glScalef(0.125,0.75,0.125);
 	figures.u_prisma(0);
 	glPopMatrix();
-	glScalef(1,0.5,1);
+	glScalef(0.5,0.25,0.5);
 	glColor3f(1,0,0);
 	figures.u_prisma(0);
 	glColor3f(1,1,1);
@@ -698,24 +769,59 @@ void sillon_uno()
 	glColor3f(0,0,1);
 	figures.u_prisma(0);
 	glPopMatrix();*/
-	glPushMatrix();
+	glPushMatrix(); //DESCANSO BRAZP DER
 	glTranslatef(1.20,0.5,0.5);
 	glColor3f(0,0,1);
 	glRotatef(-90,1,0,0);
 	figures.u_medio_cilindro(0.30,0.75,30,0);
 	glPopMatrix();
-	glPushMatrix();
+
+	glPushMatrix(); //DESCANSO BRAZO IZQ
 	glTranslatef(-1.20,0.5,0.5);
 	glColor3f(0,0,1);
 	glRotatef(-90,1,0,0);
 	figures.u_medio_cilindro(0.30,0.75,30,0);
 	glPopMatrix();
+
+	glPushMatrix(); //RESPALDO
+	glTranslatef(0,1.10,-0.375);
+
 	glPushMatrix();
-	glTranslatef(0,1,-0.375);
-	glScalef(3,1,0.25);
+	glTranslatef(1.2,-0.3,0);
+
+	glPushMatrix(); 
+	glTranslatef(-0.3,0.3,0.125);
+	glColor3f(0,1.5,1);
+	glRotatef(-90,1,0,0);
+	figures.u_cuarto_cilindro(0.6,0.25,30,0);
+	glPopMatrix();
+
+	glScalef(0.6,0.6,0.25);
 	glColor3f(0,1,1);
 	figures.u_prisma(0);
 	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-1.2,-0.3,0);
+
+	glPushMatrix(); 
+	glTranslatef(0.3,0.3,-0.125);
+	glColor3f(0,1.5,1);
+	glRotatef(-90,1,0,0);
+	glRotatef(180,0,0,1);
+	figures.u_cuarto_cilindro(0.6,0.25,30,0);
+	glPopMatrix();
+
+	glScalef(0.6,0.6,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glScalef(1.8,1.20,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
 	glPushMatrix(); //pata del sillon 1 derecha
 	glTranslatef(1.3,-0.75,0.40);
 	glColor3f(0,1,0);
