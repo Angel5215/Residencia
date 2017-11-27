@@ -73,6 +73,7 @@ CTexture sillon;
 CTexture madera;
 CTexture muebleBanio;
 CTexture negroMate;
+CTexture muebleBuro;
 
 //CTexture tree;
 
@@ -131,6 +132,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	mosaicoVintage.BuildGLTexture();
 	mosaicoVintage.ReleaseImage();
 
+	muebleBuro.LoadTGA("textures/muebleSala.tga");
+	muebleBuro.BuildGLTexture();
+	muebleBuro.ReleaseImage();
+
 	textAlberca.LoadTGA("textures/alberca.tga");
 	textAlberca.BuildGLTexture();
 	textAlberca.ReleaseImage();
@@ -171,7 +176,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pasto.BuildGLTexture();
 	pasto.ReleaseImage();
 
-	madera.LoadTGA("textures/madera.tga");
+	madera.LoadTGA("textures/maderaa.tga");
 	madera.BuildGLTexture();
 	madera.ReleaseImage();
 
@@ -1153,44 +1158,44 @@ void mueble_buro()
 	glTranslatef(0,0.3,0);
 	glPushMatrix();//PATA1
 	glTranslatef(0.9,-1.1,0.15);
-	glColor3f(0.5,1,0.855);
-	figures.u_cilindro(0.05,0.4,5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.05,0.4,5,madera.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();//PATA2
 	glTranslatef(-0.9,-1.1,0.15);
-	glColor3f(0.5,1,0.855);
-	figures.u_cilindro(0.05,0.4,5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.05,0.4,5,madera.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();//PATA3
 	glTranslatef(-0.9,-1.1,-0.15);
-	glColor3f(0.5,1,0.855);
-	figures.u_cilindro(0.05,0.4,5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.05,0.4,5,madera.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();//PATA4
 	glTranslatef(0.9,-1.1,-0.15);
-	glColor3f(0.5,1,0.855);
-	figures.u_cilindro(0.05,0.4,5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.05,0.4,5,madera.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();//PATA5
 	glTranslatef(0.0,-1.1,0.15);
-	glColor3f(0.5,1,0.855);
-	figures.u_cilindro(0.05,0.4,5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.05,0.4,5,madera.GLindex);
 	glPopMatrix();
 
 	glPushMatrix();//PATA6
 	glTranslatef(0.0,-1.1,-0.15);
-	glColor3f(0.5,1,0.855);
-	figures.u_cilindro(0.05,0.4,5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.05,0.4,5,madera.GLindex);
 	glPopMatrix();
 
 
 	glScalef(2,1.5,0.5);
-	glColor3f(1,0,1);
-	figures.u_prisma_mueble(0,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_mueble(madera.GLindex,muebleBuro.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 
