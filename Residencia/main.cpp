@@ -1364,6 +1364,11 @@ void divisiones() {
 		figures.u_prisma(pared_interior.GLindex);
 	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(5, 5, 5);
+		figures.u_cuarto_cilindro(3, 3, 20, pared_interior.GLindex);
+	glPopMatrix();
+
 }
 
 void fachada()

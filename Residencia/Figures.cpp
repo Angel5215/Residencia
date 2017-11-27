@@ -323,9 +323,12 @@ void Figures::u_cono(const GLfloat &r, const GLfloat &h, const GLfloat &res, con
 		//	Construir base con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, -1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[1]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[2]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[2]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
@@ -656,9 +659,12 @@ void Figures::u_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat &res,
 		//	Construir base (inferior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, -1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
@@ -667,9 +673,12 @@ void Figures::u_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat &res,
 		//	Construir base (superior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, 1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[3]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Construir superficie con textura
@@ -730,9 +739,12 @@ void Figures::u_medio_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat
 		//	Construir base (inferior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, -1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
@@ -741,9 +753,12 @@ void Figures::u_medio_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat
 		//	Construir base (superior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, 1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[3]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
 		glEnd();
 
 		//	Construir superficie con textura
@@ -804,9 +819,12 @@ void Figures::u_medio_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, cons
 		//	Construir base (inferior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, -1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
@@ -877,9 +895,12 @@ void Figures::u_cuarto_cilindro(const GLfloat &r, const GLfloat &h, const GLfloa
 		//	Construir base (inferior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, -1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
@@ -888,9 +909,12 @@ void Figures::u_cuarto_cilindro(const GLfloat &r, const GLfloat &h, const GLfloa
 		//	Construir base (superior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, 1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[3]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
 		glEnd();
 
 		//	Construir superficie con textura
@@ -950,9 +974,12 @@ void Figures::l_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat &res,
 		//	Construir base (inferior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, 1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
@@ -961,9 +988,12 @@ void Figures::l_cilindro(const GLfloat &r, const GLfloat &h, const GLfloat &res,
 		//	Construir base (superior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, -1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[2]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[3]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[2]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[3]);
 		glEnd();
 
 		//	Construir superficie con textura
@@ -1024,9 +1054,12 @@ void Figures::l_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfl
 		//	Construir base (inferior) con textura.
 		glBegin(GL_POLYGON);
 			glNormal3f(0, 1, 0);
-			glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
-			glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
-			glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
+			glTexCoord2f(0.5 + 0.5 * cos(i * alfa), 0.5 + 0.5 * sin(i * alfa)); 	glVertex3fv(vertices[0]);
+			glTexCoord2f(0.5, 0.5); 	glVertex3fv(vertices[4]);
+			glTexCoord2f(0.5 + 0.5 * cos((i + 1) * alfa), 0.5 + 0.5 * sin((i + 1) * alfa)); 	glVertex3fv(vertices[1]);
+			//glTexCoord2f(0, 0); 	glVertex3fv(vertices[0]);
+			//glTexCoord2f(0.5, 1); 	glVertex3fv(vertices[4]);
+			//glTexCoord2f(1, 0); 	glVertex3fv(vertices[1]);
 		glEnd();
 
 		//	Actualizar vértice central para la altura
