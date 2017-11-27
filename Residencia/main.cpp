@@ -315,22 +315,24 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			cocina();
 
 			glPushMatrix();
-			glTranslatef(10,5,30);
+			
 			silla();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(15,5,30);
+			glTranslatef(18,1.8,-14);
+			glRotatef(180,0,1,0);
 			sillon_uno();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(20,5,30);
+			glTranslatef(20.5,1.5,-14);
 			mesa_centro();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(25,5,30);
+			glTranslatef(22,1.8,-15);
+			glRotatef(225,0,1,0);
 			sillon_dos();
 			glPopMatrix();
 
@@ -964,18 +966,18 @@ void mesa_centro()
 
 	glPushMatrix();
 
-
-
-	glColor3f(0.75,1,0.25);
-	figures.u_cilindro(0.5,0.1,30,0);
 	for (int i = 0; i < 4; i++)
 	{
 		glPushMatrix();
 		glColor3f(1,0.25,0.5);
 		glTranslatef(0.4*cos(PI/2 * i),-0.5,0.4*sin(PI/2 * i));
-		figures.u_cilindro(0.05,0.5,5,0);
+		figures.u_cilindro(0.05,1,5,0);
 		glPopMatrix();
 	}
+
+	glColor3f(0.75,1,0.25);
+	glTranslatef(0,0.5,0);
+	figures.u_cilindro(0.5,0.1,30,0);
 	
 	glPopMatrix();
 	glColor3f(1,1,1);
