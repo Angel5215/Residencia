@@ -698,24 +698,59 @@ void sillon_uno()
 	glColor3f(0,0,1);
 	figures.u_prisma(0);
 	glPopMatrix();*/
-	glPushMatrix();
+	glPushMatrix(); //DESCANSO BRAZP DER
 	glTranslatef(1.20,0.5,0.5);
 	glColor3f(0,0,1);
 	glRotatef(-90,1,0,0);
 	figures.u_medio_cilindro(0.30,0.75,30,0);
 	glPopMatrix();
-	glPushMatrix();
+
+	glPushMatrix(); //DESCANSO BRAZO IZQ
 	glTranslatef(-1.20,0.5,0.5);
 	glColor3f(0,0,1);
 	glRotatef(-90,1,0,0);
 	figures.u_medio_cilindro(0.30,0.75,30,0);
 	glPopMatrix();
+
+	glPushMatrix(); //RESPALDO
+	glTranslatef(0,1.10,-0.375);
+
 	glPushMatrix();
-	glTranslatef(0,1,-0.375);
-	glScalef(3,1,0.25);
+	glTranslatef(1.2,-0.3,0);
+
+	glPushMatrix(); 
+	glTranslatef(-0.3,0.3,0.125);
+	glColor3f(0,1.5,1);
+	glRotatef(-90,1,0,0);
+	figures.u_cuarto_cilindro(0.6,0.25,30,0);
+	glPopMatrix();
+
+	glScalef(0.6,0.6,0.25);
 	glColor3f(0,1,1);
 	figures.u_prisma(0);
 	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-1.2,-0.3,0);
+
+	glPushMatrix(); 
+	glTranslatef(0.3,0.3,-0.125);
+	glColor3f(0,1.5,1);
+	glRotatef(-90,1,0,0);
+	glRotatef(180,0,0,1);
+	figures.u_cuarto_cilindro(0.6,0.25,30,0);
+	glPopMatrix();
+
+	glScalef(0.6,0.6,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glScalef(1.8,1.20,0.25);
+	glColor3f(0,1,1);
+	figures.u_prisma(0);
+	glPopMatrix();
+
 	glPushMatrix(); //pata del sillon 1 derecha
 	glTranslatef(1.3,-0.75,0.40);
 	glColor3f(0,1,0);
