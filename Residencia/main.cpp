@@ -424,11 +424,20 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			sillon_uno();
 			glPopMatrix();
 
-			glPushMatrix(); //CHIMENEA
+			glPushMatrix(); //CHIMENEA Y TELE
 			glTranslatef(20.5,2,-23.5);
+
+			glPushMatrix();
+			glTranslatef(0,3,-0.35);
+			glColor3f(0,0,0);
+			glRotatef(-90,1,0,0);
+			figures.u_prisma_tele(0.25,2.5,3,0,0);
+			glPopMatrix();
+
 			glScalef(1.5,2,1);
 			glColor3f(0.3254,0.5294,0.5098);
 			figures.u_prisma_mueble(0,0);
+			glColor3f(1,1,1);
 			glPopMatrix();
 
 			glPushMatrix();
