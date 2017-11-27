@@ -21,8 +21,10 @@ void cocina();
 void sillon_uno();
 void mesa_centro();
 void divisiones();
+void divisiones_superior();
 void sillon_dos();
 void mueble_buro();
+void mueble_armario();
 
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
@@ -417,9 +419,16 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(18,1.8,-14);
+			glTranslatef(20.5,1.8,-14);
 			glRotatef(180,0,1,0);
 			sillon_uno();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(20.5,2,-23.5);
+			glScalef(1.5,2,1);
+			glColor3f(0.3254,0.5294,0.5098);
+			figures.u_prisma(0);
 			glPopMatrix();
 
 			glPushMatrix();
@@ -429,15 +438,28 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(15.5,1.5,-14);
+			glTranslatef(17.75,2.3,-25.5);
+			glRotatef(-90,0,1,0);
+			mueble_armario();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(18,1.5,-14);
 			mesa_centro();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(14,1.8,-15);
+			glTranslatef(16.5,1.8,-15);
 			glRotatef(135,0,1,0);
 			sillon_dos();
 			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(23,1.8,-18);
+			glRotatef(255,0,1,0);
+			sillon_dos();
+			glPopMatrix();
+
 
 			glDisable(GL_LIGHTING);
 				fachada();
@@ -447,6 +469,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				banio();
 			glEnable(GL_LIGHTING);
 			divisiones();
+			divisiones_superior();
 			
 
 		glPopMatrix(); 
@@ -1113,6 +1136,27 @@ void mueble_buro()
 
 }
 
+void mueble_armario()
+{
+	glPushMatrix();
+	glTranslatef(0,1.0,0);
+	glPushMatrix();
+	glTranslatef(0,2.25,0);
+	glColor3f(0.4823,0.2588,0.0745);
+	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,-2.125,0);
+	glColor3f(0.4823,0.2588,0.0745);
+	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glPopMatrix();
+	glScalef(2,4.0,0.5);
+	glColor3f(0.4823,0.2588,0.0745);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+
 void mesa_centro()
 {
 
@@ -1472,6 +1516,54 @@ void divisiones() {
 
 
 
+}
+
+void divisiones_superior()
+{
+	glPushMatrix();
+		glTranslatef(11, 6.5, -16.5);
+		glScalef(5.995, 0.995, 16.995);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(8.5, 14, -22.5);
+		glScalef(1, 13.995, 4.995);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(11, 14, -24.5);
+		glScalef(6, 13.995, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(14.5, 14, -20.5);
+		glScalef(1, 13.995, 7);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(19.5, 14, -14.5);
+		glScalef(11, 13.995, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	//	Pared Escaleras
+	/*glPushMatrix();
+		glTranslatef(4.5, 12.49, -20.5);
+		glScalef(8.995, 17, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();*/
+
+	/*glPushMatrix();	// 14
+	glColor3f(1,1,0);
+	glTranslatef(8.5, 5.5, -18);
+	glScalef(1, 3, 4);
+	figures.u_prisma(pared_interior.GLindex);
+	glColor3f(1,1,1);
+	glPopMatrix();	//	Fin escaleras*/
 }
 
 void fachada()
