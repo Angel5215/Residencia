@@ -894,7 +894,8 @@ void refrigerador()
 
 	//	Principal (trasera)
 	glPushMatrix();
-		glScalef(2, 2.5, 0.8);
+		glTranslatef(0,0.5,0);
+		glScalef(2, 3.5, 0.8);
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 
@@ -928,20 +929,20 @@ void refrigerador()
 
 		//	Manija (superior)
 		glPushMatrix();
-			glTranslatef(-0.7, 0.3, 0.130);
+			glTranslatef(-0.7, 0.50, 0.130);
 			glScalef(0.05, 0.1, 0.05);
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
 
 		//	Manija (cilindro)
 		glPushMatrix();
-			glTranslatef(-0.7, -0.35, 0.150);
+			glTranslatef(-0.7, -0.15, 0.150);
 			figures.u_cilindro(0.025, 0.7, 6, metal_cromo.GLindex);
 		glPopMatrix();
 
 		//	Manija (inferior)
 		glPushMatrix();
-			glTranslatef(-0.7, -0.3, 0.130);
+			glTranslatef(-0.7, -0.1, 0.130);
 			glScalef(0.05, 0.1, 0.05);
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
@@ -956,25 +957,25 @@ void refrigerador()
 
 		//	Manija (superior)
 		glPushMatrix();
-			glTranslatef(-0.7, 0.25, 0.130);
+			glTranslatef(-0.7, 1.25, 0.130);
 			glScalef(0.05, 0.1, 0.05);
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
 
 		//	Manija (cilindro)
 		glPushMatrix();
-			glTranslatef(-0.7, -0.3, 0.150);
+			glTranslatef(-0.7, 0.7, 0.150);
 			figures.u_cilindro(0.025, 0.6, 6, metal_cromo.GLindex);
 		glPopMatrix();
 
 		//	Manija (inferior)
 		glPushMatrix();
-			glTranslatef(-0.7, -0.25, 0.130);
+			glTranslatef(-0.7, 0.75, 0.130);
 			glScalef(0.05, 0.1, 0.05);
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
 
-		glScalef(2, 1, 0.2);
+		glScalef(2, 3, 0.2);
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 	
