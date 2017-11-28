@@ -78,6 +78,9 @@ CTexture madera;
 CTexture muebleBanio;
 CTexture negroMate;
 CTexture muebleBuro;
+CTexture almohada;
+CTexture cabecera;
+CTexture cobija;
 
 //CTexture tree;
 
@@ -203,6 +206,18 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	negroMate.LoadTGA("textures/negroMate.tga");
 	negroMate.BuildGLTexture();
 	negroMate.ReleaseImage();
+
+	almohada.LoadTGA("textures/almohada.tga");
+	almohada.BuildGLTexture();
+	almohada.ReleaseImage();
+
+	cabecera.LoadTGA("textures/cabecera.tga");
+	cabecera.BuildGLTexture();
+	cabecera.ReleaseImage();
+
+	cobija.LoadTGA("textures/cobija.tga");
+	cobija.BuildGLTexture();
+	cobija.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -382,7 +397,7 @@ void banio(void){
 	glPopMatrix(); //toilet
 
 	glPushMatrix(); //mueble
-		glTranslatef(19.6, 1.6+0.6, -16.6);
+		glTranslatef(19.6, 1.6+1, -16.6);
 
 		glPushMatrix(); //lavabo
 			glTranslatef(-0.6, 1.85, 0);
@@ -410,6 +425,79 @@ void banio(void){
 		glPopMatrix();
 		//glColor3f(1,1,1);
 	glPopMatrix(); //mueble
+}
+
+void cama(void){
+
+	glPushMatrix();
+
+		glTranslatef(22, 1.6, -11.6);
+		//glScalef(1.4, 0.6, 3);
+
+		glPushMatrix(); //pata 1 derecha
+		glTranslatef(1.3+0.4,-0.75+0.1,0.40+0.8);
+		
+		//glColor3f(0,0,0);
+		figures.u_cilindro(0.1,1,5,madera.GLindex);
+		glPopMatrix();
+
+		glPushMatrix(); //pata 2 
+		glTranslatef(1.3+0.4,-0.75+0.1,-0.40-0.8);
+		//glColor3f(0,0,0);
+		figures.u_cilindro(0.1,1,5,madera.GLindex);
+		glPopMatrix();
+
+		glPushMatrix(); //pata 3 izquierda
+		glTranslatef(-1.3-0.6,-0.75+0.1,0.40+0.8);
+		//glColor3f(0,0,0);
+		figures.u_cilindro(0.1,1,5,madera.GLindex);
+		glPopMatrix();
+
+		glPushMatrix(); //pata 4
+		glTranslatef(-1.3-0.6,-0.75+0.1,-0.40-0.8);
+		//glColor3f(0,0,0);
+		figures.u_cilindro(0.1,1,5,madera.GLindex);
+		glPopMatrix();
+
+		glPushMatrix(); //almohadas
+			glTranslatef(1.2, 1, -0.8);
+			glScalef(1, 0.4, 1);
+			figures.u_prisma(almohada.GLindex);
+		glPopMatrix(); 
+			
+		glPushMatrix();
+			glTranslatef(1.2, 1, 0.8);
+			glScalef(1, 0.4, 1);
+			figures.u_prisma(almohada.GLindex);
+		glPopMatrix(); //almohadas
+
+
+		glPushMatrix();
+		glTranslatef(0,0.5,0);
+
+		glPushMatrix(); //cobija
+			//glTranslatef(0,0.3,0);
+			glTranslatef(-1, 0.21, 0);
+			glScalef(1.4, 0.1, 3);
+			glScalef(3-1.2,1+1.2,1+0.02);
+			figures.u_prisma(cobija.GLindex);
+		glPopMatrix(); //cobija
+
+		glPushMatrix(); //Cabecera
+			glTranslatef(2.4, 0, 0);
+			glScalef(0.6, 3.2, 3.6);
+			figures.u_prisma(cabecera.GLindex);
+		glPopMatrix(); //Cabecera
+
+		glScalef(1.4, 0.6, 3);
+		glScalef(3,1,1);
+		glColor3f(1,1,1);
+		figures.u_prisma(0);
+		glPopMatrix();
+		//glColor3f(1,1,1);
+
+	glPopMatrix();
+
 }
 
 void display ( void )   // Creamos la funcion donde se dibuja
@@ -552,6 +640,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				alberca();
 				patioTrasero();
 				banio();
+				cama();
 			glEnable(GL_LIGHTING);
 			divisiones();
 			divisiones_superior();
