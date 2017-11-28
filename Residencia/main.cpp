@@ -1832,10 +1832,18 @@ void fachada()
 	glTranslatef(9.5, 10.5, -18);
 	
 	//	Figura A (central)
+	
 	glPushMatrix();
 	glScalef(19, 21, -36);
-	figures.u_prisma_no_derecha(metal_cromo.GLindex);	
+	figures.u_prisma_no_derecha(cuarzo.GLindex);	
 	glPopMatrix();
+
+	glEnable(GL_LIGHTING);
+	glPushMatrix();
+	glScalef(18.995, 20.995, -35.995);
+	figures.l_prisma_no_derecha(cuarzo.GLindex, metal_cromo.GLindex);	
+	glPopMatrix();
+	glDisable(GL_LIGHTING);
 
 	//	Figura B (garage)
 	glPushMatrix();
