@@ -1841,6 +1841,13 @@ void divisiones_superior()
 		figures.u_prisma(cuarzo.GLindex);
 	glPopMatrix();
 
+	//	DIVISIÓN PUERTA TECHO TRACEY
+	glPushMatrix();
+		glTranslatef(14.5, 15.995, -16);
+		glScalef(1, 10, 2);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
 	//	PISO CUARTO TRACEY
 	glPushMatrix();
 		glTranslatef(21, 6.5, -19);
@@ -1854,6 +1861,189 @@ void divisiones_superior()
 		glScalef(18.995, 1, 14.995);
 		figures.u_prisma(metal_cromo.GLindex);
 	glPopMatrix();
+
+	//	PISO PASILLO BAÑO SUPERIOR CENTRAL
+	glPushMatrix();
+		glTranslatef(20.5, 6.5, -12.5);
+		glScalef(13, 1, 3);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
+
+	//	PRISMA CUARTO DE MICHAEL
+	glPushMatrix();
+		glTranslatef(4.5, 13.5, -11.5);
+		glScalef(8.995, 14.995, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	PARTE 1 PUERTA CUARTO DE MICHAEL¡
+	glPushMatrix();
+		glTranslatef(8.5, 13.5, -10.5);
+		glScalef(1, 14.995, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE MICHAEL¡
+	glPushMatrix();
+		glTranslatef(11, 13.5, -7.5);
+		glScalef(6, 14.995, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE MICHAEL-BAÑO¡
+	glPushMatrix();
+		glTranslatef(8.5, 13.5, -6);
+		glScalef(0.995, 14.995, 3.995);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE MICHAEL-BAÑO 2
+	glPushMatrix();
+		glTranslatef(8.5, 13.5, -1);
+		glScalef(0.995, 14.995, 1.995);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE MICHAEL-BAÑO 3
+	glPushMatrix();
+		glTranslatef(8.5, 15.5, -3);
+		glScalef(0.995, 10.995, 2);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE MICHAEL-BAÑO 4
+	glPushMatrix();
+		glTranslatef(8.5, 15.5, -9);
+		glScalef(0.995, 10.995, 2);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	PISO
+	glPushMatrix();
+		glTranslatef(4.5, 6.495, -6);
+		glScalef(8.995, 1, 11.995);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
+	//	PISO 2 (baño)
+	glPushMatrix();
+		glTranslatef(11, 6.5, -4);
+		glScalef(6, 1, 7.995);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
+
+	//	PISO 3 (CUARTO DE JIMMY)
+	glPushMatrix();
+		glTranslatef(20, 6.5, -5.505);
+		glScalef(11.995, 1, 11);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
+	//	Cerrar superficie principal
+	glPushMatrix();
+		glTranslatef(19, 0, 0);
+		glBindTexture(GL_TEXTURE_2D, cuarzo.GLindex);
+		glDisable(GL_LIGHTING);
+		glBegin(GL_POLYGON);
+			glNormal3f(0, 0, 1);
+			glTexCoord2f(0.0, 0.0); glVertex3f(0, 0, 0);
+			glTexCoord2f(1.0, 0.0); glVertex3f(7, 0, 0);
+			glTexCoord2f(1.0, 1.0); glVertex3f(7, 21, 0);
+			glTexCoord2f(0.0, 1.0); glVertex3f(0, 21, 0);
+		glEnd();
+		glEnable(GL_LIGHTING);
+
+		glTranslatef(0, 0, -0.02);
+		glBegin(GL_POLYGON);
+			glNormal3f(0, 0, -1);
+			glTexCoord2f(0.0, 0.0); glVertex3f(0, 0, 0);
+			glTexCoord2f(1.0, 0.0); glVertex3f(7, 0, 0);
+			glTexCoord2f(1.0, 1.0); glVertex3f(7, 21, 0);
+			glTexCoord2f(0.0, 1.0); glVertex3f(0, 21, 0);
+		glEnd();
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE JIMMY
+	glPushMatrix();
+		glTranslatef(15, 13.5, -5.5);
+		glScalef(2, 14.995, 10.995);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN CENTRAL PUERTA CUARTO DE JIMMY
+	glPushMatrix();
+		glTranslatef(17, 15.5, -10.5);
+		glScalef(2, 10.995, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN PUERTA CUARTO DE JIMMY
+	glPushMatrix();
+		glTranslatef(22.5, 13.5, -10.5);
+		glScalef(9, 14.995, 1);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+
+	//	DIVISIÓN FINAL CUARTO 1
+	glPushMatrix();
+		glTranslatef(26.5, 10.5, -2.5);
+		glScalef(1, 21, 5);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN FINAL CUARTO 2
+	glPushMatrix();
+		glTranslatef(26.5, 5, -6.5);
+		glScalef(1, 10, 3);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN FINAL CUARTO 3
+	glPushMatrix();
+		glTranslatef(26.5, 17.5, -6.5);
+		glScalef(1, 7, 3);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN FINAL CUARTO 4
+	glPushMatrix();
+		glTranslatef(26.5, 10.5, -9.5);
+		glScalef(1, 21, 3);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	DIVISIÓN FINAL CUARTO 4
+	glPushMatrix();
+		glTranslatef(27.5, 10.5, -11.5);
+		glScalef(1, 21, 5);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	//	Cerrar superficie superior
+	glPushMatrix();
+		glTranslatef(23, 20.5, -12.5);
+		glScalef(8, 1, 25);
+		figures.l_prisma(cuarzo.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glDisable(GL_LIGHTING);
+		glTranslatef(23.5, 20.5, -12.5);
+		glScalef(9.05, 1.05, 25.05);
+		figures.u_prisma(cuarzo.GLindex);
+		glEnable(GL_LIGHTING);
+	glPopMatrix();
+
+	//	CIERRE FINAL COMEDOR(SUPERIOR)
+	glPushMatrix();
+		glTranslatef(18.5, 14, -30);
+		glScalef(1, 13.995, 11.995);
+		figures.u_prisma(cuarzo.GLindex);
+	glPopMatrix();
+	
 }
 
 void fachada()
