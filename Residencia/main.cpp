@@ -58,7 +58,6 @@ float tamx = 1.0, tamy = 1.0, tamz = 1.0;
 CTexture cuarzo;
 CTexture metal_cromo;
 CTexture pared_interior;
-CTexture pared_exterior;
 CTexture puertaFrente;
 CTexture garage;
 CTexture pisoRojo;
@@ -116,7 +115,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 
 
 	//	Texturas
-	cuarzo.LoadTGA("textures/cuarzo.tga");
+	cuarzo.LoadTGA("textures/paredExt.tga");
 	cuarzo.BuildGLTexture();
 	cuarzo.ReleaseImage();
 
@@ -127,10 +126,6 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pared_interior.LoadTGA("textures/pared.tga");
 	pared_interior.BuildGLTexture();
 	pared_interior.ReleaseImage();
-
-	pared_exterior.LoadTGA("textures/paredExt.tga");
-	pared_exterior.BuildGLTexture();
-	pared_exterior.ReleaseImage();
 
 	puertaFrente.LoadTGA("textures/puerta.tga");
 	puertaFrente.BuildGLTexture();
@@ -2070,13 +2065,13 @@ void fachada()
 	
 	glPushMatrix();
 	glScalef(19, 21, -36);
-	figures.u_prisma_no_derecha(pared_exterior.GLindex);	
+	figures.u_prisma_no_derecha(cuarzo.GLindex);	
 	glPopMatrix();
 
 	glEnable(GL_LIGHTING);
 	glPushMatrix();
 	glScalef(18.995, 20.995, -35.995);
-	figures.l_prisma_no_derecha(pared_interior.GLindex, metal_cromo.GLindex);	
+	figures.l_prisma_no_derecha(cuarzo.GLindex, metal_cromo.GLindex);	
 	glPopMatrix();
 	glDisable(GL_LIGHTING);
 
