@@ -289,7 +289,32 @@ void cocina(void){
 	glPushMatrix();
 			glTranslatef(3.5,1.8,-32);
 			mesa_cocina();
-			glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(4,1.75,-21.5);
+
+
+	//ALACENA ARRIBA
+	glPushMatrix();
+	glTranslatef(0,2.75,0.20);
+	glColor3f(0.8901,0.7803,0.6235);
+	glScalef(1.25,1,0.5);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	//TABLA DE MESA 1
+	glPushMatrix();
+	glTranslatef(0,0.8,-0.05);
+	glScalef(3.25,0.15,1.15);
+	glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glScalef(3,1.5,1);
+	glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma(0);
+	glPopMatrix();
 
 }
 
