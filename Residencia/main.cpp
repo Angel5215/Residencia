@@ -70,6 +70,9 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture sillon;
+CTexture librero;
+CTexture vitrina;
+CTexture chimenea;
 CTexture madera;
 CTexture muebleBanio;
 CTexture negroMate;
@@ -132,6 +135,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	mosaicoVintage.BuildGLTexture();
 	mosaicoVintage.ReleaseImage();
 
+	chimenea.LoadTGA("textures/chimenea.tga");
+	chimenea.BuildGLTexture();
+	chimenea.ReleaseImage();
+
+	vitrina.LoadTGA("textures/vitrina.tga");
+	vitrina.BuildGLTexture();
+	vitrina.ReleaseImage();
+
 	muebleBuro.LoadTGA("textures/muebleSala.tga");
 	muebleBuro.BuildGLTexture();
 	muebleBuro.ReleaseImage();
@@ -147,6 +158,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	agua.LoadTGA("textures/water.tga");
 	agua.BuildGLTexture();
 	agua.ReleaseImage();
+
+	librero.LoadTGA("textures/librero.tga");
+	librero.BuildGLTexture();
+	librero.ReleaseImage();
 
 	porcelana.LoadTGA("textures/porcelana.tga");
 	porcelana.BuildGLTexture();
@@ -465,8 +480,8 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
-			glColor3f(0.3254,0.5294,0.5098);
-			figures.u_prisma_mueble(0,0);
+			glColor3f(1,1,1);
+			figures.u_prisma_mueble(0,chimenea.GLindex);
 			glColor3f(1,1,1);
 			glPopMatrix();
 
@@ -1181,17 +1196,17 @@ void mueble_armario()
 	glTranslatef(0,1.0,0);
 	glPushMatrix();
 	glTranslatef(0,2.25,0);
-	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_trapecio(0.5,2,0.5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0,-2.125,0);
-	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_trapecio(0.5,2,0.5,madera.GLindex);
 	glPopMatrix();
 	glScalef(2,4.0,0.5);
-	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma_mueble(0,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_mueble(madera.GLindex,vitrina.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
@@ -1202,8 +1217,9 @@ void mueble_librero()
 	glPushMatrix();
 	glTranslatef(0,3.0,0);
 	glScalef(3,4,0.75);
-	glColor3f(1,0,1);
-	figures.u_prisma_mueble(0,0);
+	glRotatef(180,0,1,0);
+	glColor3f(0.7137,0.4235,0.1764);
+	figures.u_prisma_mueble(madera.GLindex,librero.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 
@@ -1216,18 +1232,18 @@ void mesa_centro()
 	for (int i = 0; i < 4; i++)
 	{
 		glPushMatrix();
-		glColor3f(1,0.25,0.5);
+		//glColor3f(1,0.25,0.5);
 		glTranslatef(0.4*cos(PI/2 * i),-0.5,0.4*sin(PI/2 * i));
-		figures.u_cilindro(0.05,1,5,0);
+		figures.u_cilindro(0.05,1,5,madera.GLindex);
 		glPopMatrix();
 	}
 
-	glColor3f(0.75,1,0.25);
+	//glColor3f(0.75,1,0.25);
 	glTranslatef(0,0.5,0);
-	figures.u_cilindro(0.5,0.1,30,0);
+	figures.u_cilindro(0.5,0.1,30,madera.GLindex);
 	
 	glPopMatrix();
-	glColor3f(1,1,1);
+	//glColor3f(1,1,1);
 }
 
 void divisiones() {
