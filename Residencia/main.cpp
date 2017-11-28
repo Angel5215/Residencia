@@ -69,6 +69,8 @@ CTexture cielo_lateral;
 CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
+CTexture lamp;
+CTexture tele;
 CTexture sillon;
 CTexture librero;
 CTexture vitrina;
@@ -127,6 +129,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	garage.BuildGLTexture();
 	garage.ReleaseImage();
 
+	tele.LoadTGA("textures/tele.tga");
+	tele.BuildGLTexture();
+	tele.ReleaseImage();
+
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
 	pisoRojo.ReleaseImage();
@@ -146,6 +152,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	muebleBuro.LoadTGA("textures/muebleSala.tga");
 	muebleBuro.BuildGLTexture();
 	muebleBuro.ReleaseImage();
+
+	lamp.LoadTGA("textures/lampara.tga");
+	lamp.BuildGLTexture();
+	lamp.ReleaseImage();
 
 	textAlberca.LoadTGA("textures/alberca.tga");
 	textAlberca.BuildGLTexture();
@@ -479,9 +489,9 @@ void display ( void )   // Creamos la funcion donde se dibuja
 
 			glPushMatrix();
 			glTranslatef(0,2.5,-0.35);
-			glColor3f(0,0,0);
+			glColor3f(1,1,1);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,2.5,0,0);
+			figures.u_prisma_tele(0.25,2.5,2.5,0,tele.GLindex);
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
@@ -1154,14 +1164,14 @@ void lampara()
 	glTranslatef(0,0.0625,0);
 	glPushMatrix();
 	glTranslatef(0,2,0);
-	glColor3f(1,0,1);
-	figures.u_cono(0.3,1,20,0);
+	//glColor3f(1,1,1);
+	figures.u_cono(0.3,1,10,lamp.GLindex);
 	glPopMatrix();
-	glColor3f(0.1258,1,0.84);
+	glColor3f(1,1,1);
 	figures.u_cilindro(0.01,2,5,0);
 	glPopMatrix();
 
-	glColor3f(1,1,0);
+	glColor3f(0,0,0);
 	figures.u_cilindro(0.25,0.0625,30,0);
 	glPopMatrix();
 	glColor3f(1,1,1);
