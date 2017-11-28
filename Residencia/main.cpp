@@ -72,6 +72,7 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture lamp;
+CTexture refri;
 CTexture tele;
 CTexture sillon;
 CTexture librero;
@@ -142,6 +143,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
 	pisoRojo.ReleaseImage();
+
+	refri.LoadTGA("textures/metalPulido.tga");
+	refri.BuildGLTexture();
+	refri.ReleaseImage();
 
 	piso.LoadTGA("textures/piso.tga");
 	piso.BuildGLTexture();
@@ -921,7 +926,7 @@ void refrigerador()
 	glPushMatrix();
 		glTranslatef(0,0.5,0);
 		glScalef(2, 3.5, 0.8);
-		figures.u_prisma(cuarzo.GLindex);
+		figures.u_prisma(refri.GLindex);
 	glPopMatrix();
 
 	//	Delantera (izquierda)
@@ -950,7 +955,7 @@ void refrigerador()
 
 	//	Principal (delantera, abajo)
 	glPushMatrix();
-		glTranslatef(0, -0.505, 0.505);
+		glTranslatef(0, 0.2505, 0.505);
 
 		//	Manija (superior)
 		glPushMatrix();
@@ -972,36 +977,36 @@ void refrigerador()
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
 
-		glScalef(2, 1.5, 0.2);
-		figures.u_prisma(cuarzo.GLindex);
+		glScalef(2, 3, 0.2);
+		figures.u_prisma(refri.GLindex);
 	glPopMatrix();
 
 	//	Principal (delantera, arriba)
 	glPushMatrix();
-		glTranslatef(0, 0.7505, 0.505);
+		glTranslatef(0, 1.7505, 0.505);
 
 		//	Manija (superior)
 		glPushMatrix();
-			glTranslatef(-0.7, 1.25, 0.130);
+			glTranslatef(-0.7, -0.25, 0.130);
 			glScalef(0.05, 0.1, 0.05);
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
 
 		//	Manija (cilindro)
 		glPushMatrix();
-			glTranslatef(-0.7, 0.7, 0.150);
+			glTranslatef(-0.7, -0.3, 0.150);
 			figures.u_cilindro(0.025, 0.6, 6, metal_cromo.GLindex);
 		glPopMatrix();
 
 		//	Manija (inferior)
 		glPushMatrix();
-			glTranslatef(-0.7, 0.75, 0.130);
+			glTranslatef(-0.7, 0.23, 0.130);
 			glScalef(0.05, 0.1, 0.05);
 			figures.u_prisma(metal_cromo.GLindex);
 		glPopMatrix();
 
-		glScalef(2, 3, 0.2);
-		figures.u_prisma(cuarzo.GLindex);
+		glScalef(2, 1, 0.2);
+		figures.u_prisma(refri.GLindex);
 	glPopMatrix();
 	
 }
