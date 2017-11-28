@@ -81,6 +81,7 @@ CTexture muebleBuro;
 CTexture almohada;
 CTexture cabecera;
 CTexture cobija;
+CTexture piso;
 
 //CTexture tree;
 
@@ -134,6 +135,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
 	pisoRojo.ReleaseImage();
+
+	piso.LoadTGA("textures/piso.tga");
+	piso.BuildGLTexture();
+	piso.ReleaseImage();
 
 	mosaicoVintage.LoadTGA("textures/mosaico_vintage.tga");
 	mosaicoVintage.BuildGLTexture();
@@ -1465,18 +1470,18 @@ void divisiones() {
 
 	//	ESCALERAS	
 	glPushMatrix();	// 01
-		glColor3f(1,1,0);
+		glColor3f(0.8,0.8,0.8);
 		glTranslatef(2, 0.25, -10);
 		glScalef(4, 0.5, 2);
-		figures.u_prisma(pared_interior.GLindex);
-		glColor3f(1,1,1);
+		figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
+		//glColor3f(1,1,1);
 	glPopMatrix();
 
 	glPushMatrix();	// 02
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 0.5, -10.5);
 	glScalef(3, 1, 1);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1484,7 +1489,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 0.75, -11.5);
 	glScalef(3, 1.5, 1);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1492,7 +1497,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 1, -12.5);
 	glScalef(3, 2, 1);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1500,7 +1505,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 1.25, -13.5);
 	glScalef(3, 2.5, 1);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1508,7 +1513,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 1.5, -14.5);
 	glScalef(3, 3, 1);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1516,7 +1521,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 1.75, -15.5);
 	glScalef(3, 3.5, 1);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1525,7 +1530,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 3.5, -16.5);
 	glScalef(3, 1.01, 1.01);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1533,7 +1538,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(1.5, 3.75, -18);
 	glScalef(3, 0.501, 4.01);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1541,7 +1546,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(3.5, 4.25, -18);
 	glScalef(1, 0.5, 4);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1549,7 +1554,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(4.5, 4.5, -18);
 	glScalef(1, 1, 4);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1557,7 +1562,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(5.5, 4.75, -18);
 	glScalef(1, 1.5, 4);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1565,7 +1570,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(6.5, 5, -18);
 	glScalef(1, 2, 4);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1573,7 +1578,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(7.5, 5.25, -18);
 	glScalef(1, 2.5, 4);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();
 
@@ -1581,7 +1586,7 @@ void divisiones() {
 	glColor3f(1,1,0);
 	glTranslatef(8.5, 5.5, -18);
 	glScalef(1, 3, 4);
-	figures.u_prisma(pared_interior.GLindex);
+	figures.u_prisma_escalera(piso.GLindex,piso.GLindex);
 	glColor3f(1,1,1);
 	glPopMatrix();	//	Fin escaleras
 
