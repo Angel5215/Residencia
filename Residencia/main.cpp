@@ -20,13 +20,14 @@ void arbol();
 void cocina();
 void sillon_uno();
 void mesa_centro();
+void mesa_comedor();
 void divisiones();
 void divisiones_superior();
 void sillon_dos();
 void mueble_buro();
 void mueble_armario();
 void mueble_librero();
-
+void lampara();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -70,6 +71,9 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture sillon;
+CTexture librero;
+CTexture vitrina;
+CTexture chimenea;
 CTexture madera;
 CTexture muebleBanio;
 CTexture negroMate;
@@ -135,6 +139,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	mosaicoVintage.BuildGLTexture();
 	mosaicoVintage.ReleaseImage();
 
+	chimenea.LoadTGA("textures/chimenea.tga");
+	chimenea.BuildGLTexture();
+	chimenea.ReleaseImage();
+
+	vitrina.LoadTGA("textures/vitrina.tga");
+	vitrina.BuildGLTexture();
+	vitrina.ReleaseImage();
+
 	muebleBuro.LoadTGA("textures/muebleSala.tga");
 	muebleBuro.BuildGLTexture();
 	muebleBuro.ReleaseImage();
@@ -150,6 +162,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	agua.LoadTGA("textures/water.tga");
 	agua.BuildGLTexture();
 	agua.ReleaseImage();
+
+	librero.LoadTGA("textures/librero.tga");
+	librero.BuildGLTexture();
+	librero.ReleaseImage();
 
 	porcelana.LoadTGA("textures/porcelana.tga");
 	porcelana.BuildGLTexture();
@@ -400,7 +416,7 @@ void banio(void){
 			glPopMatrix(); //base llave
 
 			glRotatef(90,1,0,0);
-			figures.u_media_esfera(0.5, 10,10, plata.GLindex);
+			figures.u_media_esfera(0.5, 20,20, plata.GLindex);
 		glPopMatrix(); //lavabo
 
 		glScalef(2.5,1.5+1.2,1);
@@ -527,14 +543,44 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			cocina();
 
 			glPushMatrix();
-			
+			glTranslatef(13.25,2,-33.5);
+			//glRotatef(-90,0,1,0);
 			silla();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(13.25,2,-30.5);
+			glRotatef(180,0,1,0);
+			silla();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(11.5,2,-32);
+			glRotatef(90,0,1,0);
+			silla();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(15,2,-32);
+			glRotatef(-90,0,1,0);
+			silla();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(13.3,0,-32);
+			glRotatef(45,0,1,0);
+			mesa_comedor();
 			glPopMatrix();
 
 			glPushMatrix();
 			glTranslatef(20.5,1.8,-14);
 			glRotatef(180,0,1,0);
 			sillon_uno();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(23,0,-15);
+			lampara();
 			glPopMatrix();
 
 			glPushMatrix();
@@ -546,15 +592,15 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(20.5,2,-23.5);
 
 			glPushMatrix();
-			glTranslatef(0,3,-0.35);
+			glTranslatef(0,2.5,-0.35);
 			glColor3f(0,0,0);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,3,0,0);
+			figures.u_prisma_tele(0.25,2.5,2.5,0,0);
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
-			glColor3f(0.3254,0.5294,0.5098);
-			figures.u_prisma_mueble(0,0);
+			glColor3f(1,1,1);
+			figures.u_prisma_mueble(0,chimenea.GLindex);
 			glColor3f(1,1,1);
 			glPopMatrix();
 
@@ -1214,6 +1260,27 @@ void sillon_dos()
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
+void lampara()
+{
+	glPushMatrix();
+	glTranslatef(0,1,0.0);
+
+	glPushMatrix();
+	glTranslatef(0,0.0625,0);
+	glPushMatrix();
+	glTranslatef(0,2,0);
+	glColor3f(1,0,1);
+	figures.u_cono(0.3,1,20,0);
+	glPopMatrix();
+	glColor3f(0.1258,1,0.84);
+	figures.u_cilindro(0.01,2,5,0);
+	glPopMatrix();
+
+	glColor3f(1,1,0);
+	figures.u_cilindro(0.25,0.0625,30,0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
 
 void mueble_buro()
 {
@@ -1270,17 +1337,17 @@ void mueble_armario()
 	glTranslatef(0,1.0,0);
 	glPushMatrix();
 	glTranslatef(0,2.25,0);
-	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_trapecio(0.5,2,0.5,madera.GLindex);
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0,-2.125,0);
-	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma_trapecio(0.5,2,0.5,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_trapecio(0.5,2,0.5,madera.GLindex);
 	glPopMatrix();
 	glScalef(2,4.0,0.5);
-	glColor3f(0.4823,0.2588,0.0745);
-	figures.u_prisma_mueble(0,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma_mueble(madera.GLindex,vitrina.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
@@ -1291,8 +1358,9 @@ void mueble_librero()
 	glPushMatrix();
 	glTranslatef(0,3.0,0);
 	glScalef(3,4,0.75);
-	glColor3f(1,0,1);
-	figures.u_prisma_mueble(0,0);
+	glRotatef(180,0,1,0);
+	glColor3f(0.7137,0.4235,0.1764);
+	figures.u_prisma_mueble(madera.GLindex,librero.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 
@@ -1305,18 +1373,37 @@ void mesa_centro()
 	for (int i = 0; i < 4; i++)
 	{
 		glPushMatrix();
-		glColor3f(1,0.25,0.5);
+		//glColor3f(1,0.25,0.5);
 		glTranslatef(0.4*cos(PI/2 * i),-0.5,0.4*sin(PI/2 * i));
-		figures.u_cilindro(0.05,1,5,0);
+		figures.u_cilindro(0.05,1,5,madera.GLindex);
 		glPopMatrix();
 	}
 
-	glColor3f(0.75,1,0.25);
+	//glColor3f(0.75,1,0.25);
 	glTranslatef(0,0.5,0);
-	figures.u_cilindro(0.5,0.1,30,0);
+	figures.u_cilindro(0.5,0.1,30,madera.GLindex);
 	
 	glPopMatrix();
-	glColor3f(1,1,1);
+	//glColor3f(1,1,1);
+}
+
+void mesa_comedor()
+{
+	glPushMatrix();
+	glTranslatef(0,1.05,0);
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(0,1.5,0);
+	glColor3f(0.6901,0.4980,0.2196);
+	figures.u_cilindro(1.5,0.1,20,0);
+	glPopMatrix();
+	glColor3f(0.6901,0,0);
+	figures.u_cilindro(0.125,1.5,15,0);
+	glPopMatrix();
+	glScalef(1.5,0.05,1.5);
+	glColor3f(0.6901,0.4980,0.2196);
+	figures.u_prisma(0);
+	glPopMatrix();
 }
 
 void divisiones() {
@@ -1660,6 +1747,7 @@ void divisiones() {
 
 void divisiones_superior()
 {
+	//	PISO SUPERIOR CENTRAL
 	glPushMatrix();
 		glTranslatef(11, 6.5, -16.5);
 		glScalef(5.995, 0.995, 16.995);
@@ -1684,11 +1772,56 @@ void divisiones_superior()
 		figures.u_prisma(pared_interior.GLindex);
 	glPopMatrix();
 
+	//	DIVISION CUARTO TRACEY-BAÑO
 	glPushMatrix();
 		glTranslatef(19.5, 14, -14.5);
 		glScalef(11, 13.995, 1);
 		figures.u_prisma(pared_interior.GLindex);
 	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(25.5, 14, -19);
+		glScalef(1, 13.995, 10);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(25.5, 14, -19);
+		glScalef(1, 13.995, 10);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(20.5, 20, -24.5);
+		glScalef(11, 1.995, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(20.5, 10, -24.5);
+		glScalef(11, 3.995, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(17, 14, -24.5);
+		glScalef(4, 13.995, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(25, 14, -24.5);
+		glScalef(2, 13.995, 1);
+		figures.u_prisma(pared_interior.GLindex);
+	glPopMatrix();
+
+	//	PISO CUARTO TRACEY
+	glPushMatrix();
+		glTranslatef(20, 6.5, -19);
+		glScalef(12, 0.995, 9.995);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
+
 
 	//	Pared Escaleras
 	/*glPushMatrix();
