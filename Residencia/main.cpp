@@ -574,7 +574,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(3.5,2,-32);
+			glTranslatef(3.5,1.8,-32);
 			mesa_cocina();
 			glPopMatrix();
 
@@ -1416,12 +1416,12 @@ void mesa_cocina()
 {
 	glPushMatrix();
 	glPushMatrix();
-	glTranslatef(0,1.08,0);
+	glTranslatef(0,0.80,0);
 	glScalef(2.5,0.1,2.5);
 	glColor3f(0.8901,0.7803,0.6235);
 	figures.u_prisma(0);
 	glPopMatrix();
-	glScalef(1.5,2.0,2);
+	glScalef(1.5,1.5,2);
 	glColor3f(0.6901,0.4980,0.2196);
 	figures.u_prisma(0);
 	glPopMatrix();	
