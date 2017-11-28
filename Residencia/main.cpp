@@ -1816,6 +1816,13 @@ void divisiones_superior()
 		glScalef(13.995, 0.995, 9.995);
 		figures.u_prisma(metal_cromo.GLindex);
 	glPopMatrix();
+
+	//	TECHO COCINA/COMEDOR
+	glPushMatrix();
+		glTranslatef(9.5, 6.505, -28.5);
+		glScalef(18.995, 1, 14.995);
+		figures.u_prisma(metal_cromo.GLindex);
+	glPopMatrix();
 }
 
 void fachada()
