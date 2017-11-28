@@ -544,25 +544,25 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			cocina();
 
 			glPushMatrix();
-			glTranslatef(13.25,2,-33.5);
+			glTranslatef(13.75,2,-34);
 			//glRotatef(-90,0,1,0);
 			silla();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(13.25,2,-30.5);
+			glTranslatef(13.75,2,-31);
 			glRotatef(180,0,1,0);
 			silla();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(11.5,2,-32);
+			glTranslatef(12,2,-32.5);
 			glRotatef(90,0,1,0);
 			silla();
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(15,2,-32);
+			glTranslatef(15.5,2,-32.5);
 			glRotatef(-90,0,1,0);
 			silla();
 			glPopMatrix();
