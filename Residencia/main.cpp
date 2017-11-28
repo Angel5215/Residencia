@@ -284,6 +284,45 @@ void cocina(void){
 		glTranslatef(0.45, 2.35, -23);
 		glRotatef(90,0,1,0);
 		refrigerador();
+	//MESA 2
+	glPopMatrix();
+	//TABLA MESA 2
+	glPushMatrix();
+	glTranslatef(0.51,1.75,-26);
+		glPushMatrix(); //ALACENA 2 ARRIBA
+		glTranslatef(0,2.35,0);
+		glColor3f(0.8901,0.7803,0.6235);
+		glScalef(0.5,1,1.25);
+		figures.u_prisma(0);
+		glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.20,0.8,0.0);
+	glRotatef(90,0,1,0);
+	glScalef(2.5,0.1,1.25);
+	glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glRotatef(90,0,1,0);
+	glScalef(2.3,1.5,1);
+	glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	//ESTUFA 1
+	glPushMatrix();
+	glTranslatef(0.51,1.75,-28.5);
+	glScalef(1,1.5,1);
+	glColor3f(0.3254,0.4784,0.4549);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	//ESTUFA 2
+	glPushMatrix();
+	glTranslatef(0.51,1.75,-29.5);
+	glScalef(1,1.5,1);
+	glColor3f(0,0.4784,0.4549);
+	figures.u_prisma(0);
 	glPopMatrix();
 
 	glPushMatrix();
