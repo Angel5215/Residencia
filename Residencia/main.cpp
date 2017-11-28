@@ -281,9 +281,15 @@ void puertas(void){
 void cocina(void){
 
 	glPushMatrix();
-		glTranslatef(5, 5, 30);
+		glTranslatef(0.45, 2.35, -23);
+		glRotatef(90,0,1,0);
 		refrigerador();
 	glPopMatrix();
+
+	glPushMatrix();
+			glTranslatef(3.5,1.8,-32);
+			mesa_cocina();
+			glPopMatrix();
 
 }
 
@@ -594,11 +600,6 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(3.5,1.8,-32);
-			mesa_cocina();
-			glPopMatrix();
-
-			glPushMatrix();
 			glTranslatef(20.5,1.8,-14);
 			glRotatef(180,0,1,0);
 			sillon_uno();
@@ -894,7 +895,7 @@ int main ( int argc, char** argv )   // Main Function
 
 void refrigerador()
 {
-	glTranslatef(1, 1.25, -0.4);
+	//glTranslatef(1, 1.25, -0.4);
 
 	//	Principal (trasera)
 	glPushMatrix();
