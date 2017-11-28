@@ -21,6 +21,7 @@ void cocina();
 void sillon_uno();
 void mesa_centro();
 void mesa_comedor();
+void mesa_cocina();
 void divisiones();
 void divisiones_superior();
 void sillon_dos();
@@ -567,9 +568,14 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(13.3,0,-32);
+			glTranslatef(13.8,0,-32.5);
 			glRotatef(45,0,1,0);
 			mesa_comedor();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(3.5,2,-32);
+			mesa_cocina();
 			glPopMatrix();
 
 			glPushMatrix();
@@ -1404,6 +1410,21 @@ void mesa_comedor()
 	glColor3f(0.6901,0.4980,0.2196);
 	figures.u_prisma(0);
 	glPopMatrix();
+}
+
+void mesa_cocina()
+{
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(0,1.08,0);
+	glScalef(2.5,0.1,2.5);
+	glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glScalef(1.5,2.0,2);
+	glColor3f(0.6901,0.4980,0.2196);
+	figures.u_prisma(0);
+	glPopMatrix();	
 }
 
 void divisiones() {
