@@ -463,10 +463,10 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(20.5,2,-23.5);
 
 			glPushMatrix();
-			glTranslatef(0,3,-0.35);
+			glTranslatef(0,2.5,-0.35);
 			glColor3f(0,0,0);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,3,0,0);
+			figures.u_prisma_tele(0.25,2.5,2.5,0,0);
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
