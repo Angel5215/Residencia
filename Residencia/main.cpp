@@ -611,7 +611,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(0,2.5,-0.35);
 			glColor3f(1,1,1);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,2.5,0,tele.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,tele.GLindex);
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
@@ -976,7 +976,6 @@ void refrigerador()
 
 void silla()
 {
-	
 
 	//RESPALDO
 	glPushMatrix();
@@ -984,42 +983,46 @@ void silla()
 	glPushMatrix();
 	glTranslatef(0,0.375,0.031);
 	glRotatef(-90,1,0,0);
-	glColor3f(0,1,0);
-	figures.u_medio_cilindro(0.25,0.0625,30,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_medio_cilindro(0.25,0.0625,30,madera.GLindex);
 	glPopMatrix();
 	glScalef(0.5,0.75,0.0625);
-	glColor3f(0,1,0);
-	figures.u_prisma(0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,0);
 	//PATA 1
 	glPushMatrix();
 	glTranslatef(0.1875,-0.5,0.1875);
 	glScalef(0.125,0.75,0.125);
-	figures.u_prisma(0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
 	glPopMatrix();
 	//PATA  2
 	glPushMatrix();
 	glTranslatef(0.1875,-0.5,-0.1875);
 	glScalef(0.125,0.75,0.125);
-	figures.u_prisma(0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
 	glPopMatrix();
 	//PATA 3
 	glPushMatrix();
 	glTranslatef(-0.1875,-0.5,-0.1875);
 	glScalef(0.125,0.75,0.125);
-	figures.u_prisma(0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
 	glPopMatrix();
 	//PATA 4
 	glPushMatrix();
 	glTranslatef(-0.1875,-0.5,0.1875);
 	glScalef(0.125,0.75,0.125);
-	figures.u_prisma(0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
 	glPopMatrix();
 	glScalef(0.5,0.25,0.5);
-	glColor3f(1,0,0);
-	figures.u_prisma(0);
-	glColor3f(1,1,1);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
+	//glColor3f(1,1,1);
 }
 
 void arbol()
@@ -1375,7 +1378,7 @@ void mueble_librero()
 	glTranslatef(0,3.0,0);
 	glScalef(3,4,0.75);
 	glRotatef(180,0,1,0);
-	glColor3f(0.7137,0.4235,0.1764);
+	glColor3f(0.2745,0.1882,0.1333);
 	figures.u_prisma_mueble(madera.GLindex,librero.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
@@ -1410,15 +1413,15 @@ void mesa_comedor()
 	glPushMatrix();
 	glPushMatrix();
 	glTranslatef(0,1.5,0);
-	glColor3f(0.6901,0.4980,0.2196);
-	figures.u_cilindro(1.5,0.1,20,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(1.5,0.1,20,madera.GLindex);
 	glPopMatrix();
-	glColor3f(0.6901,0,0);
-	figures.u_cilindro(0.125,1.5,15,0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_cilindro(0.125,1.5,15,madera.GLindex);
 	glPopMatrix();
 	glScalef(1.5,0.05,1.5);
-	glColor3f(0.6901,0.4980,0.2196);
-	figures.u_prisma(0);
+	glColor3f(0.2745,0.1882,0.1333);
+	figures.u_prisma(madera.GLindex);
 	glPopMatrix();
 }
 
