@@ -29,6 +29,7 @@ void mueble_buro();
 void mueble_armario();
 void mueble_librero();
 void lampara();
+void pato();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -664,6 +665,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glVertex3f(0.0, 0.0, 0.0);
 			glVertex3f(0.0, 0.0, 100.0);
 			glEnd();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(11.4,0.4,-63.4);
+			pato();
 			glPopMatrix();
 
 			cocina();
@@ -1549,6 +1555,86 @@ void mesa_cocina()
 	glColor3f(0.6901,0.4980,0.2196);
 	figures.u_prisma(0);
 	glPopMatrix();	
+}
+
+void pato()
+{
+	glPushMatrix();
+
+	glPushMatrix();//Ala derecha
+	glTranslatef(0.25,0.1,0);
+	glScalef(0.1,0.75,0.325);
+	glColor3f(0.4431,0.4901,0.4941);
+	figures.u_prisma(0);
+	glPopMatrix();	
+
+	glPushMatrix();//Ala derecha
+	glTranslatef(-0.25,0.1,0);
+	glScalef(0.1,0.75,0.325);
+	glColor3f(0.4431,0.4901,0.4941);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	//PATAS
+	glPushMatrix();//IZQUIERDA
+	glTranslatef(-0.15,-0.75,0);
+	glPushMatrix();
+	glTranslatef(0,-0.25,0.1);
+	glScalef(0.15,0.1,0.15);
+	glColor3f(0.8627,0.4627,0.2);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glScalef(0.05,0.5,0.075);
+	glColor3f(0.8627,0.4627,0.2);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glPushMatrix();//DERECHA
+	glTranslatef(0.15,-0.75,0);
+	glPushMatrix();
+	glTranslatef(0,-0.25,0.1);
+	glScalef(0.15,0.1,0.15);
+	glColor3f(0.8627,0.4627,0.2);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glScalef(0.05,0.5,0.075);
+	glColor3f(0.8627,0.4627,0.2);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	//CABEZA
+	glPushMatrix();
+	glTranslatef(0,0.65,0.25);
+	glPushMatrix();//PUSH DE LA BOCA
+	glTranslatef(0,0,0.07);
+
+	glPushMatrix();//PUSH DE OJO IZQ
+	glTranslatef(-0.095,0.15,0);
+	glScalef(0.025,0.05,0.05);
+	glColor3f(0,0,0);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glPushMatrix();//PUSH DE OJO DER
+	glTranslatef(0.095,0.15,0);
+	glScalef(0.025,0.05,0.05);
+	glColor3f(0,0,0);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glScalef(0.25,0.25,0.05);
+	glColor3f(0.9568,0.8156,0.2470);
+	figures.u_prisma(0);
+	glPopMatrix();
+	glScalef(0.25,0.75,0.1);
+	glColor3f(0.6666,0.7176,0.7215);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glScalef(0.5,1,0.5);
+	glColor3f(0.4745,0.4901,0.4980);
+	figures.u_prisma(0);
+	glPopMatrix();
 }
 
 void divisiones() {
