@@ -309,6 +309,30 @@ void cocina(void){
 	figures.u_prisma(0);
 	glPopMatrix();
 
+	//TABLA MESA 2
+	glPushMatrix();
+	glTranslatef(0.51,1.75,-32);
+		glPushMatrix(); //ALACENA 2 ARRIBA
+		glTranslatef(0,2.35,0);
+		glColor3f(0.8901,0.7803,0.6235);
+		glScalef(0.5,1,1.25);
+		figures.u_prisma(0);
+		glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.20,0.8,0.0);
+	glRotatef(90,0,1,0);
+	glScalef(2.5,0.1,1.25);
+	glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	glRotatef(90,0,1,0);
+	glScalef(2.3,1.5,1);
+	glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+
 	//ESTUFA 1
 	glPushMatrix();
 	glTranslatef(0.51,1.75,-28.5);
@@ -326,7 +350,7 @@ void cocina(void){
 	glPopMatrix();
 
 	glPushMatrix();
-			glTranslatef(3.5,1.8,-32);
+			glTranslatef(4.5,1.8,-28);
 			mesa_cocina();
 	glPopMatrix();
 
@@ -339,6 +363,14 @@ void cocina(void){
 	glTranslatef(0,2.75,0.20);
 	glColor3f(0.8901,0.7803,0.6235);
 	glScalef(1.25,1,0.5);
+	figures.u_prisma(0);
+	glPopMatrix();
+
+	//ALACENA GRANDE
+	glPushMatrix();
+	glTranslatef(0,1.25,-14.2);
+	glScalef(2,4,0.5);
+	glColor3f(0.9019,0.6196,0.4117);
 	figures.u_prisma(0);
 	glPopMatrix();
 
@@ -520,7 +552,10 @@ void banio(void){
 
 void cama(void){
 
+
 	glPushMatrix();
+
+	glTranslatef(-16.75,6,5.65);
 
 		glTranslatef(22, 1.6, -11.6);
 		//glScalef(1.4, 0.6, 3);
