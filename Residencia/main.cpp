@@ -30,6 +30,8 @@ void mueble_armario();
 void mueble_librero();
 void lampara();
 void pato();
+void taza_banio();
+void mueble_banio();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -496,7 +498,8 @@ void patioTrasero(void){
 
 }
 
-void banio(void){
+void taza_banio(void){
+
 
 	glPushMatrix(); //toilet
 		//glTranslatef(0,2, 12.8);
@@ -532,6 +535,10 @@ void banio(void){
 
 	glPopMatrix(); //toilet
 
+}
+
+void mueble_banio()
+{
 	glPushMatrix(); //mueble
 		glTranslatef(19.6, 1.6+1, -16.6);
 
@@ -783,7 +790,18 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				puertas();
 				alberca();
 				patioTrasero();
-				banio();
+				glPushMatrix();
+				glTranslatef(40.6,5.9,-28.40);
+				glRotatef(180,0,1,0);
+				taza_banio();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(40.4,5.9,-28.2);
+				glRotatef(180,0,1,0);
+				mueble_banio();
+				glPopMatrix();
+
 				cama();
 			glEnable(GL_LIGHTING);
 			divisiones();
