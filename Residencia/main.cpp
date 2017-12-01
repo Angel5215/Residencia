@@ -747,23 +747,10 @@ void mueble_banio_toallas()
 	//glTranslatef(15.35,7.5,-20.200005);
 	//glScalef(-0.600000,1.000000,1.000000);
 	glTranslatef(15.5,7.799997,-19.600002);
-
-	glPushMatrix();
-	glTranslatef(0.000000,1.300000,0.000000);
-	glPushMatrix();
-	glTranslatef(0,1,0);
-	glScalef(1,1,1);
-	glColor3f(0,0,1);
-	figures.u_prisma_mueble(0,0);
-	glPopMatrix();
-	glScalef(1,1,1);
-	glColor3f(1,0,0);
-	figures.u_prisma_mueble(0,0);
-	glPopMatrix();
-
-	glScalef(1.000000,1.600000,2.000000);
-	glColor3f(0.8980,0.9137,0.6274);
-	figures.u_prisma_mueble(0,0);
+	glRotatef(90,0,1,0);
+	glScalef(2.000000,1.600000,1.000000);
+	glColor3f(1,1,1);
+	figures.u_prisma_mueble(negroMate.GLindex,muebleBanio2.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
