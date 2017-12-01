@@ -1165,7 +1165,7 @@ void mueble_banio()
 		figures.u_prisma_mueble(negroMate.GLindex,muebleBanio.GLindex);
 		glPopMatrix();
 		//glColor3f(1,1,1);
-	glPopMatrix(); //mueble
+	//glPopMatrix(); //mueble
 }
 
 void mueble_banio_toallas()
@@ -1495,7 +1495,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glPushMatrix();
 				glTranslatef(2.600000,7.399998,-5.999999);
 
-				glPushMatrix();
+				glPushMatrix();//CUARTO 1
 				glTranslatef(0.000000,0.600000,0.000000);
 				glScalef(1.000000,0.200000,3.000000);
 				glColor3f(0.6274,0.1529,0.0705);
@@ -1544,11 +1544,70 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glScalef(1.000000,1.000000,2.800000);
 				figures.u_prisma(madera.GLindex);
 				glPopMatrix();
-				
+
 				cama();
 				glPopMatrix();
 
+				glPushMatrix();//CUARTO 2
+				glTranslatef(19.4,0.000000,2.400000);
+
+				glPushMatrix();
+				glTranslatef(3.600001,8.799996,-11.799994);
+				glScalef(1.600000,3.800001,1.000000);
+				figures.u_prisma_mueble(madera.GLindex,0);
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.800000,7.699997,-4.600000);
+				glPushMatrix();
+				glTranslatef(0.400000,-0.000000,-0.000000);
+				glRotatef(90,0,1,0);
+				glScalef(0.600000,0.600000,1.000000);
+				tele();
+				glPopMatrix();
+				glRotatef(90,0,1,0);
+				glScalef(1.200000,1.400000,1.000000);
+				figures.u_prisma_mueble(madera.GLindex,0);
+				glPopMatrix();
+
+				glScalef(0.800000,1.000000,0.800000);
+
+				glPushMatrix();
+				glTranslatef(-23.800018,7.7,-10.999994);
+				glPushMatrix();
+				glTranslatef(0.400000,-0.000000,-0.000000);
+				glRotatef(90,0,1,0);
+				glScalef(0.600000,0.600000,1.000000);
+				tele();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.000000,-1.800000,16.599991);
+
+				glPushMatrix();
+				glTranslatef(-0.000000,-0.200000,-32.000050);
+				glRotatef(-90,0,1,0);
+				glScalef(1.000000,1.000000,1.000000);
+				mueble_banio();
+				glPopMatrix();
+
+				glScalef(1.000000,1.000000,1.000000);
+				taza_banio();
+				glPopMatrix();
+
+				glRotatef(90,0,1,0);
+				//glScalef(1.200000,1.400000,1.000000);
+				glScalef(1.400000,1.400000,0.800000);
+				figures.u_prisma_mueble(madera.GLindex,0);
+				glPopMatrix();
 				cama();
+				glPopMatrix();
+
+
+				glPushMatrix();
+
+				cama();
+				glPopMatrix();
 			glEnable(GL_LIGHTING);
 			divisiones();
 			divisiones_superior();
