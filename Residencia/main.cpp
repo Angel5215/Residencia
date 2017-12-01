@@ -70,6 +70,7 @@ int estadoPato = 1;
 //CTexture text3;	//Flecha
 
 //	Texturas para el refrigerador
+CTexture window_texture;
 CTexture cuarzo;
 CTexture metal_cromo;
 CTexture pared_interior;
@@ -102,6 +103,7 @@ CTexture cabecera;
 CTexture cobija;
 CTexture piso;
 CTexture tree_tex;
+CTexture door;
 
 //CTexture tree;
 
@@ -259,6 +261,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	tree_tex.LoadTGA("textures/arbol.tga");
 	tree_tex.BuildGLTexture();
 	tree_tex.ReleaseImage();
+
+	window_texture.LoadTGA("textures/window.tga");
+	window_texture.BuildGLTexture();
+	window_texture.ReleaseImage();
+
+	door.LoadTGA("textures/door.tga");
+	door.BuildGLTexture();
+	door.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -821,6 +831,52 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glTranslatef(5, 0, 5);
 				//glScalef(0.3, 0.3, 0.3);
 				arbol(tree_tex.GLindex);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(21.4, 14.7, -24.6);
+				glScalef(3.4, 8.4, 1);
+				figures.ventana(window_texture.GLindex, true, false, false, 
+				false, false, false);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(25.4, 3.4, -25.2);
+				glScalef(3.4, 3, 1);
+				figures.ventana(window_texture.GLindex, true, false, false, 
+					false, false, false);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(25.2, 12, -6.6);
+			glScalef(2, 4.2, 3.2);
+			figures.ventana(window_texture.GLindex, false, false, false,
+				false, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(26.8, 3.6, -22.4);
+			glScalef(1, 3, 3.2);
+			figures.ventana(window_texture.GLindex, false, false, false,
+				false, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(0, 1.8, -18);
+			glScalef(0.2, 3.605, 2.2);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(8.4, 9, -22.6);
+			glScalef(1, 3.8, 1.6);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(8.6, 9, -22.6);
+			glScalef(1, 3.8, 1.6);
+			figures.puerta(door.GLindex, false, true);
 			glPopMatrix();
 
 		glPopMatrix(); 
