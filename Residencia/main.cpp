@@ -1,4 +1,4 @@
-  r//Semestre 2018 - 1
+//Semestre 2018 - 1
 //************************************************************//
 //************************************************************//
 //************** Alumno (s): *********************************//
@@ -97,6 +97,7 @@ CTexture sillon;
 CTexture librero;
 CTexture vitrina;
 CTexture chimenea;
+CTexture chimeneaExt;
 CTexture madera;
 CTexture muebleBanio;
 CTexture negroMate;
@@ -105,6 +106,8 @@ CTexture almohada;
 CTexture cabecera;
 CTexture cobija;
 CTexture piso;
+CTexture estufa;
+CTexture estufaCal;
 CTexture tree_tex;
 
 //CTexture tree;
@@ -179,6 +182,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
 	pisoRojo.ReleaseImage();
+
+	estufa.LoadTGA("textures/estufa.tga");
+	estufa.BuildGLTexture();
+	estufa.ReleaseImage();
+
+	estufaCal.LoadTGA("textures/estufaCal.tga");
+	estufaCal.BuildGLTexture();
+	estufaCal.ReleaseImage();
 
 	refri.LoadTGA("textures/metalPulido.tga");
 	refri.BuildGLTexture();
@@ -382,18 +393,38 @@ void cocina(void){
 
 	//ESTUFA 1
 	glPushMatrix();
+	glPushMatrix();
 	glTranslatef(0.51,1.75,-28.5);
+	glRotatef(90,0,1,0);
 	glScalef(1,1.5,1);
 	//glColor3f(0.3254,0.4784,0.4549);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(negroMate.GLindex,estufa.GLindex);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.51,2.50,-28.5);
+	glRotatef(90,0,1,0);
+	glScalef(1,0.02,1);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma_mueble(estufaCal.GLindex,negroMate.GLindex);
+	glPopMatrix();
 	glPopMatrix();
 
 	//ESTUFA 2
 	glPushMatrix();
+	glPushMatrix();
 	glTranslatef(0.51,1.75,-29.5);
+	glRotatef(90,0,1,0);
 	glScalef(1,1.5,1);
 	//glColor3f(0,0.4784,0.4549);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(negroMate.GLindex,estufa.GLindex);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.51,2.50,-29.5);
+	glRotatef(90,0,1,0);
+	glScalef(1,0.02,1);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma_mueble(estufaCal.GLindex,negroMate.GLindex);
+	glPopMatrix();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -418,8 +449,8 @@ void cocina(void){
 	glPushMatrix();
 	glTranslatef(0,1.25,-14.2);
 	glScalef(2,4,0.5);
-	glColor3f(1,1,1;
-	figures.u_prisma_mueble(alacena3.GLindex,0);
+	glColor3f(1,1,1);
+	figures.u_prisma_mueble(0,alacena3.GLindex);
 	glPopMatrix();
 
 	//TABLA DE MESA 1
