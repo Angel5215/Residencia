@@ -297,6 +297,166 @@ void Figures::u_prisma(const GLuint &t1)
 
 }
 
+void Figures::ventana(const GLuint &t1, bool frontal, bool superior, 
+	bool inferior, bool trasera, bool izquierda, bool derecha)
+{
+	GLfloat vertices[8][3] = 
+	{
+		{ -0.5, -0.5, +0.5 },		//	V0
+		{ +0.5, -0.5, +0.5 },		//	V1
+		{ +0.5, +0.5, +0.5 },		//	V2
+		{ -0.5, +0.5, +0.5 },		//	V3
+		{ -0.5, -0.5, -0.5 },		//	V4
+		{ +0.5, -0.5, -0.5 },		//	V5
+		{ +0.5, +0.5, -0.5 },		//	V6
+		{ -0.5, +0.5, -0.5 }		//	V7
+	}; 
+
+	glDisable(GL_LIGHTING);
+	glBindTexture(GL_TEXTURE_2D, t1);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.1);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	if(frontal){
+		//	Frontal (0123)
+		glBegin(GL_POLYGON);
+		glNormal3f(0, 0, 1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[3]);
+		glEnd();
+	}
+
+	if(derecha){
+		//	Derecha (1562)
+		glBegin(GL_POLYGON);
+		glNormal3f(1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[2]);
+		glEnd();
+	}
+
+	if(trasera){
+		//	Atrás (5476)
+		glBegin(GL_POLYGON);
+		glNormal3f(0, 0, -1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[7]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[6]);
+		glEnd();
+	}
+
+	if(izquierda){
+		//	Izquierda (4037)
+		glBegin(GL_POLYGON);
+		glNormal3f(-1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+		glEnd();
+	}
+
+	if(superior){
+		//	Arriba (3267)
+		glBegin(GL_POLYGON);
+		glNormal3f(0, 1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+		glEnd();
+	}
+
+	if(inferior){
+		//	Abajo (1045)
+		glBegin(GL_POLYGON);
+		glNormal3f(0,-1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[5]);
+		glEnd();
+	}
+
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+	glEnable(GL_LIGHTING);
+
+}
+
+void Figures::puerta(const GLuint &t1, bool frontales, bool laterales)
+{
+	GLfloat vertices[8][3] = 
+	{
+		{ -0.5, -0.5, +0.5 },		//	V0
+		{ +0.5, -0.5, +0.5 },		//	V1
+		{ +0.5, +0.5, +0.5 },		//	V2
+		{ -0.5, +0.5, +0.5 },		//	V3
+		{ -0.5, -0.5, -0.5 },		//	V4
+		{ +0.5, -0.5, -0.5 },		//	V5
+		{ +0.5, +0.5, -0.5 },		//	V6
+		{ -0.5, +0.5, -0.5 }		//	V7
+	}; 
+
+	glDisable(GL_LIGHTING);
+	glBindTexture(GL_TEXTURE_2D, t1);
+	//glEnable(GL_ALPHA_TEST);
+	//glAlphaFunc(GL_GREATER, 0.1);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	if(frontales){
+		//	Frontal (0123)
+		glBegin(GL_POLYGON);
+		glNormal3f(0, 0, 1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[3]);
+		glEnd();
+
+		//	Atrás (5476)
+		glBegin(GL_POLYGON);
+		glNormal3f(0, 0, -1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[7]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[6]);
+		glEnd();
+	}
+
+	if(laterales){
+		//	Derecha (1562)
+		glBegin(GL_POLYGON);
+		glNormal3f(1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[2]);
+		glEnd();
+
+		//	Izquierda (4037)
+		glBegin(GL_POLYGON);
+		glNormal3f(-1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+		glEnd();
+	}
+
+	glEnable(GL_LIGHTING);
+
+}
+
+
 void Figures::u_prisma_garage(const GLuint &t1, const GLuint &t2, const GLuint &t3)
 {
 	GLfloat vertices[8][3] = 
@@ -1667,19 +1827,23 @@ void Figures::u_esfera(const GLfloat &r, const GLuint &meridianos,
 			vertices[3][2] = r * sin(alfa * j) * sin(theta * (i + 1));
 
 			glBegin(GL_POLYGON);
-				//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
-				glNormal3fv(vertices[0]);
-				glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
-				glNormal3fv(vertices[1]);
-				glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
-				glNormal3fv(vertices[2]);
-				glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
-				glNormal3fv(vertices[3]);
-				glTexCoord2f(1, 0); glVertex3fv(vertices[3]);
-				/*glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[1]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[2]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[3]);*/
+			//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
+			/*glNormal3fv(vertices[0]);
+			glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(1, 0); glVertex3fv(vertices[3]);*/
+			glNormal3fv(vertices[0]);
+			glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(ctext_s*i, -ctext_t*(j + 1)); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*(j + 1)); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*j); glVertex3fv(vertices[3]);
 			glEnd();
 			
 		}
@@ -1735,23 +1899,23 @@ void Figures::u_media_esfera(const GLfloat &r, const GLuint &meridianos,
 			vertices[3][2] = r * sin(alfa * j) * sin(theta * (i + 1));
 
 			glBegin(GL_POLYGON);
-				//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
-				/*glNormal3fv(vertices[0]);
-				glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
-				glNormal3fv(vertices[1]);
-				glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
-				glNormal3fv(vertices[2]);
-				glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
-				glNormal3fv(vertices[3]);
-				glTexCoord2f(1, 0); glVertex3fv(vertices[3]);*/
-				glNormal3fv(vertices[0]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
-				glNormal3fv(vertices[1]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[1]);
-				glNormal3fv(vertices[2]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[2]);
-				glNormal3fv(vertices[3]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[3]);
+			//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
+			/*glNormal3fv(vertices[0]);
+			glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(1, 0); glVertex3fv(vertices[3]);*/
+			glNormal3fv(vertices[0]);
+			glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(ctext_s*i, -ctext_t*(j + 1)); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*(j + 1)); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*j); glVertex3fv(vertices[3]);
 			glEnd();
 			
 		}

@@ -32,6 +32,8 @@ void lampara();
 void pato();
 void taza_banio();
 void mueble_banio();
+void mueble_banio_toallas();
+void tele();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -125,8 +127,25 @@ GLfloat pos_pato_z = 0.f;
 GLfloat rot_pato = 0.f;
 GLfloat ant_pos_pato_z = 0.f;
 
+//	Variables para animar la pelota
+GLfloat pos_ball_x = 13.f;
+GLfloat pos_ball_y = 22.0f;
+GLfloat pos_ball_z = -5.6f;
+GLfloat rot_ball_x = 0.f;
+GLfloat par_pos_ball_x_ini = 13.f;
+GLfloat par_pos_ball_y_ini = 22.0f;
+GLfloat par_pos_ball_z_ini = -5.6f;
+GLfloat v_ini_ball = 10;
+GLfloat angle_ball = 3.1415926 / 10;
+GLfloat ball_t = 0;
+const GLfloat gravity = 9.81;
+int estadoPelota = 1;
+
 // 1 (Adelante), 2(Atras), 3(Giro)
 int estadoPato = 1;
+
+//	Variables para animar la textura
+GLdouble estadoTelevision = 1.0;
 
 
 //CTexture text1;
@@ -136,6 +155,7 @@ int estadoPato = 1;
 CFiguras fig7;
 
 //	Texturas para el refrigerador
+CTexture window_texture;
 CTexture cuarzo;
 CTexture cubierta;
 CTexture metal_cromo;
@@ -157,8 +177,22 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture lamp;
+CTexture toallas;
 CTexture refri;
-CTexture tele;
+CTexture t1;
+CTexture t2;
+CTexture t3;
+CTexture t4;
+CTexture t5;
+CTexture t6;
+CTexture t7;
+CTexture t8;
+CTexture t9;
+CTexture t10;
+CTexture t11;
+CTexture t12;
+CTexture t13;
+CTexture t14;
 CTexture sillon;
 CTexture librero;
 CTexture vitrina;
@@ -166,6 +200,7 @@ CTexture chimenea;
 CTexture chimeneaExt;
 CTexture madera;
 CTexture muebleBanio;
+CTexture muebleBanio2;
 CTexture negroMate;
 CTexture muebleBuro;
 CTexture almohada;
@@ -175,6 +210,8 @@ CTexture piso;
 CTexture estufa;
 CTexture estufaCal;
 CTexture tree_tex;
+CTexture door;
+CTexture ball;
 
 //CTexture tree;
 
@@ -213,6 +250,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	metal_cromo.BuildGLTexture();
 	metal_cromo.ReleaseImage();
 
+	toallas.LoadTGA("textures/toallas.tga");
+	toallas.BuildGLTexture();
+	toallas.ReleaseImage();
+
 	cubierta.LoadTGA("textures/cubierta.tga");
 	cubierta.BuildGLTexture();
 	cubierta.ReleaseImage();
@@ -241,9 +282,61 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	garage.BuildGLTexture();
 	garage.ReleaseImage();
 
-	tele.LoadTGA("textures/tele.tga");
-	tele.BuildGLTexture();
-	tele.ReleaseImage();
+	t1.LoadTGA("textures/t1.tga");
+	t1.BuildGLTexture();
+	t1.ReleaseImage();
+
+	t2.LoadTGA("textures/t2.tga");
+	t2.BuildGLTexture();
+	t2.ReleaseImage();
+
+	t3.LoadTGA("textures/t3.tga");
+	t3.BuildGLTexture();
+	t3.ReleaseImage();
+
+	t4.LoadTGA("textures/t4.tga");
+	t4.BuildGLTexture();
+	t4.ReleaseImage();
+
+	t5.LoadTGA("textures/t5.tga");
+	t5.BuildGLTexture();
+	t5.ReleaseImage();
+
+	t6.LoadTGA("textures/t6.tga");
+	t6.BuildGLTexture();
+	t6.ReleaseImage();
+
+	t7.LoadTGA("textures/t7.tga");
+	t7.BuildGLTexture();
+	t7.ReleaseImage();
+
+	t8.LoadTGA("textures/t8.tga");
+	t8.BuildGLTexture();
+	t8.ReleaseImage();
+
+	t9.LoadTGA("textures/t9.tga");
+	t9.BuildGLTexture();
+	t9.ReleaseImage();
+
+	t10.LoadTGA("textures/t10.tga");
+	t10.BuildGLTexture();
+	t10.ReleaseImage();
+
+	t11.LoadTGA("textures/t11.tga");
+	t11.BuildGLTexture();
+	t11.ReleaseImage();
+
+	t12.LoadTGA("textures/t12.tga");
+	t12.BuildGLTexture();
+	t12.ReleaseImage();
+
+	t13.LoadTGA("textures/t13.tga");
+	t13.BuildGLTexture();
+	t13.ReleaseImage();
+
+	t14.LoadTGA("textures/t14.tga");
+	t14.BuildGLTexture();
+	t14.ReleaseImage();
 
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
@@ -337,6 +430,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	muebleBanio.BuildGLTexture();
 	muebleBanio.ReleaseImage();
 
+	muebleBanio2.LoadTGA("textures/muebleBanio2.tga");
+	muebleBanio2.BuildGLTexture();
+	muebleBanio2.ReleaseImage();
+
 	negroMate.LoadTGA("textures/negroMate.tga");
 	negroMate.BuildGLTexture();
 	negroMate.ReleaseImage();
@@ -357,6 +454,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	tree_tex.BuildGLTexture();
 	tree_tex.ReleaseImage();
 
+//<<<<<<< HEAD
 	KeyFrame[0].posX = 0;
 	KeyFrame[0].posY = 2.4;
 	KeyFrame[0].posZ = -3.5;
@@ -587,6 +685,19 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 
 
 
+//=======
+	window_texture.LoadTGA("textures/window.tga");
+	window_texture.BuildGLTexture();
+	window_texture.ReleaseImage();
+
+	door.LoadTGA("textures/door.tga");
+	door.BuildGLTexture();
+	door.ReleaseImage();
+
+	ball.LoadTGA("textures/ball.tga");
+	ball.BuildGLTexture();
+	ball.ReleaseImage();
+//>>>>>>> refs/remotes/origin/master
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -1042,6 +1153,20 @@ void mueble_banio()
 	glPopMatrix(); //mueble
 }
 
+void mueble_banio_toallas()
+{
+	glPushMatrix();
+	//glTranslatef(15.35,7.5,-20.200005);
+	//glScalef(-0.600000,1.000000,1.000000);
+	glTranslatef(15.5,7.799997,-19.600002);
+	glRotatef(90,0,1,0);
+	glScalef(2.000000,1.600000,1.000000);
+	glColor3f(1,1,1);
+	figures.u_prisma_mueble(negroMate.GLindex,muebleBanio2.GLindex);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+
 void cama(void){
 
 
@@ -1218,7 +1343,64 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(0,2.5,-0.35);
 			glColor3f(1,1,1);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,tele.GLindex);
+			
+			if (estadoTelevision >= 1 && estadoTelevision <= 10){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+				glutPostRedisplay();
+			}
+			else if (estadoTelevision >= 11 && estadoTelevision <= 20){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 21 && estadoTelevision <= 30){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 31 && estadoTelevision <= 40){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 41 && estadoTelevision <= 50){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 51 && estadoTelevision <= 60){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 61 && estadoTelevision <= 70){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 71 && estadoTelevision <= 80){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 81 && estadoTelevision <= 90){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 91 && estadoTelevision <= 100){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 101 && estadoTelevision <= 110){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 111 && estadoTelevision <= 120){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 121 && estadoTelevision <= 130){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 131 && estadoTelevision <= 140){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
+				glutPostRedisplay();
+			}	
+				
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
@@ -1271,15 +1453,72 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(40.6,5.9,-28.40);
+				glTranslatef(40.6,5.9,-32.5);
+				//glTranslatef(xx,yy,zz);
 				glRotatef(180,0,1,0);
 				taza_banio();
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(40.4,5.9,-28.2);
+				glTranslatef(40.4,5.7,-32.2);
+				//glTranslatef(xx,yy,zz);
 				glRotatef(180,0,1,0);
 				mueble_banio();
+				glPopMatrix();
+
+				glPushMatrix();
+				mueble_banio_toallas();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(9.999995,0.000000,-24.200020);
+				glPushMatrix();
+				glTranslatef(5.999999,7.599998,-3.000000);
+				mesa_centro();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.600000,7.399998,-5.999999);
+
+				glPushMatrix();
+				glTranslatef(0.000000,0.600000,0.000000);
+				glScalef(1.000000,0.200000,3.000000);
+				glColor3f(0.6274,0.1529,0.0705);
+				figures.u_prisma(almohada.GLindex);
+				glColor3f(1,1,1);
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.800000,0.400000,-3.600001);
+				glRotatef(45,0,1,0);
+				glPushMatrix();
+				glTranslatef(0.000000,-0.3,0.400000);
+				glScalef(0.800000,0.800000,1.000000);
+				tele();
+				glPopMatrix();
+				glScalef(1.600000,1.400000,0.800000);
+				figures.u_prisma_mueble(madera.GLindex,0);
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-11.399994,0.400000,3.800001);
+				glRotatef(90,0,1,0);
+				glScalef(1.200000,1.000000,1.000000);
+				sillon_uno();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.200000,1.500000,4.700000);
+				glRotatef(180,0,1,0);
+				glScalef(1.600000,3.800001,1.000000);
+				figures.u_prisma_mueble(madera.GLindex,0);
+				glPopMatrix();
+
+				glScalef(1.000000,1.000000,2.800000);
+				figures.u_prisma(madera.GLindex);
+				glPopMatrix();
+				
+				cama();
 				glPopMatrix();
 
 				cama();
@@ -1291,6 +1530,58 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glTranslatef(5, 0, 5);
 				//glScalef(0.3, 0.3, 0.3);
 				arbol(tree_tex.GLindex);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(21.4, 14.7, -24.6);
+				glScalef(3.4, 8.4, 1);
+				figures.ventana(window_texture.GLindex, true, false, false, 
+				false, false, false);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(25.4, 3.4, -25.2);
+				glScalef(3.4, 3, 1);
+				figures.ventana(window_texture.GLindex, true, false, false, 
+					false, false, false);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(25.2, 12, -6.6);
+			glScalef(2, 4.2, 3.2);
+			figures.ventana(window_texture.GLindex, false, false, false,
+				false, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(26.8, 3.6, -22.4);
+			glScalef(1, 3, 3.2);
+			figures.ventana(window_texture.GLindex, false, false, false,
+				false, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(0, 1.8, -18);
+			glScalef(0.2, 3.605, 2.2);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(8.4, 9, -22.6);
+			glScalef(1, 3.8, 1.6);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(8.6, 9, -22.6);
+			glScalef(1, 3.8, 1.6);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(pos_ball_x, pos_ball_y, pos_ball_z);
+			glRotatef(rot_ball_x, -1, 0, 0);
+			figures.u_esfera(1, 20, 20, ball.GLindex);
 			glPopMatrix();
 
 		glPopMatrix(); 
@@ -1314,6 +1605,9 @@ void animacion()
 	{
 		mov_agua.t_fin = 1.0;
 	}
+
+	++estadoTelevision;
+	if(estadoTelevision == 140) estadoTelevision = 1;
 
 	switch (estadoPato)
 	{
@@ -1355,6 +1649,7 @@ void animacion()
 			break;
 	}
 
+//<<<<<<< HEAD
 	//Movimiento del monito
 	if (play)
 	{
@@ -1419,6 +1714,34 @@ void animacion()
 		frame = 0;
 	}
 
+//=======
+	//	Movimiento de la pelota
+	switch(estadoPelota){
+		case 1:
+			pos_ball_z -= 0.2;
+			rot_ball_x -= 1;
+			if (pos_ball_z <= -37.5) {
+				estadoPelota = 2;
+			}
+			break;
+		case 2:
+			pos_ball_z = -38.0 - (v_ini_ball * ball_t);
+			pos_ball_y = par_pos_ball_y_ini + (v_ini_ball * sin(angle_ball) * ball_t 
+				- 0.5 * gravity * ball_t * ball_t);
+			ball_t += 0.01;
+
+			if (pos_ball_y <= 0)
+			{
+				estadoPelota = 3;
+				xx = pos_ball_z;
+			}
+			break;
+		case 3:
+			rot_ball_x += 0.2;
+			break;
+	}
+	
+//>>>>>>> refs/remotes/origin/master
 
 
 	glutPostRedisplay();
@@ -1447,6 +1770,15 @@ void reshape ( int width , int height )   // Creamos funcion Reshape
 void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 {
 	switch ( key ) {
+
+		case '<':
+			pos_ball_x = par_pos_ball_x_ini;
+			pos_ball_y = par_pos_ball_y_ini;
+			pos_ball_z = par_pos_ball_z_ini;
+			rot_ball_x = 0.f;
+			ball_t = 0.f;
+			estadoPelota = 1;
+			break;
 
 		case 'w':   //Movimientos de camara
 		case 'W':
@@ -2168,6 +2500,29 @@ void sillon_dos()
 	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
+}
+
+void tele()
+{
+	glPushMatrix();
+	glTranslatef(0,2.5,-0.35);
+			glColor3f(1,1,1);
+			glRotatef(-90,1,0,0);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+			glPopMatrix();
 }
 void lampara()
 {
