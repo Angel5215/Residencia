@@ -33,6 +33,7 @@ void pato();
 void taza_banio();
 void mueble_banio();
 void mueble_banio_toallas();
+void tele();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -110,6 +111,7 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture lamp;
+CTexture toallas;
 CTexture refri;
 CTexture t1;
 CTexture t2;
@@ -132,6 +134,7 @@ CTexture chimenea;
 CTexture chimeneaExt;
 CTexture madera;
 CTexture muebleBanio;
+CTexture muebleBanio2;
 CTexture negroMate;
 CTexture muebleBuro;
 CTexture almohada;
@@ -180,6 +183,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	metal_cromo.LoadTGA("textures/metal_cromo.tga");
 	metal_cromo.BuildGLTexture();
 	metal_cromo.ReleaseImage();
+
+	toallas.LoadTGA("textures/toallas.tga");
+	toallas.BuildGLTexture();
+	toallas.ReleaseImage();
 
 	cubierta.LoadTGA("textures/cubierta.tga");
 	cubierta.BuildGLTexture();
@@ -356,6 +363,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	muebleBanio.LoadTGA("textures/muebleBanio.tga");
 	muebleBanio.BuildGLTexture();
 	muebleBanio.ReleaseImage();
+
+	muebleBanio2.LoadTGA("textures/muebleBanio2.tga");
+	muebleBanio2.BuildGLTexture();
+	muebleBanio2.ReleaseImage();
 
 	negroMate.LoadTGA("textures/negroMate.tga");
 	negroMate.BuildGLTexture();
@@ -739,23 +750,10 @@ void mueble_banio_toallas()
 	//glTranslatef(15.35,7.5,-20.200005);
 	//glScalef(-0.600000,1.000000,1.000000);
 	glTranslatef(15.5,7.799997,-19.600002);
-
-	glPushMatrix();
-	glTranslatef(0.000000,1.300000,0.000000);
-	glPushMatrix();
-	glTranslatef(0,1,0);
-	glScalef(1,1,1);
-	glColor3f(0,0,1);
-	figures.u_prisma_mueble(0,0);
-	glPopMatrix();
-	glScalef(1,1,1);
-	glColor3f(1,0,0);
-	figures.u_prisma_mueble(0,0);
-	glPopMatrix();
-
-	glScalef(1.000000,1.600000,2.000000);
-	glColor3f(0.8980,0.9137,0.6274);
-	figures.u_prisma_mueble(0,0);
+	glRotatef(90,0,1,0);
+	glScalef(2.000000,1.600000,1.000000);
+	glColor3f(1,1,1);
+	figures.u_prisma_mueble(negroMate.GLindex,muebleBanio2.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
 }
@@ -1071,6 +1069,32 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glColor3f(0.6274,0.1529,0.0705);
 				figures.u_prisma(almohada.GLindex);
 				glColor3f(1,1,1);
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.800000,0.400000,-3.600001);
+				glRotatef(45,0,1,0);
+				glPushMatrix();
+				glTranslatef(0.000000,-0.3,0.400000);
+				glScalef(0.800000,0.800000,1.000000);
+				tele();
+				glPopMatrix();
+				glScalef(1.600000,1.400000,0.800000);
+				figures.u_prisma_mueble(madera.GLindex,0);
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-11.399994,0.400000,3.800001);
+				glRotatef(90,0,1,0);
+				glScalef(1.200000,1.000000,1.000000);
+				sillon_uno();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.200000,1.500000,4.700000);
+				glRotatef(180,0,1,0);
+				glScalef(1.600000,3.800001,1.000000);
+				figures.u_prisma_mueble(madera.GLindex,0);
 				glPopMatrix();
 
 				glScalef(1.000000,1.000000,2.800000);
@@ -1819,6 +1843,29 @@ void sillon_dos()
 	figures.u_prisma(sillon.GLindex);
 	glPopMatrix();
 	glColor3f(1,1,1);
+}
+
+void tele()
+{
+	glPushMatrix();
+	glTranslatef(0,2.5,-0.35);
+			glColor3f(1,1,1);
+			glRotatef(-90,1,0,0);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+			glPopMatrix();
 }
 void lampara()
 {
