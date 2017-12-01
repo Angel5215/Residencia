@@ -76,6 +76,9 @@ int estadoPelota = 1;
 // 1 (Adelante), 2(Atras), 3(Giro)
 int estadoPato = 1;
 
+//	Variables para animar la textura
+GLdouble estadoTelevision = 1.0;
+
 
 //CTexture text1;
 //CTexture text2;
@@ -903,20 +906,64 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(0,2.5,-0.35);
 			glColor3f(1,1,1);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+			
+			if (estadoTelevision >= 1 && estadoTelevision <= 10){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+				glutPostRedisplay();
+			}
+			else if (estadoTelevision >= 11 && estadoTelevision <= 20){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 21 && estadoTelevision <= 30){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 31 && estadoTelevision <= 40){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 41 && estadoTelevision <= 50){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 51 && estadoTelevision <= 60){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 61 && estadoTelevision <= 70){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 71 && estadoTelevision <= 80){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 81 && estadoTelevision <= 90){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 91 && estadoTelevision <= 100){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 101 && estadoTelevision <= 110){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 111 && estadoTelevision <= 120){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 121 && estadoTelevision <= 130){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 131 && estadoTelevision <= 140){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
+				glutPostRedisplay();
+			}	
+				
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
@@ -1055,6 +1102,9 @@ void animacion()
 	{
 		mov_agua.t_fin = 1.0;
 	}
+
+	++estadoTelevision;
+	if(estadoTelevision == 140) estadoTelevision = 1;
 
 	switch (estadoPato)
 	{
