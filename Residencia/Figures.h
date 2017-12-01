@@ -31,6 +31,9 @@ class Figures
 
 		//	Otros
 		void u_prisma_no_derecha(const GLuint &t1);
+		void u_prisma_garage(const GLuint &t1, const GLuint &t2, const GLuint &t3);
+		void l_prisma_garage(const GLuint &t1, const GLuint &t2, const GLuint &t3);
+		void l_prisma_agua(const GLuint &t1);
 		void u_prisma_no_izquierda(const GLuint &t1);
 		void l_prisma_no_derecha(const GLuint &t1);
 		void l_prisma_no_derecha(const GLuint &t1, const GLuint &t2);
@@ -43,6 +46,12 @@ class Figures
 		void u_medio_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void l_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void skybox(const GLuint &t1, const GLuint &t2, const GLuint &t3, const GLuint &t4);
+
+		//	Constructor
+		Figures();
+
+		double t_ini;
+		double t_fin;
 
 };
 

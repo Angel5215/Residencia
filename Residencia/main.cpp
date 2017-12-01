@@ -16,7 +16,7 @@
 void fachada();
 void refrigerador();
 void silla();
-void arbol();
+void arbol(const GLuint &text);
 void cocina();
 void sillon_uno();
 void mesa_centro();
@@ -30,6 +30,8 @@ void mueble_armario();
 void mueble_librero();
 void lampara();
 void pato();
+void taza_banio();
+void mueble_banio();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -37,6 +39,7 @@ int deltaTime = 0;*/
 //	Objeto para dibujar figuras
 //CFiguras figures;
 Figures figures;
+Figures mov_agua;
 
 CCamera objCamera;	//Create objet Camera
 
@@ -50,6 +53,17 @@ GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 //Variables de apoyo para colocar figuras
 float xx=0.0, yy = 0.0, zz = 0.0;
 float tamx = 1.0, tamy = 1.0, tamz = 1.0;
+
+//	Variables para animar al pato
+GLfloat pos_pato_x = 0.f;
+GLfloat pos_pato_y = 0.f;
+GLfloat pos_pato_z = 0.f;
+GLfloat rot_pato = 0.f;
+GLfloat ant_pos_pato_z = 0.f;
+
+// 1 (Adelante), 2(Atras), 3(Giro)
+int estadoPato = 1;
+
 
 //CTexture text1;
 //CTexture text2;
@@ -91,6 +105,7 @@ CTexture almohada;
 CTexture cabecera;
 CTexture cobija;
 CTexture piso;
+CTexture tree_tex;
 
 //CTexture tree;
 
@@ -261,10 +276,19 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	cobija.BuildGLTexture();
 	cobija.ReleaseImage();
 
+	tree_tex.LoadTGA("textures/arbol.tga");
+	tree_tex.BuildGLTexture();
+	tree_tex.ReleaseImage();
+
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
 	//	inclinación  (0, 1, 0)
 	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 37, 0, 1, 0);
+
+	//	Reproducir música si se está en Windows
+	#if _WIN32
+	PlaySound(TEXT("halo_channel.wav"), NULL, SND_LOOP | SND_ASYNC);
+	#endif
 
 }
 
@@ -285,7 +309,7 @@ void puertas(void){
 	glPopMatrix();
 
 	//Puerta garage
-	glPushMatrix();
+	/*glPushMatrix();
 		glTranslatef(-6, 2.4, -6.99);
 		glScalef(8, 4.8, 1);
 		glBindTexture(GL_TEXTURE_2D, garage.GLindex);
@@ -295,7 +319,7 @@ void puertas(void){
 			glTexCoord2f(0, 1); glVertex3f(-0.5, 0.5, 0.5);
 			glTexCoord2f(1, 1); glVertex3f(0.5, 0.5, 0.5);
 		glEnd();
-	glPopMatrix();
+	glPopMatrix();*/
 
 }
 
@@ -421,7 +445,7 @@ void alberca(void){
 		glPushMatrix(); //agua
 			glTranslatef(0,4.2,0);
 			glScalef(9.99,0.1,19.99);
-			figures.l_prisma(agua.GLindex);
+			mov_agua.l_prisma_agua(agua.GLindex);
 		glPopMatrix(); //agua
 		glScalef(10,10,20);
 		figures.l_prisma_alberca(textAlberca.GLindex);
@@ -508,7 +532,8 @@ void patioTrasero(void){
 
 }
 
-void banio(void){
+void taza_banio(void){
+
 
 	glPushMatrix(); //toilet
 		//glTranslatef(0,2, 12.8);
@@ -544,6 +569,10 @@ void banio(void){
 
 	glPopMatrix(); //toilet
 
+}
+
+void mueble_banio()
+{
 	glPushMatrix(); //mueble
 		glTranslatef(19.6, 1.6+1, -16.6);
 
@@ -795,12 +824,28 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				puertas();
 				alberca();
 				patioTrasero();
-				banio();
+				glPushMatrix();
+				glTranslatef(40.6,5.9,-28.40);
+				glRotatef(180,0,1,0);
+				taza_banio();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(40.4,5.9,-28.2);
+				glRotatef(180,0,1,0);
+				mueble_banio();
+				glPopMatrix();
+
 				cama();
 			glEnable(GL_LIGHTING);
 			divisiones();
 			divisiones_superior();
 			
+			glPushMatrix();
+				glTranslatef(5, 0, 5);
+				//glScalef(0.3, 0.3, 0.3);
+				arbol(tree_tex.GLindex);
+			glPopMatrix();
 
 		glPopMatrix(); 
 
@@ -811,6 +856,61 @@ void display ( void )   // Creamos la funcion donde se dibuja
 
 void animacion()
 {
+	//	Movimiento del agua
+	mov_agua.t_ini -= 0.001;
+	mov_agua.t_fin -= 0.001;
+
+	if (mov_agua.t_ini < -1.0)
+	{
+		mov_agua.t_ini = 0.0;
+	}
+	if(mov_agua.t_fin < 0.0)
+	{
+		mov_agua.t_fin = 1.0;
+	}
+
+	switch (estadoPato)
+	{
+		case 1:
+			pos_pato_z += 0.01;
+			if(pos_pato_z >= 6)
+			{
+				estadoPato = 2;
+				ant_pos_pato_z = pos_pato_z;
+			}
+			break;
+		case 2:
+			pos_pato_z += 0.01;
+			pos_pato_x += 0.05;
+			rot_pato += 3;
+			if(rot_pato >= 180)
+			{
+				estadoPato = 3;
+				ant_pos_pato_z = pos_pato_z;
+			}
+			break;
+		case 3:
+			pos_pato_z -= 0.01;
+			if(pos_pato_z <= -10)
+			{
+				estadoPato = 4;
+			}
+			break;
+		case 4:
+			pos_pato_z -= 0.01;
+			pos_pato_x -= 0.05;
+			rot_pato += 3;
+			if(rot_pato >= 360)
+			{
+				rot_pato = 0;
+				estadoPato = 1;
+				pos_pato_x = 0;
+			}
+			break;
+	}
+
+
+
 	glutPostRedisplay();
 }
 
@@ -1166,66 +1266,32 @@ void silla()
 	//glColor3f(1,1,1);
 }
 
-void arbol()
+void arbol(const GLuint &text)
 {
+
 	glPushMatrix();
-					glDisable(GL_LIGHTING);
-					glEnable( GL_ALPHA_TEST );
-					//glDisable(GL_DEPTH_TEST);   // Turn Depth Testing Off
-					glAlphaFunc( GL_GREATER, 0.1 );
-					//glEnable(GL_BLEND);     // Turn Blending On
-					//glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-					//glBindTexture(GL_TEXTURE_2D, tree.GLindex);
-					glBegin(GL_QUADS); //plano
-						glColor3f(1.0, 1.0, 1.0);
-						glNormal3f( 0.0f, 0.0f, 1.0f);
-						glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-						glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-					glEnd();
+		//glDisable(GL_LIGHTING);
+		glEnable(GL_ALPHA_TEST);
+		glAlphaFunc(GL_GREATER, 0.1);
+
+		glBindTexture(GL_TEXTURE_2D, text);
+		for(int i = 0; i < 12; i++)
+		{
+			glPushMatrix();
+				glRotatef(30 / 2.0 * i, 0, 1, 0);
+				glNormal3f(0, 0, 1);
+				glBegin(GL_QUADS);
+					glTexCoord2f(0.0f, 0.0f); glVertex3f(-5.0, 0.0, 0.0);
+					glTexCoord2f(1.0f, 0.0f); glVertex3f(5.0, 0.0, 0.0);
+					glTexCoord2f(1.0f, 1.0f); glVertex3f(5.0, 10.0, 0.0);
+					glTexCoord2f(0.0f, 1.0f); glVertex3f(-5.0, 10.0, 0.0);
+				glEnd();
 			glPopMatrix();
 
-			glPushMatrix();
-					glRotatef(45, 0, 1, 0);
-					glBegin(GL_QUADS); //plano
-						glColor3f(1.0, 1.0, 1.0);
-						glNormal3f( 0.0f, 0.0f, 1.0f);
-						glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-						glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-					glEnd();
-			glPopMatrix();
-
-			glPushMatrix();
-					glRotatef(-45, 0, 1, 0);
-					glBegin(GL_QUADS); //plano
-						glColor3f(1.0, 1.0, 1.0);
-						glNormal3f( 0.0f, 0.0f, 1.0f);
-						glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-						glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-					glEnd();
-			glPopMatrix();
-
-			glPushMatrix();
-					glRotatef(90, 0, 1, 0);
-					glBegin(GL_QUADS); //plano
-						glColor3f(1.0, 1.0, 1.0);
-						glNormal3f( 0.0f, 0.0f, 1.0f);
-						glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-						glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-						glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-					glEnd();
-					glDisable( GL_ALPHA_TEST );
-					//glDisable(GL_BLEND);        // Turn Blending Off
-					//glEnable(GL_DEPTH_TEST);    // Turn Depth Testing On
-					glEnable(GL_LIGHTING);
-				
-			glPopMatrix();
+		}
+		//glEnable(GL_LIGHTING);
+		glDisable(GL_ALPHA_TEST);
+	glPopMatrix();
 }
 
 void sillon_uno()
@@ -1584,6 +1650,9 @@ void mesa_cocina()
 void pato()
 {
 	glPushMatrix();
+
+	glTranslatef(pos_pato_x, pos_pato_y, pos_pato_z);
+	glRotatef(rot_pato, 0, 1, 0);
 
 	glPushMatrix();//Ala derecha
 	glTranslatef(0.25,0.1,0);
@@ -1978,10 +2047,10 @@ void divisiones() {
 		figures.u_prisma(pared_interior.GLindex);
 	glPopMatrix();
 
-	glPushMatrix();
+	/*glPushMatrix();
 		glTranslatef(5, 5, 5);
 		figures.u_cuarto_cilindro(3, 3, 20, pared_interior.GLindex);
-	glPopMatrix();
+	glPopMatrix();*/
 
 	//	Escalones en la entrada
 	glPushMatrix();
@@ -2292,11 +2361,18 @@ void fachada()
 
 	//	Figura B (garage)
 	glPushMatrix();
-	glColor3f(0, 1, 1);
 	glTranslatef(-15.501, -7.5, 3.5);
 	glScalef(12, 6, 16);
-	figures.u_prisma(metal_cromo.GLindex);
+	figures.u_prisma_garage(garage.GLindex, pared_interior.GLindex, metal_cromo.GLindex);
 	glPopMatrix();
+
+	glEnable(GL_LIGHTING);
+	glPushMatrix();
+	glTranslatef(-15.501, -7.5, 3.5);
+	glScalef(11.995, 5.995, 15.995);
+	figures.l_prisma_garage(garage.GLindex, pared_interior.GLindex, metal_cromo.GLindex);
+	glPopMatrix();
+	glDisable(GL_LIGHTING);
 
 	/*//	Figura C (sala)
 	glColor3f(1, 1, 0);
@@ -2315,11 +2391,11 @@ void fachada()
 	glPopMatrix();*/
 
 	//	Chimenea
-	glColor3f(1, 0, 0);
+	//glColor3f(1, 0, 0);
 	glPushMatrix();
 	glTranslatef(-10.501, 1.5, -11.5);
 	glScalef(2, 24, 2);
-	figures.u_prisma(metal_cromo.GLindex);
+	figures.u_prisma(pisoPatioT.GLindex);
 	glPopMatrix();
 
 	glColor3f(1, 1, 1);
