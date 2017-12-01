@@ -46,6 +46,9 @@ class Figures
 		void u_medio_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void l_cilindro_sin_tapa(const GLfloat &r, const GLfloat &h, const GLfloat &res, const GLuint &t1);
 		void skybox(const GLuint &t1, const GLuint &t2, const GLuint &t3, const GLuint &t4);
+		void ventana(const GLuint &t1, bool frontal, bool superior, 
+			bool inferior, bool trasera, bool izquierda, bool derecha);
+		void puerta(const GLuint &t1, bool frontales, bool laterales);
 
 		//	Constructor
 		Figures();
