@@ -71,6 +71,7 @@ int estadoPato = 1;
 //CTexture text3;	//Flecha
 
 //	Texturas para el refrigerador
+CTexture window_texture;
 CTexture cuarzo;
 CTexture cubierta;
 CTexture metal_cromo;
@@ -93,7 +94,20 @@ CTexture cielo_superior;
 CTexture pasto;
 CTexture lamp;
 CTexture refri;
-CTexture tele;
+CTexture t1;
+CTexture t2;
+CTexture t3;
+CTexture t4;
+CTexture t5;
+CTexture t6;
+CTexture t7;
+CTexture t8;
+CTexture t9;
+CTexture t10;
+CTexture t11;
+CTexture t12;
+CTexture t13;
+CTexture t14;
 CTexture sillon;
 CTexture librero;
 CTexture vitrina;
@@ -110,6 +124,7 @@ CTexture piso;
 CTexture estufa;
 CTexture estufaCal;
 CTexture tree_tex;
+CTexture door;
 
 //CTexture tree;
 
@@ -176,9 +191,61 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	garage.BuildGLTexture();
 	garage.ReleaseImage();
 
-	tele.LoadTGA("textures/tele.tga");
-	tele.BuildGLTexture();
-	tele.ReleaseImage();
+	t1.LoadTGA("textures/t1.tga");
+	t1.BuildGLTexture();
+	t1.ReleaseImage();
+
+	t2.LoadTGA("textures/t2.tga");
+	t2.BuildGLTexture();
+	t2.ReleaseImage();
+
+	t3.LoadTGA("textures/t3.tga");
+	t3.BuildGLTexture();
+	t3.ReleaseImage();
+
+	t4.LoadTGA("textures/t4.tga");
+	t4.BuildGLTexture();
+	t4.ReleaseImage();
+
+	t5.LoadTGA("textures/t5.tga");
+	t5.BuildGLTexture();
+	t5.ReleaseImage();
+
+	t6.LoadTGA("textures/t6.tga");
+	t6.BuildGLTexture();
+	t6.ReleaseImage();
+
+	t7.LoadTGA("textures/t7.tga");
+	t7.BuildGLTexture();
+	t7.ReleaseImage();
+
+	t8.LoadTGA("textures/t8.tga");
+	t8.BuildGLTexture();
+	t8.ReleaseImage();
+
+	t9.LoadTGA("textures/t9.tga");
+	t9.BuildGLTexture();
+	t9.ReleaseImage();
+
+	t10.LoadTGA("textures/t10.tga");
+	t10.BuildGLTexture();
+	t10.ReleaseImage();
+
+	t11.LoadTGA("textures/t11.tga");
+	t11.BuildGLTexture();
+	t11.ReleaseImage();
+
+	t12.LoadTGA("textures/t12.tga");
+	t12.BuildGLTexture();
+	t12.ReleaseImage();
+
+	t13.LoadTGA("textures/t13.tga");
+	t13.BuildGLTexture();
+	t13.ReleaseImage();
+
+	t14.LoadTGA("textures/t14.tga");
+	t14.BuildGLTexture();
+	t14.ReleaseImage();
 
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
@@ -291,6 +358,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	tree_tex.LoadTGA("textures/arbol.tga");
 	tree_tex.BuildGLTexture();
 	tree_tex.ReleaseImage();
+
+	window_texture.LoadTGA("textures/window.tga");
+	window_texture.BuildGLTexture();
+	window_texture.ReleaseImage();
+
+	door.LoadTGA("textures/door.tga");
+	door.BuildGLTexture();
+	door.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -839,7 +914,20 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(0,2.5,-0.35);
 			glColor3f(1,1,1);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,tele.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
+			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
@@ -935,6 +1023,52 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glTranslatef(5, 0, 5);
 				//glScalef(0.3, 0.3, 0.3);
 				arbol(tree_tex.GLindex);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(21.4, 14.7, -24.6);
+				glScalef(3.4, 8.4, 1);
+				figures.ventana(window_texture.GLindex, true, false, false, 
+				false, false, false);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(25.4, 3.4, -25.2);
+				glScalef(3.4, 3, 1);
+				figures.ventana(window_texture.GLindex, true, false, false, 
+					false, false, false);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(25.2, 12, -6.6);
+			glScalef(2, 4.2, 3.2);
+			figures.ventana(window_texture.GLindex, false, false, false,
+				false, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(26.8, 3.6, -22.4);
+			glScalef(1, 3, 3.2);
+			figures.ventana(window_texture.GLindex, false, false, false,
+				false, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(0, 1.8, -18);
+			glScalef(0.2, 3.605, 2.2);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(8.4, 9, -22.6);
+			glScalef(1, 3.8, 1.6);
+			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(8.6, 9, -22.6);
+			glScalef(1, 3.8, 1.6);
+			figures.puerta(door.GLindex, false, true);
 			glPopMatrix();
 
 		glPopMatrix(); 
