@@ -297,6 +297,156 @@ void Figures::u_prisma(const GLuint &t1)
 
 }
 
+void Figures::u_prisma_garage(const GLuint &t1, const GLuint &t2, const GLuint &t3)
+{
+	GLfloat vertices[8][3] = 
+	{
+		{ -0.5, -0.5, +0.5 },		//	V0
+		{ +0.5, -0.5, +0.5 },		//	V1
+		{ +0.5, +0.5, +0.5 },		//	V2
+		{ -0.5, +0.5, +0.5 },		//	V3
+		{ -0.5, -0.5, -0.5 },		//	V4
+		{ +0.5, -0.5, -0.5 },		//	V5
+		{ +0.5, +0.5, -0.5 },		//	V6
+		{ -0.5, +0.5, -0.5 }		//	V7
+	}; 
+
+	glBindTexture(GL_TEXTURE_2D, t1);
+
+	//	Frontal (0123)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, 1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[3]);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, t2);
+
+	//	Derecha (1562)
+	glBegin(GL_POLYGON);
+		glNormal3f(1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[2]);
+	glEnd();
+
+	//	Atrás (5476)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, -1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[7]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[6]);
+	glEnd();
+
+	//	Izquierda (4037)
+	glBegin(GL_POLYGON);
+		glNormal3f(-1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	//	Arriba (3267)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, t3);
+	//	Abajo (1045)
+	glBegin(GL_POLYGON);
+		glNormal3f(0,-1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[5]);
+	glEnd();
+
+}
+
+void Figures::l_prisma_garage(const GLuint &t1, const GLuint &t2, const GLuint &t3)
+{
+	GLfloat vertices[8][3] = 
+	{
+		{ -0.5, -0.5, +0.5 },		//	V0
+		{ +0.5, -0.5, +0.5 },		//	V1
+		{ +0.5, +0.5, +0.5 },		//	V2
+		{ -0.5, +0.5, +0.5 },		//	V3
+		{ -0.5, -0.5, -0.5 },		//	V4
+		{ +0.5, -0.5, -0.5 },		//	V5
+		{ +0.5, +0.5, -0.5 },		//	V6
+		{ -0.5, +0.5, -0.5 }		//	V7
+	}; 
+
+	glBindTexture(GL_TEXTURE_2D, t1);
+
+	//	Frontal (0123)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, -1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[3]);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, t2);
+
+	//	Derecha (1562)
+	glBegin(GL_POLYGON);
+		glNormal3f(-1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[2]);
+	glEnd();
+
+	//	Atrás (5476)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 0, 1);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[5]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[7]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[6]);
+	glEnd();
+
+	//	Izquierda (4037)
+	glBegin(GL_POLYGON);
+		glNormal3f(1, 0, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	//	Arriba (3267)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, -1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[3]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[2]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[6]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[7]);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, t3);
+	//	Abajo (1045)
+	glBegin(GL_POLYGON);
+		glNormal3f(0, 1, 0);
+		glTexCoord2f(0.0, 0.0); glVertex3fv(vertices[1]);
+		glTexCoord2f(1.0, 0.0); glVertex3fv(vertices[0]);
+		glTexCoord2f(1.0, 1.0); glVertex3fv(vertices[4]);
+		glTexCoord2f(0.0, 1.0); glVertex3fv(vertices[5]);
+	glEnd();
+
+}
+
 void Figures::u_prisma_mueble(const GLuint &t1, const GLuint &t2)
 {
 	GLfloat vertices[8][3] = 
