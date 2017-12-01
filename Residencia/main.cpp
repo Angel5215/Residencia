@@ -101,6 +101,7 @@ CTexture pisoRojo;
 CTexture mosaicoVintage;
 CTexture textAlberca;
 CTexture pisoPatioT;
+CTexture ropero;
 CTexture agua;
 CTexture porcelana;
 CTexture plata;
@@ -109,7 +110,9 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture lamp;
+CTexture tocador;
 CTexture toallas;
+CTexture tele1;
 CTexture refri;
 CTexture t1;
 CTexture t2;
@@ -182,6 +185,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	metal_cromo.BuildGLTexture();
 	metal_cromo.ReleaseImage();
 
+	ropero.LoadTGA("textures/roperoo.tga");
+	ropero.BuildGLTexture();
+	ropero.ReleaseImage();
+
 	toallas.LoadTGA("textures/toallas.tga");
 	toallas.BuildGLTexture();
 	toallas.ReleaseImage();
@@ -189,6 +196,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	cubierta.LoadTGA("textures/cubierta.tga");
 	cubierta.BuildGLTexture();
 	cubierta.ReleaseImage();
+
+	tele1.LoadTGA("textures/tele1.tga");
+	tele1.BuildGLTexture();
+	tele1.ReleaseImage();
+
+	tocador.LoadTGA("textures/tocador.tga");
+	tocador.BuildGLTexture();
+	tocador.ReleaseImage();
 
 	alacena1.LoadTGA("textures/alacena.tga");
 	alacena1.BuildGLTexture();
@@ -1075,10 +1090,20 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glPushMatrix();
 				glTranslatef(0.000000,-0.3,0.400000);
 				glScalef(0.800000,0.800000,1.000000);
-				tele();
+				
+				glPushMatrix(); //TELE
+				
+				glTranslatef(0,2.5,-0.35);
+				glColor3f(1,1,1);
+				glRotatef(-90,1,0,0);
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,tele1.GLindex);	
+				glPopMatrix();
+
 				glPopMatrix();
 				glScalef(1.600000,1.400000,0.800000);
-				figures.u_prisma_mueble(madera.GLindex,0);
+				glColor3f(0.3529,0.1764,0.0862);
+				figures.u_prisma_mueble(madera.GLindex,tocador.GLindex);
+				glColor3f(1,1,1);
 				glPopMatrix();
 
 				glPushMatrix();
@@ -1092,7 +1117,9 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glTranslatef(0.200000,1.500000,4.700000);
 				glRotatef(180,0,1,0);
 				glScalef(1.600000,3.800001,1.000000);
-				figures.u_prisma_mueble(madera.GLindex,0);
+				glColor3f(0.3529,0.1764,0.0862);
+				figures.u_prisma_mueble(madera.GLindex,ropero.GLindex);
+				glColor3f(1,1,1);
 				glPopMatrix();
 
 				glScalef(1.000000,1.000000,2.800000);
