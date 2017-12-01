@@ -63,13 +63,15 @@ GLfloat rot_pato = 0.f;
 GLfloat ant_pos_pato_z = 0.f;
 
 //	Variables para animar la pelota
-GLfloat pos_ball_x = 3.6f;
+GLfloat pos_ball_x = 13.f;
 GLfloat pos_ball_y = 22.0f;
 GLfloat pos_ball_z = -5.6f;
 GLfloat rot_ball_x = 0.f;
-GLfloat par_pos_ball_x_ini = 3.6f;
+GLfloat par_pos_ball_x_ini = 13.f;
 GLfloat par_pos_ball_y_ini = 22.0f;
 GLfloat par_pos_ball_z_ini = -5.6f;
+GLfloat v_ini_ball = 10;
+GLfloat angle_ball = 3.1415926 / 10;
 GLfloat ball_t = 0;
 const GLfloat gravity = 9.81;
 int estadoPelota = 1;
@@ -1136,7 +1138,8 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslatef(xx, yy, zz);
+			glTranslatef(pos_ball_x, pos_ball_y, pos_ball_z);
+			glRotatef(rot_ball_x, -1, 0, 0);
 			figures.u_esfera(1, 20, 20, ball.GLindex);
 			glPopMatrix();
 
@@ -1205,6 +1208,32 @@ void animacion()
 			break;
 	}
 
+	//	Movimiento de la pelota
+	switch(estadoPelota){
+		case 1:
+			pos_ball_z -= 0.2;
+			rot_ball_x -= 1;
+			if (pos_ball_z <= -37.5) {
+				estadoPelota = 2;
+			}
+			break;
+		case 2:
+			pos_ball_z = -38.0 - (v_ini_ball * ball_t);
+			pos_ball_y = par_pos_ball_y_ini + (v_ini_ball * sin(angle_ball) * ball_t 
+				- 0.5 * gravity * ball_t * ball_t);
+			ball_t += 0.01;
+
+			if (pos_ball_y <= 0)
+			{
+				estadoPelota = 3;
+				xx = pos_ball_z;
+			}
+			break;
+		case 3:
+			rot_ball_x += 0.2;
+			break;
+	}
+	
 
 
 	glutPostRedisplay();
@@ -1233,6 +1262,15 @@ void reshape ( int width , int height )   // Creamos funcion Reshape
 void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 {
 	switch ( key ) {
+
+		case '<':
+			pos_ball_x = par_pos_ball_x_ini;
+			pos_ball_y = par_pos_ball_y_ini;
+			pos_ball_z = par_pos_ball_z_ini;
+			rot_ball_x = 0.f;
+			ball_t = 0.f;
+			estadoPelota = 1;
+			break;
 
 		case 'w':   //Movimientos de camara
 		case 'W':
