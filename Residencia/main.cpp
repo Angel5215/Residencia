@@ -32,6 +32,7 @@ void lampara();
 void pato();
 void taza_banio();
 void mueble_banio();
+void mueble_banio_toallas();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -61,8 +62,23 @@ GLfloat pos_pato_z = 0.f;
 GLfloat rot_pato = 0.f;
 GLfloat ant_pos_pato_z = 0.f;
 
+//	Variables para animar la pelota
+GLfloat pos_ball_x = 3.6f;
+GLfloat pos_ball_y = 22.0f;
+GLfloat pos_ball_z = -5.6f;
+GLfloat rot_ball_x = 0.f;
+GLfloat par_pos_ball_x_ini = 3.6f;
+GLfloat par_pos_ball_y_ini = 22.0f;
+GLfloat par_pos_ball_z_ini = -5.6f;
+GLfloat ball_t = 0;
+const GLfloat gravity = 9.81;
+int estadoPelota = 1;
+
 // 1 (Adelante), 2(Atras), 3(Giro)
 int estadoPato = 1;
+
+//	Variables para animar la textura
+GLdouble estadoTelevision = 1.0;
 
 
 //CTexture text1;
@@ -126,6 +142,7 @@ CTexture estufa;
 CTexture estufaCal;
 CTexture tree_tex;
 CTexture door;
+CTexture ball;
 
 //CTexture tree;
 
@@ -375,6 +392,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	door.LoadTGA("textures/door.tga");
 	door.BuildGLTexture();
 	door.ReleaseImage();
+
+	ball.LoadTGA("textures/ball.tga");
+	ball.BuildGLTexture();
+	ball.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -720,6 +741,33 @@ void mueble_banio()
 	glPopMatrix(); //mueble
 }
 
+void mueble_banio_toallas()
+{
+	glPushMatrix();
+	//glTranslatef(15.35,7.5,-20.200005);
+	//glScalef(-0.600000,1.000000,1.000000);
+	glTranslatef(15.5,7.799997,-19.600002);
+
+	glPushMatrix();
+	glTranslatef(0.000000,1.300000,0.000000);
+	glPushMatrix();
+	glTranslatef(0,1,0);
+	glScalef(1,1,1);
+	glColor3f(0,0,1);
+	figures.u_prisma_mueble(0,0);
+	glPopMatrix();
+	glScalef(1,1,1);
+	glColor3f(1,0,0);
+	figures.u_prisma_mueble(0,0);
+	glPopMatrix();
+
+	glScalef(1.000000,1.600000,2.000000);
+	glColor3f(0.8980,0.9137,0.6274);
+	figures.u_prisma_mueble(0,0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+
 void cama(void){
 
 
@@ -896,20 +944,64 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(0,2.5,-0.35);
 			glColor3f(1,1,1);
 			glRotatef(-90,1,0,0);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
-			figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+			
+			if (estadoTelevision >= 1 && estadoTelevision <= 10){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t1.GLindex);
+				glutPostRedisplay();
+			}
+			else if (estadoTelevision >= 11 && estadoTelevision <= 20){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t2.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 21 && estadoTelevision <= 30){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t3.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 31 && estadoTelevision <= 40){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t4.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 41 && estadoTelevision <= 50){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t5.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 51 && estadoTelevision <= 60){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t6.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 61 && estadoTelevision <= 70){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t7.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 71 && estadoTelevision <= 80){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t8.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 81 && estadoTelevision <= 90){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t9.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 91 && estadoTelevision <= 100){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t10.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 101 && estadoTelevision <= 110){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t11.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 111 && estadoTelevision <= 120){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t12.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 121 && estadoTelevision <= 130){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t13.GLindex);
+				glutPostRedisplay();
+			}	
+			else if (estadoTelevision >= 131 && estadoTelevision <= 140){
+				figures.u_prisma_tele(0.25,2.5,2.5,negroMate.GLindex,t14.GLindex);
+				glutPostRedisplay();
+			}	
+				
 			glPopMatrix();
 
 			glScalef(1.5,2,1);
@@ -954,15 +1046,46 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				alberca();
 				patioTrasero();
 				glPushMatrix();
-				glTranslatef(40.6,5.9,-28.40);
+				glTranslatef(40.6,5.9,-32.5);
+				//glTranslatef(xx,yy,zz);
 				glRotatef(180,0,1,0);
 				taza_banio();
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(40.4,5.9,-28.2);
+				glTranslatef(40.4,5.7,-32.2);
+				//glTranslatef(xx,yy,zz);
 				glRotatef(180,0,1,0);
 				mueble_banio();
+				glPopMatrix();
+
+				glPushMatrix();
+				mueble_banio_toallas();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(9.999995,0.000000,-24.200020);
+				glPushMatrix();
+				glTranslatef(5.999999,7.599998,-3.000000);
+				mesa_centro();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.600000,7.399998,-5.999999);
+
+				glPushMatrix();
+				glTranslatef(0.000000,0.600000,0.000000);
+				glScalef(1.000000,0.200000,3.000000);
+				glColor3f(0.6274,0.1529,0.0705);
+				figures.u_prisma(almohada.GLindex);
+				glColor3f(1,1,1);
+				glPopMatrix();
+
+				glScalef(1.000000,1.000000,2.800000);
+				figures.u_prisma(madera.GLindex);
+				glPopMatrix();
+				
+				cama();
 				glPopMatrix();
 
 				cama();
@@ -1022,6 +1145,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			figures.puerta(door.GLindex, false, true);
 			glPopMatrix();
 
+			glPushMatrix();
+			glTranslatef(xx, yy, zz);
+			figures.u_esfera(1, 20, 20, ball.GLindex);
+			glPopMatrix();
+
 		glPopMatrix(); 
 
 	glPopMatrix();
@@ -1043,6 +1171,9 @@ void animacion()
 	{
 		mov_agua.t_fin = 1.0;
 	}
+
+	++estadoTelevision;
+	if(estadoTelevision == 140) estadoTelevision = 1;
 
 	switch (estadoPato)
 	{

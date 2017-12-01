@@ -1827,19 +1827,23 @@ void Figures::u_esfera(const GLfloat &r, const GLuint &meridianos,
 			vertices[3][2] = r * sin(alfa * j) * sin(theta * (i + 1));
 
 			glBegin(GL_POLYGON);
-				//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
-				glNormal3fv(vertices[0]);
-				glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
-				glNormal3fv(vertices[1]);
-				glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
-				glNormal3fv(vertices[2]);
-				glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
-				glNormal3fv(vertices[3]);
-				glTexCoord2f(1, 0); glVertex3fv(vertices[3]);
-				/*glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[1]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[2]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[3]);*/
+			//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
+			/*glNormal3fv(vertices[0]);
+			glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(1, 0); glVertex3fv(vertices[3]);*/
+			glNormal3fv(vertices[0]);
+			glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(ctext_s*i, -ctext_t*(j + 1)); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*(j + 1)); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*j); glVertex3fv(vertices[3]);
 			glEnd();
 			
 		}
@@ -1895,23 +1899,23 @@ void Figures::u_media_esfera(const GLfloat &r, const GLuint &meridianos,
 			vertices[3][2] = r * sin(alfa * j) * sin(theta * (i + 1));
 
 			glBegin(GL_POLYGON);
-				//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
-				/*glNormal3fv(vertices[0]);
-				glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
-				glNormal3fv(vertices[1]);
-				glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
-				glNormal3fv(vertices[2]);
-				glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
-				glNormal3fv(vertices[3]);
-				glTexCoord2f(1, 0); glVertex3fv(vertices[3]);*/
-				glNormal3fv(vertices[0]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
-				glNormal3fv(vertices[1]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[1]);
-				glNormal3fv(vertices[2]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[2]);
-				glNormal3fv(vertices[3]);
-				glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[3]);
+			//glNormal3f(vertices[0][0], vertices[1][1], vertices[0][2]);
+			/*glNormal3fv(vertices[0]);
+			glTexCoord2f(0, 0); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(0, 1); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(1, 1); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(1, 0); glVertex3fv(vertices[3]);*/
+			glNormal3fv(vertices[0]);
+			glTexCoord2f(ctext_s*i, -ctext_t*j); glVertex3fv(vertices[0]);
+			glNormal3fv(vertices[1]);
+			glTexCoord2f(ctext_s*i, -ctext_t*(j + 1)); glVertex3fv(vertices[1]);
+			glNormal3fv(vertices[2]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*(j + 1)); glVertex3fv(vertices[2]);
+			glNormal3fv(vertices[3]);
+			glTexCoord2f(ctext_s*(i + 1), -ctext_t*j); glVertex3fv(vertices[3]);
 			glEnd();
 			
 		}
