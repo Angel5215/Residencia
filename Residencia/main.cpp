@@ -265,6 +265,11 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	//	inclinación  (0, 1, 0)
 	objCamera.Position_Camera(9.5, 2.5f, 40, 9.5, 2.5f, 37, 0, 1, 0);
 
+	//	Reproducir música si se está en Windows
+	#if _WIN32
+	PlaySound(TEXT("halo_channel.wav"), NULL, SND_LOOP | SND_ASYNC);
+	#endif
+
 }
 
 void puertas(void){
