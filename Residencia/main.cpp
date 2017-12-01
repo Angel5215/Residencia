@@ -8,7 +8,7 @@
 //************************************************************//
 
 #include "texture.h"
-//#include "figuras.h"
+#include "figuras.h"
 #include "Camera.h"
 #include "Figures.h"
 
@@ -35,6 +35,70 @@ void mueble_banio();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
+
+static GLuint ciudad_display_list;	//Display List for the Monito
+
+
+									//NEW// Keyframes
+float posX = 0, posY = 2.5, posZ = -3.5, rotRodIzq = 0, rotRodDer = 0.0, rotBrazoIzq = 0.0, rotBrazoDer = 0.0;
+float movBrazoIzq = 0.0;
+float giroMonito = 0;
+float movBrazoDer = 0.0;
+float movCuerpo = 0.0;
+
+#define MAX_FRAMES 200		//cuantos cuadros clave se van a utilizar (keyframes)
+int i_max_steps = 50;
+int i_curr_steps = 0;
+typedef struct _frame
+{
+	//Variables para GUARDAR Key Frames
+	float posX;		//Variable para PosicionX
+	float posY;		//Variable para PosicionY
+	float posZ;		//Variable para PosicionZ
+
+	float incX;		//Variable para IncrementoX
+	float incY;		//Variable para IncrementoY
+	float incZ;		//Variable para IncrementoZ
+
+	float rotRodIzq;
+	float rotRodDer;
+
+	float rotRodIzqInc;
+	float rotRodDerInc;
+
+	float giroMonito;
+	float giroMonitoInc;
+	
+	float movBrazoDer;
+	float movBrazoDerInc;
+	
+	float movBrazoIzq;
+	float movBrazoIzqInc;
+	
+	float rotBrazoIzq;
+	float rotBrazoDer;
+	float rotBrazoDerInc;
+	float rotBrazoIzqInc;
+	
+	float rotInc;
+
+	float movCuerpo;
+	float movCuerpoInc;
+
+
+}FRAME;
+
+FRAME KeyFrame[MAX_FRAMES];
+int FrameIndex = 19;			//introducir datos
+bool play = false;
+int playIndex = 0;
+
+
+//NEW//////////////////NEW//////////////////NEW//////////////////NEW////////////////
+
+int w = 500, h = 500;
+int frame = 0, time2, timebase = 0;
+char s[30];
 
 //	Objeto para dibujar figuras
 //CFiguras figures;
@@ -68,6 +132,8 @@ int estadoPato = 1;
 //CTexture text1;
 //CTexture text2;
 //CTexture text3;	//Flecha
+
+CFiguras fig7;
 
 //	Texturas para el refrigerador
 CTexture cuarzo;
@@ -291,6 +357,237 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	tree_tex.BuildGLTexture();
 	tree_tex.ReleaseImage();
 
+	KeyFrame[0].posX = 0;
+	KeyFrame[0].posY = 2.4;
+	KeyFrame[0].posZ = -3.5;
+	KeyFrame[0].rotRodIzq = 0;
+	KeyFrame[0].rotRodDer = 0;
+	KeyFrame[0].giroMonito = 0;
+	KeyFrame[0].movBrazoDer = 0;
+	KeyFrame[0].movBrazoIzq = 0;
+	KeyFrame[0].movCuerpo = 0;
+	KeyFrame[0].rotBrazoDer = 0;
+	KeyFrame[0].rotBrazoIzq = 0;
+
+	KeyFrame[1].posX = 0;
+	KeyFrame[1].posY = 2.4;
+	KeyFrame[1].posZ = -3.5;
+	KeyFrame[1].rotRodIzq = 0;
+	KeyFrame[1].rotRodDer = 0;
+	KeyFrame[1].giroMonito = 77.0;
+	KeyFrame[1].movBrazoDer = 0;
+	KeyFrame[1].movBrazoIzq = 0;
+	KeyFrame[1].movCuerpo = 0;
+	KeyFrame[1].rotBrazoDer = -91.0;
+	KeyFrame[1].rotBrazoIzq = 83.0;
+
+	KeyFrame[2].posX = 0;
+	KeyFrame[2].posY = 2.4;
+	KeyFrame[2].posZ = -3.5;
+	KeyFrame[2].rotRodIzq = 0;
+	KeyFrame[2].rotRodDer = 0;
+	KeyFrame[2].giroMonito = 77.0;
+	KeyFrame[2].movBrazoDer = 31.0;
+	KeyFrame[2].movBrazoIzq = 33.0;
+	KeyFrame[2].movCuerpo = 0;
+	KeyFrame[2].rotBrazoDer = -91.0;
+	KeyFrame[2].rotBrazoIzq = 83.0;
+
+	KeyFrame[3].posX = 0;
+	KeyFrame[3].posY = 2.2;
+	KeyFrame[3].posZ = -3.5;
+	KeyFrame[3].rotRodIzq = 49.0;
+	KeyFrame[3].rotRodDer = 44.0;
+	KeyFrame[3].giroMonito = 77.0;
+	KeyFrame[3].movBrazoDer = -23.0;
+	KeyFrame[3].movBrazoIzq = -36.0;
+	KeyFrame[3].movCuerpo = 0;
+	KeyFrame[3].rotBrazoDer = -91.0;
+	KeyFrame[3].rotBrazoIzq = 83.0;
+
+	KeyFrame[4].posX = 0;
+	KeyFrame[4].posY = 2.2;
+	KeyFrame[4].posZ = -3.5;
+	KeyFrame[4].rotRodIzq = 15.0;
+	KeyFrame[4].rotRodDer = 17.0;
+	KeyFrame[4].giroMonito = 77.0;
+	KeyFrame[4].movBrazoDer = 40.0;
+	KeyFrame[4].movBrazoIzq = 28.0;
+	KeyFrame[4].movCuerpo = 0;
+	KeyFrame[4].rotBrazoDer = -91.0;
+	KeyFrame[4].rotBrazoIzq = 83.0;
+
+	KeyFrame[5].posX = 0;
+	KeyFrame[5].posY = 2.4;
+	KeyFrame[5].posZ = -3.5;
+	KeyFrame[5].rotRodIzq = 46.0;
+	KeyFrame[5].rotRodDer = 51.0;
+	KeyFrame[5].giroMonito = 77.0;
+	KeyFrame[5].movBrazoDer = -17.0;
+	KeyFrame[5].movBrazoIzq = -41.0;
+	KeyFrame[5].movCuerpo = 0;
+	KeyFrame[5].rotBrazoDer = -91.0;
+	KeyFrame[5].rotBrazoIzq = 83.0;
+
+	KeyFrame[6].posX = 0;
+	KeyFrame[6].posY = 2.4;
+	KeyFrame[6].posZ = -3.5;
+	KeyFrame[6].rotRodIzq = 9.0;
+	KeyFrame[6].rotRodDer = 23.0;
+	KeyFrame[6].giroMonito = 77.0;
+	KeyFrame[6].movBrazoDer = 33.0;
+	KeyFrame[6].movBrazoIzq = 29.0;
+	KeyFrame[6].movCuerpo = 0;
+	KeyFrame[6].rotBrazoDer = -91.0;
+	KeyFrame[6].rotBrazoIzq = 83.0;
+
+	KeyFrame[7].posX = 0;
+	KeyFrame[7].posY = 2.2;
+	KeyFrame[7].posZ = -3.5;
+	KeyFrame[7].rotRodIzq = 46.0;
+	KeyFrame[7].rotRodDer = 43.0;
+	KeyFrame[7].giroMonito = 77.0;
+	KeyFrame[7].movBrazoDer = -22.0;
+	KeyFrame[7].movBrazoIzq = -36.0;
+	KeyFrame[7].movCuerpo = 0;
+	KeyFrame[7].rotBrazoDer = -91.0;
+	KeyFrame[7].rotBrazoIzq = 83.0;
+
+	KeyFrame[8].posX = 0;
+	KeyFrame[8].posY = 2.4;
+	KeyFrame[8].posZ = -3.5;
+	KeyFrame[8].rotRodIzq = 3.0;
+	KeyFrame[8].rotRodDer = 8.0;
+	KeyFrame[8].giroMonito = 77.0;
+	KeyFrame[8].movBrazoDer = 43.0;
+	KeyFrame[8].movBrazoIzq = 26.0;
+	KeyFrame[8].movCuerpo = 0.0;
+	KeyFrame[8].rotBrazoDer = -91.0;
+	KeyFrame[8].rotBrazoIzq = 83.0;
+
+	KeyFrame[9].posX = 0;
+	KeyFrame[9].posY = 2.2;
+	KeyFrame[9].posZ = -3.5;
+	KeyFrame[9].rotRodIzq = 43.0;
+	KeyFrame[9].rotRodDer = 45.0;
+	KeyFrame[9].giroMonito = 77.0;
+	KeyFrame[9].movBrazoDer = -31.0;
+	KeyFrame[9].movBrazoIzq = -42.0;
+	KeyFrame[9].movCuerpo = 0;
+	KeyFrame[9].rotBrazoDer = -91.0;
+	KeyFrame[9].rotBrazoIzq = 83.0;
+
+	KeyFrame[10].posX = 0;
+	KeyFrame[10].posY = 2.4;
+	KeyFrame[10].posZ = -3.5;
+	KeyFrame[10].rotRodIzq = 1.0;
+	KeyFrame[10].rotRodDer = 11.0;
+	KeyFrame[10].giroMonito = 77.0;
+	KeyFrame[10].movBrazoDer = 41.0;
+	KeyFrame[10].movBrazoIzq = 32.0;
+	KeyFrame[10].movCuerpo = 0;
+	KeyFrame[10].rotBrazoDer = -91.0;
+	KeyFrame[10].rotBrazoIzq = 83.0;
+
+	KeyFrame[11].posX = 0;
+	KeyFrame[11].posY = 2.2;
+	KeyFrame[11].posZ = -3.5;
+	KeyFrame[11].rotRodIzq = 43.0;
+	KeyFrame[11].rotRodDer = 56.0;
+	KeyFrame[11].giroMonito = 77.0;
+	KeyFrame[11].movBrazoDer = -23.0;
+	KeyFrame[11].movBrazoIzq = -47.0;
+	KeyFrame[11].movCuerpo = 0;
+	KeyFrame[11].rotBrazoDer = -91.0;
+	KeyFrame[11].rotBrazoIzq = 83.0;
+
+	KeyFrame[12].posX = 0;
+	KeyFrame[12].posY = 2.4;
+	KeyFrame[12].posZ = -3.5;
+	KeyFrame[12].rotRodIzq = 6.0;
+	KeyFrame[12].rotRodDer = 10.0;
+	KeyFrame[12].giroMonito = 77.0;
+	KeyFrame[12].movBrazoDer = 34.0;
+	KeyFrame[12].movBrazoIzq = 27.0;
+	KeyFrame[12].movCuerpo = 0;
+	KeyFrame[12].rotBrazoDer = -91.0;
+	KeyFrame[12].rotBrazoIzq = 83.0;
+
+	KeyFrame[13].posX = 0;
+	KeyFrame[13].posY = 2.2;
+	KeyFrame[13].posZ = -3.5;
+	KeyFrame[13].rotRodIzq = 6.0;
+	KeyFrame[13].rotRodDer = 10.0;
+	KeyFrame[13].giroMonito = -1.0;
+	KeyFrame[13].movBrazoDer = 12.0;
+	KeyFrame[13].movBrazoIzq = 6.0;
+	KeyFrame[13].movCuerpo = 0;
+	KeyFrame[13].rotBrazoDer = -91.0;
+	KeyFrame[13].rotBrazoIzq = 83.0;
+
+	KeyFrame[14].posX = 0;
+	KeyFrame[14].posY = 2.4;
+	KeyFrame[14].posZ = -3.5;
+	KeyFrame[14].rotRodIzq = 6.0;
+	KeyFrame[14].rotRodDer = 10.0;
+	KeyFrame[14].giroMonito = -82.0;
+	KeyFrame[14].movBrazoDer = -20.0;
+	KeyFrame[14].movBrazoIzq = -26.0;
+	KeyFrame[14].movCuerpo = 0;
+	KeyFrame[14].rotBrazoDer = -91.0;
+	KeyFrame[14].rotBrazoIzq = 83.0;
+
+	KeyFrame[15].posX = 0;
+	KeyFrame[15].posY = 2.2;
+	KeyFrame[15].posZ = -3.5;
+	KeyFrame[15].rotRodIzq = 42.0;
+	KeyFrame[15].rotRodDer = 44.0;
+	KeyFrame[15].giroMonito = -82.0;
+	KeyFrame[15].movBrazoDer = 37.0;
+	KeyFrame[15].movBrazoIzq = 21.0;
+	KeyFrame[15].movCuerpo = 0;
+	KeyFrame[15].rotBrazoDer = -91.0;
+	KeyFrame[15].rotBrazoIzq = 83.0;
+
+	KeyFrame[16].posX = 0;
+	KeyFrame[16].posY = 2.4;
+	KeyFrame[16].posZ = -3.5;
+	KeyFrame[16].rotRodIzq = -15.0;
+	KeyFrame[16].rotRodDer = 6.0;
+	KeyFrame[16].giroMonito = -82.0;
+	KeyFrame[16].movBrazoDer = -25.0;
+	KeyFrame[16].movBrazoIzq = -37.0;
+	KeyFrame[16].movCuerpo = 0;
+	KeyFrame[16].rotBrazoDer = -91.0;
+	KeyFrame[16].rotBrazoIzq = 83.0;
+
+	KeyFrame[17].posX = 0;
+	KeyFrame[17].posY = 2.2;
+	KeyFrame[17].posZ = -3.5;
+	KeyFrame[17].rotRodIzq = 9.0;
+	KeyFrame[17].rotRodDer = 44.0;
+	KeyFrame[17].giroMonito = -82.0;
+	KeyFrame[17].movBrazoDer = 35.0;
+	KeyFrame[17].movBrazoIzq = 15.0;
+	KeyFrame[17].movCuerpo = 0;
+	KeyFrame[17].rotBrazoDer = -91.0;
+	KeyFrame[17].rotBrazoIzq = 83.0;
+
+	KeyFrame[18].posX = 0;
+	KeyFrame[18].posY = 2.4;
+	KeyFrame[18].posZ = -3.5;
+	KeyFrame[18].rotRodIzq = -1.0;
+	KeyFrame[18].rotRodDer = 5.0;
+	KeyFrame[18].giroMonito = -82.0;
+	KeyFrame[18].movBrazoDer = -23.0;
+	KeyFrame[18].movBrazoIzq = -48.0;
+	KeyFrame[18].movCuerpo = 0;
+	KeyFrame[18].rotBrazoDer = -91.0;
+	KeyFrame[18].rotBrazoIzq = 83.0;
+
+
+
+
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
 	//	inclinación  (0, 1, 0)
@@ -332,6 +629,116 @@ void puertas(void){
 		glEnd();
 	glPopMatrix();*/
 
+}
+
+void monito()
+{
+	glPushMatrix();
+
+		//glTranslatef(xx,yy,zz);
+	//glNewList(1, GL_COMPILE);
+	glPushMatrix();//Pecho
+
+	glTranslatef(0.0, movCuerpo, 0.0);
+	glScalef(0.5, 0.5, 0.5);
+	fig7.prisma(2.0, 2.0, 1, plata.GLindex);
+
+	glPushMatrix();//Cuello
+	glTranslatef(0, 1.0, 0.0);
+	fig7.cilindro(0.25, 0.25, 15, 0);
+	glPushMatrix();//Cabeza
+	glTranslatef(0, 1.0, 0);
+	fig7.esfera(0.75, 15, 15, 0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix(); //Brazo derecho-->
+	glTranslatef(1.25, 0.65, 0);
+	glRotatef(rotBrazoDer, 0.0, 1.0, 0.0);
+	glRotatef(movBrazoDer, 0.0, 0.0, 1.0);
+	fig7.esfera(0.5, 12, 12, 0);
+	glPushMatrix();
+	glTranslatef(0.25, 0, 0);
+	glRotatef(-25, 0, 0, 1);
+	glRotatef(-25, 1, 0, 0);
+	glTranslatef(0.75, 0, 0);
+	fig7.prisma(0.7, 1.5, 0.7, 0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix(); //Brazo izquierdo <--
+	glTranslatef(-1.25, 0.65, 0);
+	glRotatef(rotBrazoIzq, 0, 1, 0);
+	glRotatef(movBrazoIzq, 0.0, 0.0, 1.0);
+
+	fig7.esfera(0.5, 12, 12, 0);
+	glPushMatrix();
+	glTranslatef(-0.25, 0, 0);
+	glRotatef(25, 0, 0, 1);
+	glRotatef(25, 1, 0, 0);
+	glTranslatef(-0.75, 0, 0);
+	fig7.prisma(0.7, 1.5, 0.7, 0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();//Cintura
+	glColor3f(0, 0, 1);
+	glTranslatef(0, -1.5, 0);
+	fig7.prisma(1, 2, 1, plata.GLindex);
+
+	//glTranslatef(0.0, movCuerpo+1.5, 0.0);
+
+
+	glPushMatrix(); //Pie Derecho -->
+	glTranslatef(0.75, -0.5, 0);
+	glRotatef(-15, 1, 0, 0);
+	glTranslatef(0, -0.5, 0);
+	fig7.prisma(1.0, 0.5, 1, plata.GLindex);
+
+	glPushMatrix();
+	glTranslatef(0, -0.5, 0);
+	glRotatef(15 + rotRodDer, 1, 0, 0);
+	glTranslatef(0, -0.75, 0);
+	fig7.prisma(1.5, 0.5, 1, plata.GLindex);
+
+	glPushMatrix();
+	glTranslatef(0, -0.75, 0.3);
+	glRotatef(15 - rotRodDer, 1, 0, 0);
+	fig7.prisma(0.2, 1.2, 1.5, plata.GLindex);
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+
+
+	glPushMatrix(); //Pie Izquierdo -->
+	glTranslatef(-0.75, -0.5, 0);
+	glRotatef(-5, 1, 0, 0);
+	glTranslatef(0, -0.5, 0);
+	fig7.prisma(1.0, 0.5, 1, plata.GLindex);
+
+	glPushMatrix();
+	glTranslatef(0, -0.5, 0);
+	glRotatef(15 + rotRodIzq, 1, 0, 0);
+	glTranslatef(0, -0.75, 0);
+	fig7.prisma(1.5, 0.5, 1, plata.GLindex);
+
+	glPushMatrix();
+	glTranslatef(0, -0.75, 0.3);
+	glRotatef(15 - rotRodIzq, 1, 0, 0);
+	fig7.prisma(0.2, 1.2, 1.5, plata.GLindex);
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+
+
+	glPopMatrix();
+
+
+	glColor3f(1, 1, 1);
+	glPopMatrix();
+	//glEndList();
+
+	glPopMatrix();
 }
 
 void cocina(void){
@@ -855,6 +1262,14 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				puertas();
 				alberca();
 				patioTrasero();
+
+				glPushMatrix();
+				glTranslatef(10.6,7.0,-29.4);
+				glTranslatef(-5.8, posY, 0.0);
+				glRotatef(giroMonito, 0,1,0);
+				monito();
+				glPopMatrix();
+
 				glPushMatrix();
 				glTranslatef(40.6,5.9,-28.40);
 				glRotatef(180,0,1,0);
@@ -938,6 +1353,70 @@ void animacion()
 				pos_pato_x = 0;
 			}
 			break;
+	}
+
+	//Movimiento del monito
+	if (play)
+	{
+
+		if (i_curr_steps >= i_max_steps) //end of animation between frames?
+		{
+			playIndex++;
+			if (playIndex>FrameIndex - 2)	//end of total animation?
+			{
+				printf("termina anim\n");
+				playIndex = 0;
+				play = false;
+			}
+			else //Next frame interpolations
+			{
+				i_curr_steps = 0; //Reset counter
+								  //Interpolation
+				KeyFrame[playIndex].incX = (KeyFrame[playIndex + 1].posX - KeyFrame[playIndex].posX) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].incY = (KeyFrame[playIndex + 1].posY - KeyFrame[playIndex].posY) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].incZ = (KeyFrame[playIndex + 1].posZ - KeyFrame[playIndex].posZ) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].rotInc = (KeyFrame[playIndex + 1].rotRodIzq - KeyFrame[playIndex].rotRodIzq) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].rotRodDerInc = (KeyFrame[playIndex + 1].rotRodDer - KeyFrame[playIndex].rotRodDer) / i_max_steps;
+				KeyFrame[playIndex].giroMonitoInc = (KeyFrame[playIndex + 1].giroMonito - KeyFrame[playIndex].giroMonito) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].movBrazoDerInc = (KeyFrame[playIndex + 1].movBrazoDer - KeyFrame[playIndex].movBrazoDer) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].movBrazoIzqInc = (KeyFrame[playIndex + 1].movBrazoIzq - KeyFrame[playIndex].movBrazoIzq) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].rotBrazoDerInc = (KeyFrame[playIndex + 1].rotBrazoDer - KeyFrame[playIndex].rotBrazoDer) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].rotBrazoIzqInc = (KeyFrame[playIndex + 1].rotBrazoIzq - KeyFrame[playIndex].rotBrazoIzq) / i_max_steps;		//100 frames
+				KeyFrame[playIndex].movCuerpoInc = (KeyFrame[playIndex + 1].movCuerpo - KeyFrame[playIndex].movCuerpo) / i_max_steps;
+			}
+		}
+		else
+		{	//Draw information
+
+
+			posX += KeyFrame[playIndex].incX;
+			posY += KeyFrame[playIndex].incY;
+			posZ += KeyFrame[playIndex].incZ;
+
+			movCuerpo += KeyFrame[playIndex].movCuerpoInc;
+
+			rotRodIzq += KeyFrame[playIndex].rotInc;
+			rotRodDer += KeyFrame[playIndex].rotRodDerInc;
+			giroMonito += KeyFrame[playIndex].giroMonitoInc;
+			movBrazoDer += KeyFrame[playIndex].movBrazoDerInc;
+
+			movBrazoIzq += KeyFrame[playIndex].movBrazoIzqInc;
+			rotBrazoDer += KeyFrame[playIndex].rotBrazoDerInc;
+			rotBrazoIzq += KeyFrame[playIndex].rotBrazoIzqInc;
+
+			
+
+			i_curr_steps++;
+		}
+
+	}
+
+	frame++;
+	time2 = glutGet(GLUT_ELAPSED_TIME);
+	if (time2 - timebase > 1000) {
+		sprintf(s, "FPS:%4.2f", frame*1000.0 / (time2 - timebase));
+		timebase = time2;
+		frame = 0;
 	}
 
 
@@ -1080,11 +1559,184 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 		case 'l':
 		case 'L':
 			printf("(xx,yy,zz) (%f,%f,%f)\n", xx,yy,zz);
-			printf("(tamx,tamy,tamz) (%f,%f,%f)\n", tamx,tamy,tamz);
+			//printf("(tamx,tamy,tamz) (%f,%f,%f)\n", tamx,tamy,tamz);
 			//printf("(mPos) (%f, %f, %f)\n", objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z);
 			//printf("(mView) (%f, %f, %f)\n", objCamera.mView.x, objCamera.mView.y, objCamera.mView.z);
 			//printf("(mUp) (%f, %f, %f)\n", objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
+			
+			/*for(int i = 1; i <= FrameIndex; i++){
+				//printf("posX: %f\n", posX);
+				//printf("posY: %f\n", posY);
+				//printf("posZ: %f\n", posZ);
+				printf("rotRodIzq: %f\n", KeyFrame[i].rotRodIzq);
+				printf("rotRodDer: %f\n", KeyFrame[i].rotRodDer);
+				printf("giroMonito: %f\n", KeyFrame[i].giroMonito);
+				printf("movBrazoDer: %f\n", KeyFrame[i].movBrazoDer);
+				printf("movBrazoIzq: %f\n", KeyFrame[i].movBrazoIzq);
+				printf("movCuerpo: %f\n", KeyFrame[i].movCuerpo);
+				printf("rotBrazoDer: %f\n", KeyFrame[i].rotBrazoDer);
+				printf("rotBrazoIzq: %f\n", KeyFrame[i].rotBrazoIzq);
+			}*/
+
+			/*
+			KeyFrame[0].posX = 0;
+	KeyFrame[0].posY = 2.5;
+	KeyFrame[0].posZ = -3.5;
+	KeyFrame[0].rotRodIzq = 0;
+	KeyFrame[0].rotRodDer = 0;
+	KeyFrame[0].giroMonito = 0;
+	KeyFrame[0].movBrazoDer = 0;
+	KeyFrame[0].movBrazoIzq = 0;
+	KeyFrame[0].movCuerpo = 0;
+	KeyFrame[0].rotBrazoDer = 0;
+	KeyFrame[0].rotBrazoIzq = 0;
+			*/
+
 			break;
+
+		case 'o':		//
+	case 'O':
+		if (FrameIndex<MAX_FRAMES)
+		{
+			printf("frameindex %d\n", FrameIndex);
+
+			KeyFrame[FrameIndex].posX = posX;
+			KeyFrame[FrameIndex].posY = posY;
+			KeyFrame[FrameIndex].posZ = posZ;
+
+			KeyFrame[FrameIndex].rotRodIzq = rotRodIzq;
+			KeyFrame[FrameIndex].rotRodDer = rotRodDer;
+			KeyFrame[FrameIndex].giroMonito = giroMonito;
+			KeyFrame[FrameIndex].movBrazoDer = movBrazoDer;
+			KeyFrame[FrameIndex].movBrazoIzq = movBrazoIzq;
+			KeyFrame[FrameIndex].rotBrazoDer = rotBrazoDer;
+			KeyFrame[FrameIndex].rotBrazoIzq = rotBrazoIzq;
+			KeyFrame[FrameIndex].movCuerpo = movCuerpo;
+
+			FrameIndex++;
+		}
+
+		break;
+
+	case 'e':
+	case 'E':
+		if (play == false && (FrameIndex>1))
+		{
+
+			posX = KeyFrame[0].posX;
+			posY = KeyFrame[0].posY;
+			posZ = KeyFrame[0].posZ;
+			rotRodIzq = KeyFrame[0].rotRodIzq;
+			rotRodDer = KeyFrame[0].rotRodDer;
+			giroMonito = KeyFrame[0].giroMonito;
+			movBrazoDer = KeyFrame[0].movBrazoDer;
+			movBrazoIzq = KeyFrame[0].movBrazoIzq;
+			rotBrazoDer = KeyFrame[0].rotBrazoDer;
+			rotBrazoIzq = KeyFrame[0].rotBrazoIzq;
+			movCuerpo = KeyFrame[0].movCuerpo;
+
+			//First Interpolation
+			KeyFrame[playIndex].incX = (KeyFrame[playIndex + 1].posX - KeyFrame[playIndex].posX) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].incY = (KeyFrame[playIndex + 1].posY - KeyFrame[playIndex].posY) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].incZ = (KeyFrame[playIndex + 1].posZ - KeyFrame[playIndex].posZ) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].rotInc = (KeyFrame[playIndex + 1].rotRodIzq - KeyFrame[playIndex].rotRodIzq) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].rotRodDerInc = (KeyFrame[playIndex + 1].rotRodDer - KeyFrame[playIndex].rotRodDer) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].giroMonitoInc = (KeyFrame[playIndex + 1].giroMonito - KeyFrame[playIndex].giroMonito) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].movBrazoDerInc = (KeyFrame[playIndex + 1].movBrazoDer - KeyFrame[playIndex].movBrazoDer) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].movBrazoIzqInc = (KeyFrame[playIndex + 1].movBrazoIzq - KeyFrame[playIndex].movBrazoIzq) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].rotBrazoDerInc = (KeyFrame[playIndex + 1].rotBrazoDer - KeyFrame[playIndex].rotBrazoDer) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].rotBrazoIzqInc = (KeyFrame[playIndex + 1].rotBrazoIzq - KeyFrame[playIndex].rotBrazoIzq) / i_max_steps;		//100 frames
+			KeyFrame[playIndex].movCuerpoInc = (KeyFrame[playIndex + 1].movCuerpo - KeyFrame[playIndex].movCuerpo) / i_max_steps;
+
+			play = true;
+			playIndex = 0;
+			i_curr_steps = 0;
+		}
+		else
+		{
+			play = false;
+		}
+		break;
+
+		case 'x':
+		rotRodIzq++;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'X':
+		rotRodIzq--;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'v':
+		rotRodDer++;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'V':
+		rotRodDer--;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'b':
+		rotBrazoIzq++;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'B':
+		rotBrazoIzq--;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'g':
+		rotBrazoDer++;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'G':
+		rotBrazoDer--;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'm':
+		movBrazoIzq++;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 'M':
+		movBrazoIzq--;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case '7':
+		movBrazoDer++;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case '8':
+		movBrazoDer--;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case '9':
+		movCuerpo += 0.2;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case '0':
+		movCuerpo -= 0.2;
+		//printf("%f \n", rotRodIzq);
+		break;
+
+	case 't':
+		giroMonito++;
+		//printf("%f \n", giroMonito);
+		break;
+
+	case 'T':
+		giroMonito--;
+		//printf("%f \n", giroMonito);
+		break;
 
 		case 27:        // Cuando Esc es presionado...
 			exit ( 0 );   // Salimos del programa
