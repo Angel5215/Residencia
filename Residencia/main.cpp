@@ -72,10 +72,14 @@ int estadoPato = 1;
 //	Texturas para el refrigerador
 CTexture window_texture;
 CTexture cuarzo;
+CTexture cubierta;
 CTexture metal_cromo;
 CTexture pared_interior;
 CTexture puertaFrente;
 CTexture garage;
+CTexture alacena1;
+CTexture alacena2;
+CTexture alacena3;
 CTexture pisoRojo;
 CTexture mosaicoVintage;
 CTexture textAlberca;
@@ -94,6 +98,7 @@ CTexture sillon;
 CTexture librero;
 CTexture vitrina;
 CTexture chimenea;
+CTexture chimeneaExt;
 CTexture madera;
 CTexture muebleBanio;
 CTexture negroMate;
@@ -102,6 +107,8 @@ CTexture almohada;
 CTexture cabecera;
 CTexture cobija;
 CTexture piso;
+CTexture estufa;
+CTexture estufaCal;
 CTexture tree_tex;
 CTexture door;
 
@@ -142,6 +149,22 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	metal_cromo.BuildGLTexture();
 	metal_cromo.ReleaseImage();
 
+	cubierta.LoadTGA("textures/cubierta.tga");
+	cubierta.BuildGLTexture();
+	cubierta.ReleaseImage();
+
+	alacena1.LoadTGA("textures/alacena.tga");
+	alacena1.BuildGLTexture();
+	alacena1.ReleaseImage();
+
+	alacena2.LoadTGA("textures/alacena1.tga");
+	alacena2.BuildGLTexture();
+	alacena2.ReleaseImage();
+
+	alacena3.LoadTGA("textures/alacena2.tga");
+	alacena3.BuildGLTexture();
+	alacena3.ReleaseImage();
+
 	pared_interior.LoadTGA("textures/pared.tga");
 	pared_interior.BuildGLTexture();
 	pared_interior.ReleaseImage();
@@ -161,6 +184,14 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	pisoRojo.LoadTGA("textures/piso_entrada.tga");
 	pisoRojo.BuildGLTexture();
 	pisoRojo.ReleaseImage();
+
+	estufa.LoadTGA("textures/estufa.tga");
+	estufa.BuildGLTexture();
+	estufa.ReleaseImage();
+
+	estufaCal.LoadTGA("textures/estufaCal.tga");
+	estufaCal.BuildGLTexture();
+	estufaCal.ReleaseImage();
 
 	refri.LoadTGA("textures/metalPulido.tga");
 	refri.BuildGLTexture();
@@ -326,22 +357,23 @@ void cocina(void){
 	glTranslatef(0.51,1.75,-26);
 		glPushMatrix(); //ALACENA 2 ARRIBA
 		glTranslatef(0,2.35,0);
-		glColor3f(0.8901,0.7803,0.6235);
-		glScalef(0.5,1,1.25);
-		figures.u_prisma(0);
+		glColor3f(1,1,1);
+		glRotatef(90,0,1,0);
+		glScalef(1.25,1,0.5);
+		figures.u_prisma_mueble(0,alacena1.GLindex);
 		glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0.20,0.8,0.0);
 	glRotatef(90,0,1,0);
-	glScalef(2.5,0.1,1.25);
-	glColor3f(0.5843,0.4196,0.1843);
-	figures.u_prisma(0);
+	glScalef(3.25,0.15,1.15);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma(cubierta.GLindex);
 	glPopMatrix();
 
 	glRotatef(90,0,1,0);
-	glScalef(2.3,1.5,1);
-	glColor3f(0.8901,0.7803,0.6235);
-	figures.u_prisma(0);
+	glScalef(3,1.5,1);
+	//glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma_mueble(0,alacena2.GLindex);
 	glPopMatrix();
 
 	//TABLA MESA 2
@@ -349,39 +381,60 @@ void cocina(void){
 	glTranslatef(0.51,1.75,-32);
 		glPushMatrix(); //ALACENA 2 ARRIBA
 		glTranslatef(0,2.35,0);
-		glColor3f(0.8901,0.7803,0.6235);
-		glScalef(0.5,1,1.25);
-		figures.u_prisma(0);
+		glColor3f(1,1,1);
+		glRotatef(90,0,1,0);
+		glScalef(1.25,1,0.5);
+		figures.u_prisma_mueble(0,alacena1.GLindex);
 		glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0.20,0.8,0.0);
 	glRotatef(90,0,1,0);
-	glScalef(2.5,0.1,1.25);
-	glColor3f(0.5843,0.4196,0.1843);
-	figures.u_prisma(0);
+	glScalef(3.25,0.15,1.15);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma(cubierta.GLindex);
 	glPopMatrix();
 
 	glRotatef(90,0,1,0);
-	glScalef(2.3,1.5,1);
-	glColor3f(0.8901,0.7803,0.6235);
-	figures.u_prisma(0);
+	glScalef(3,1.5,1);
+	//glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma_mueble(0,alacena2.GLindex);
 	glPopMatrix();
 
 
 	//ESTUFA 1
 	glPushMatrix();
+	glPushMatrix();
 	glTranslatef(0.51,1.75,-28.5);
+	glRotatef(90,0,1,0);
 	glScalef(1,1.5,1);
-	glColor3f(0.3254,0.4784,0.4549);
-	figures.u_prisma(0);
+	//glColor3f(0.3254,0.4784,0.4549);
+	figures.u_prisma_mueble(negroMate.GLindex,estufa.GLindex);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.51,2.50,-28.5);
+	glRotatef(90,0,1,0);
+	glScalef(1,0.02,1);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma_mueble(estufaCal.GLindex,negroMate.GLindex);
+	glPopMatrix();
 	glPopMatrix();
 
 	//ESTUFA 2
 	glPushMatrix();
+	glPushMatrix();
 	glTranslatef(0.51,1.75,-29.5);
+	glRotatef(90,0,1,0);
 	glScalef(1,1.5,1);
-	glColor3f(0,0.4784,0.4549);
-	figures.u_prisma(0);
+	//glColor3f(0,0.4784,0.4549);
+	figures.u_prisma_mueble(negroMate.GLindex,estufa.GLindex);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.51,2.50,-29.5);
+	glRotatef(90,0,1,0);
+	glScalef(1,0.02,1);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma_mueble(estufaCal.GLindex,negroMate.GLindex);
+	glPopMatrix();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -396,30 +449,32 @@ void cocina(void){
 	//ALACENA ARRIBA
 	glPushMatrix();
 	glTranslatef(0,2.75,0.20);
-	glColor3f(0.8901,0.7803,0.6235);
+	glColor3f(1,1,1);
+	glRotatef(180,0,1,0);
 	glScalef(1.25,1,0.5);
-	figures.u_prisma(0);
+	figures.u_prisma_mueble(0,alacena1.GLindex);
 	glPopMatrix();
 
 	//ALACENA GRANDE
 	glPushMatrix();
 	glTranslatef(0,1.25,-14.2);
 	glScalef(2,4,0.5);
-	glColor3f(0.9019,0.6196,0.4117);
-	figures.u_prisma(0);
+	glColor3f(1,1,1);
+	figures.u_prisma_mueble(0,alacena3.GLindex);
 	glPopMatrix();
 
 	//TABLA DE MESA 1
 	glPushMatrix();
 	glTranslatef(0,0.8,-0.05);
 	glScalef(3.25,0.15,1.15);
-	glColor3f(0.5843,0.4196,0.1843);
-	figures.u_prisma(0);
+	//glColor3f(0.5843,0.4196,0.1843);
+	figures.u_prisma(cubierta.GLindex);
 	glPopMatrix();
 
+	glRotatef(180,0,1,0);
 	glScalef(3,1.5,1);
-	glColor3f(0.8901,0.7803,0.6235);
-	figures.u_prisma(0);
+	//glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma_mueble(0,alacena2.GLindex);
 	glPopMatrix();
 
 }
@@ -1670,11 +1725,11 @@ void mesa_cocina()
 	glPushMatrix();
 	glTranslatef(0,0.80,0);
 	glScalef(2.5,0.1,2.5);
-	glColor3f(0.8901,0.7803,0.6235);
-	figures.u_prisma(0);
+	//glColor3f(0.8901,0.7803,0.6235);
+	figures.u_prisma(cubierta.GLindex);
 	glPopMatrix();
 	glScalef(1.5,1.5,2);
-	glColor3f(0.6901,0.4980,0.2196);
+	//glColor3f(0.6901,0.4980,0.2196);
 	figures.u_prisma(0);
 	glPopMatrix();	
 }
