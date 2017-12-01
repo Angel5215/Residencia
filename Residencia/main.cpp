@@ -92,6 +92,7 @@ CTexture cielo_frontal;
 CTexture cielo_superior;
 CTexture pasto;
 CTexture lamp;
+CTexture toallas;
 CTexture refri;
 CTexture t1;
 CTexture t2;
@@ -114,6 +115,7 @@ CTexture chimenea;
 CTexture chimeneaExt;
 CTexture madera;
 CTexture muebleBanio;
+CTexture muebleBanio2;
 CTexture negroMate;
 CTexture muebleBuro;
 CTexture almohada;
@@ -161,6 +163,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	metal_cromo.LoadTGA("textures/metal_cromo.tga");
 	metal_cromo.BuildGLTexture();
 	metal_cromo.ReleaseImage();
+
+	toallas.LoadTGA("textures/toallas.tga");
+	toallas.BuildGLTexture();
+	toallas.ReleaseImage();
 
 	cubierta.LoadTGA("textures/cubierta.tga");
 	cubierta.BuildGLTexture();
@@ -337,6 +343,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	muebleBanio.LoadTGA("textures/muebleBanio.tga");
 	muebleBanio.BuildGLTexture();
 	muebleBanio.ReleaseImage();
+
+	muebleBanio2.LoadTGA("textures/muebleBanio2.tga");
+	muebleBanio2.BuildGLTexture();
+	muebleBanio2.ReleaseImage();
 
 	negroMate.LoadTGA("textures/negroMate.tga");
 	negroMate.BuildGLTexture();
