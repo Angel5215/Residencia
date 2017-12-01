@@ -32,6 +32,7 @@ void lampara();
 void pato();
 void taza_banio();
 void mueble_banio();
+void mueble_banio_toallas();
 /*int w = 500, h = 500;
 int frame=0,time,timebase=0;
 int deltaTime = 0;*/
@@ -635,6 +636,33 @@ void mueble_banio()
 	glPopMatrix(); //mueble
 }
 
+void mueble_banio_toallas()
+{
+	glPushMatrix();
+	//glTranslatef(15.35,7.5,-20.200005);
+	//glScalef(-0.600000,1.000000,1.000000);
+	glTranslatef(15.5,7.799997,-19.600002);
+
+	glPushMatrix();
+	glTranslatef(0.000000,1.300000,0.000000);
+	glPushMatrix();
+	glTranslatef(0,1,0);
+	glScalef(1,1,1);
+	glColor3f(0,0,1);
+	figures.u_prisma_mueble(0,0);
+	glPopMatrix();
+	glScalef(1,1,1);
+	glColor3f(1,0,0);
+	figures.u_prisma_mueble(0,0);
+	glPopMatrix();
+
+	glScalef(1.000000,1.600000,2.000000);
+	glColor3f(0.8980,0.9137,0.6274);
+	figures.u_prisma_mueble(0,0);
+	glPopMatrix();
+	glColor3f(1,1,1);
+}
+
 void cama(void){
 
 
@@ -856,15 +884,46 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				alberca();
 				patioTrasero();
 				glPushMatrix();
-				glTranslatef(40.6,5.9,-28.40);
+				glTranslatef(40.6,5.9,-32.5);
+				//glTranslatef(xx,yy,zz);
 				glRotatef(180,0,1,0);
 				taza_banio();
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(40.4,5.9,-28.2);
+				glTranslatef(40.4,5.7,-32.2);
+				//glTranslatef(xx,yy,zz);
 				glRotatef(180,0,1,0);
 				mueble_banio();
+				glPopMatrix();
+
+				glPushMatrix();
+				mueble_banio_toallas();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(9.999995,0.000000,-24.200020);
+				glPushMatrix();
+				glTranslatef(5.999999,7.599998,-3.000000);
+				mesa_centro();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.600000,7.399998,-5.999999);
+
+				glPushMatrix();
+				glTranslatef(0.000000,0.600000,0.000000);
+				glScalef(1.000000,0.200000,3.000000);
+				glColor3f(0.6274,0.1529,0.0705);
+				figures.u_prisma(almohada.GLindex);
+				glColor3f(1,1,1);
+				glPopMatrix();
+
+				glScalef(1.000000,1.000000,2.800000);
+				figures.u_prisma(madera.GLindex);
+				glPopMatrix();
+				
+				cama();
 				glPopMatrix();
 
 				cama();
