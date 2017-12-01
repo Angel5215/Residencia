@@ -37,6 +37,7 @@ int deltaTime = 0;*/
 //	Objeto para dibujar figuras
 //CFiguras figures;
 Figures figures;
+Figures mov_agua;
 
 CCamera objCamera;	//Create objet Camera
 
@@ -50,6 +51,17 @@ GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 //Variables de apoyo para colocar figuras
 float xx=0.0, yy = 0.0, zz = 0.0;
 float tamx = 1.0, tamy = 1.0, tamz = 1.0;
+
+//	Variables para animar al pato
+GLfloat pos_pato_x = 0.f;
+GLfloat pos_pato_y = 0.f;
+GLfloat pos_pato_z = 0.f;
+GLfloat rot_pato = 0.f;
+GLfloat ant_pos_pato_z = 0.f;
+
+// 1 (Adelante), 2(Atras), 3(Giro)
+int estadoPato = 1;
+
 
 //CTexture text1;
 //CTexture text2;
@@ -397,7 +409,7 @@ void alberca(void){
 		glPushMatrix(); //agua
 			glTranslatef(0,4.2,0);
 			glScalef(9.99,0.1,19.99);
-			figures.l_prisma(agua.GLindex);
+			mov_agua.l_prisma_agua(agua.GLindex);
 		glPopMatrix(); //agua
 		glScalef(10,10,20);
 		figures.l_prisma_alberca(textAlberca.GLindex);
@@ -787,6 +799,61 @@ void display ( void )   // Creamos la funcion donde se dibuja
 
 void animacion()
 {
+	//	Movimiento del agua
+	mov_agua.t_ini -= 0.001;
+	mov_agua.t_fin -= 0.001;
+
+	if (mov_agua.t_ini < -1.0)
+	{
+		mov_agua.t_ini = 0.0;
+	}
+	if(mov_agua.t_fin < 0.0)
+	{
+		mov_agua.t_fin = 1.0;
+	}
+
+	switch (estadoPato)
+	{
+		case 1:
+			pos_pato_z += 0.01;
+			if(pos_pato_z >= 6)
+			{
+				estadoPato = 2;
+				ant_pos_pato_z = pos_pato_z;
+			}
+			break;
+		case 2:
+			pos_pato_z += 0.01;
+			pos_pato_x += 0.05;
+			rot_pato += 3;
+			if(rot_pato >= 180)
+			{
+				estadoPato = 3;
+				ant_pos_pato_z = pos_pato_z;
+			}
+			break;
+		case 3:
+			pos_pato_z -= 0.01;
+			if(pos_pato_z <= -10)
+			{
+				estadoPato = 4;
+			}
+			break;
+		case 4:
+			pos_pato_z -= 0.01;
+			pos_pato_x -= 0.05;
+			rot_pato += 3;
+			if(rot_pato >= 360)
+			{
+				rot_pato = 0;
+				estadoPato = 1;
+				pos_pato_x = 0;
+			}
+			break;
+	}
+
+
+
 	glutPostRedisplay();
 }
 
@@ -1560,6 +1627,9 @@ void mesa_cocina()
 void pato()
 {
 	glPushMatrix();
+
+	glTranslatef(pos_pato_x, pos_pato_y, pos_pato_z);
+	glRotatef(rot_pato, 0, 1, 0);
 
 	glPushMatrix();//Ala derecha
 	glTranslatef(0.25,0.1,0);
