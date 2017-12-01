@@ -1553,11 +1553,19 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			divisiones();
 			divisiones_superior();
 			
-			glPushMatrix();
-				glTranslatef(5, 0, 5);
+			for(int i = 0; i < 3; i++){
+				glPushMatrix();
+					glTranslatef(10 + 10 * i, 0, 5);
+					//glScalef(0.3, 0.3, 0.3);
+					arbol(tree_tex.GLindex);
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(15 + 10 * i, 0, 10);
 				//glScalef(0.3, 0.3, 0.3);
 				arbol(tree_tex.GLindex);
-			glPopMatrix();
+				glPopMatrix();
+			}
 
 			glPushMatrix();
 				glTranslatef(21.4, 14.7, -24.6);
