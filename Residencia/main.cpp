@@ -61,6 +61,18 @@ GLfloat pos_pato_z = 0.f;
 GLfloat rot_pato = 0.f;
 GLfloat ant_pos_pato_z = 0.f;
 
+//	Variables para animar la pelota
+GLfloat pos_ball_x = 3.6f;
+GLfloat pos_ball_y = 22.0f;
+GLfloat pos_ball_z = -5.6f;
+GLfloat rot_ball_x = 0.f;
+GLfloat par_pos_ball_x_ini = 3.6f;
+GLfloat par_pos_ball_y_ini = 22.0f;
+GLfloat par_pos_ball_z_ini = -5.6f;
+GLfloat ball_t = 0;
+const GLfloat gravity = 9.81;
+int estadoPelota = 1;
+
 // 1 (Adelante), 2(Atras), 3(Giro)
 int estadoPato = 1;
 
@@ -111,6 +123,7 @@ CTexture estufa;
 CTexture estufaCal;
 CTexture tree_tex;
 CTexture door;
+CTexture ball;
 
 //CTexture tree;
 
@@ -300,6 +313,10 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	door.LoadTGA("textures/door.tga");
 	door.BuildGLTexture();
 	door.ReleaseImage();
+
+	ball.LoadTGA("textures/ball.tga");
+	ball.BuildGLTexture();
+	ball.ReleaseImage();
 
 	//	posicion     (0, 2.5, 3)
 	//	hacia donde  (0, 2.5, 0)
@@ -932,6 +949,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glTranslatef(8.6, 9, -22.6);
 			glScalef(1, 3.8, 1.6);
 			figures.puerta(door.GLindex, false, true);
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(xx, yy, zz);
+			figures.u_esfera(1, 20, 20, ball.GLindex);
 			glPopMatrix();
 
 		glPopMatrix(); 
