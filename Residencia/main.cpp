@@ -136,7 +136,7 @@ GLfloat par_pos_ball_x_ini = 13.f;
 GLfloat par_pos_ball_y_ini = 22.0f;
 GLfloat par_pos_ball_z_ini = -5.6f;
 GLfloat v_ini_ball = 10;
-GLfloat angle_ball = 3.1415926 / 10;
+GLfloat angle_ball = 3.141592 / 10;
 GLfloat ball_t = 0;
 const GLfloat gravity = 9.81;
 int estadoPelota = 1;
@@ -1511,7 +1511,6 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glScalef(0.800000,0.800000,1.000000);
 				
 				glPushMatrix(); //TELE
-				
 				glTranslatef(0,2.5,-0.35);
 				glColor3f(1,1,1);
 				glRotatef(-90,1,0,0);
@@ -1744,6 +1743,8 @@ void animacion()
 	}
 
 //<<<<<<< HEAD
+//=======
+//<<<<<<< HEAD
 	//Movimiento del monito
 	if (play)
 	{
@@ -1836,6 +1837,7 @@ void animacion()
 	}
 	
 //>>>>>>> refs/remotes/origin/master
+//>>>>>>> 24ff8ad8257540ac645e88e7afe1a4ca17ce7eeb
 
 
 	glutPostRedisplay();
